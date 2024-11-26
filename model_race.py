@@ -56,25 +56,28 @@ class ModelEvaluator:
         """Convert tensor to numpy array"""
         return tensor.detach().cpu().numpy() if tensor.requires_grad else tensor.cpu().numpy()
 
-    def plot_detailed_confusion_matrix(self, all_labels, all_preds, model_name):
+    def plot_detailed_confusion_matrix(self, all_labels, all_preds, model_name, model_metrics):
         """
-        Create a more detailed confusion matrix visualization
+        Create a more detailed confusion matrix visualization with three subplots
         
         Args:
         - all_labels (list): True labels
         - all_preds (list): Predicted labels
         - model_name (str): Name of the model for title
+        - model_metrics (dict): Dictionary containing model evaluation metrics
         """
         # Compute confusion matrix
         cm = confusion_matrix(all_labels, all_preds)
         
         # Compute per-class accuracy
         class_accuracy = cm.diagonal() / cm.sum(axis=1)
+        
+        # Generate random figure number to avoid conflicts
         random_number = random.randint(1, 100)
-        plt.figure(num =random_number, figsize=(15, 6))
+        plt.figure(num=random_number, figsize=(20, 6))
         
         # Confusion Matrix Subplot
-        plt.subplot(1, 2, 1)
+        plt.subplot(1, 3, 1)
         sns.heatmap(cm, annot=True, fmt="d", cmap="Blues",
                     xticklabels=self.class_names, 
                     yticklabels=self.class_names)
@@ -84,12 +87,37 @@ class ModelEvaluator:
         plt.xticks(rotation=45, ha='right')
         
         # Per-class Accuracy Subplot
-        plt.subplot(1, 2, 2)
+        plt.subplot(1, 3, 2)
         plt.bar(self.class_names, class_accuracy)
         plt.title(f"{model_name} - Per-Class Accuracy")
         plt.xlabel("Classes")
         plt.ylabel("Accuracy")
         plt.xticks(rotation=45, ha='right')
+        
+        # Model Metrics Subplot
+        plt.subplot(1, 3, 3)
+        metrics = [
+            'Accuracy', 
+            'Precision', 
+            'Recall', 
+            'F1 Score'
+        ]
+        values = [
+            model_metrics['accuracy'],
+            model_metrics['precision'] * 100,
+            model_metrics['recall'] * 100,
+            model_metrics['f1_score'] * 100
+        ]
+        
+        plt.bar(metrics, values)
+        plt.title(f"{model_name} - Overall Model Metrics")
+        plt.xlabel("Metrics")
+        plt.ylabel("Percentage (%)")
+        plt.ylim(0, 100)  # Set y-axis from 0 to 100%
+        
+        # Add percentage labels on top of each bar
+        for i, v in enumerate(values):
+            plt.text(i, v, f'{v:.2f}%', ha='center', va='bottom')
         
         plt.tight_layout()
         plt.show(block=False)
@@ -147,13 +175,19 @@ class ModelEvaluator:
         
     def plot_top_models_class_accuracy(self, results, top_models, model_folder):
         """
-        Plot class-level accuracy for top models
+        Plot class-level accuracy for top models with an additional subplot for overall metrics
         
         Args:
         - results (dict): Dictionary of all model evaluation results
         - top_models (list): List of top models to analyze
         - model_folder (str): Path to model folder
         """
+        # Create figure with subplots
+        plt.figure(figsize=(20, 8))
+        
+        # First subplot for class-level precision
+        plt.subplot(1, 2, 1)
+        
         # Prepare data for plotting
         class_level_accuracy = {}
         
@@ -171,9 +205,6 @@ class ModelEvaluator:
                 for cls in self.class_names
             ]
         
-        # Create bar plot
-        plt.figure(figsize=(15, 6))
-        
         # Set the width of each bar and positions
         bar_width = 0.25
         num_models = len(top_models)
@@ -186,14 +217,55 @@ class ModelEvaluator:
                     edgecolor='white', 
                     label=model_name)
         
-        # Add labels and title
+        # Add labels and title for class-level precision
         plt.xlabel('Classes', fontweight='bold')
         plt.ylabel('Precision (%)', fontweight='bold')
         plt.title('Top Models - Class-Level Precision')
         plt.xticks([j + bar_width * (num_models-1)/2 for j in range(len(self.class_names))], 
                 self.class_names, rotation=45, ha='right')
         
+        # Second subplot for overall model metrics
+        plt.subplot(1, 2, 2)
+        
+        # Prepare data for overall metrics
+        metrics = ['Accuracy', 'Precision', 'Recall', 'F1 Score']
+        model_metrics = {}
+        
+        # Collect metrics for top models
+        for model_name, _ in top_models:
+            model_path = os.path.join(model_folder, model_name)
+            evaluation_results = self.evaluate_onnx_model(model_path)
+            
+            # Convert metrics to percentage for easier comparison
+            model_metrics[model_name] = [
+                evaluation_results['accuracy'],
+                evaluation_results['precision'] * 100,
+                evaluation_results['recall'] * 100,
+                evaluation_results['f1_score'] * 100
+            ]
+        
+        # Set up bar positions for overall metrics
+        bar_width = 0.25
+        x = np.arange(len(metrics))
+        
+        # Plot bars for each top model's metrics
+        for i, (model_name, _) in enumerate(top_models):
+            plt.bar(
+                x + i * bar_width, 
+                model_metrics[model_name], 
+                width=bar_width, 
+                label=model_name
+            )
+        
+        # Customize overall metrics subplot
+        plt.title('Top Models - Overall Performance Metrics')
+        plt.xlabel('Metrics')
+        plt.ylabel('Percentage (%)')
+        plt.xticks(x + bar_width * (num_models-1)/2, metrics, rotation=45)
+        plt.ylim(0, 100)  # Set y-axis from 0 to 100%
         plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+        
+        # Adjust layout and display
         plt.tight_layout()
         plt.show()
 
@@ -259,7 +331,12 @@ class ModelEvaluator:
         # Optional confusion matrix display
         if show_confusion_matrix:
             model_name = os.path.basename(model_path)
-            self.plot_detailed_confusion_matrix(all_labels, all_preds, model_name)
+            self.plot_detailed_confusion_matrix(all_labels, all_preds, model_name, {
+                'accuracy': accuracy,
+                'precision': precision,
+                'recall': recall,
+                'f1_score': f1
+            })
         
         # Generate classification report
         class_report = classification_report(
