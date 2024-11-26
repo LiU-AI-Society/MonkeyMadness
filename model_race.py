@@ -314,7 +314,7 @@ def main():
     parser.add_argument(
         '--model_folder', 
         type=str, 
-        default='models_from_workshop',
+        default='saved_models',
         help='Path to folder containing ONNX models'
     )
     parser.add_argument(
