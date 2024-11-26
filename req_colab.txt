@@ -1,3 +1,4 @@
 torchlens
 torchsummary
 onnx
+livelossplot
