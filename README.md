@@ -21,6 +21,7 @@
 - Mixup - Mixup mixer : 20 B NN
 - Focus on one class - Herr Nilsson's friend
 - Knowledge distilation - Wisdom extractor
+- F**k around and find out - Do whatever you want
 
 
 # Things to try out for yourself
@@ -420,6 +421,110 @@ criterion = DistillationLoss()
 
 model, t_loss, t_acc, v_loss, v_acc = train(model, train_loader, val_loader, optimizer, criterion, device, start_epoch=START_EPOCH, num_epochs=EPOCHS, model_name=MODEL_NAME, unique_id=ID, teacher_model = teacher_model)
 ```
+
+
+</details>
+<details>
+<summary><strong> Implement Focus Lens  </strong> </summary>
+
+# **Spatial Attention**
+
+## **What is Spatial Attention?**
+Spatial attention is a mechanism in deep learning models designed to emphasize the most important spatial regions in an input feature map. It guides the model to focus on relevant areas, enhancing performance in tasks that require spatial understanding, such as object detection, segmentation, and image recognition.
+
+## **How Does it Work?**
+Spatial attention operates on the spatial dimensions (height and width) of a feature map. It identifies where in the feature map the model should focus by creating a spatial attention map, which assigns importance scores to each spatial location.
+
+## **Steps in Spatial Attention**
+
+1. **Pooling Across Channels:**
+   - **Average Pooling:** Captures overall spatial context by taking the mean across all channels.
+   - **Max Pooling:** Highlights the most prominent features across channels.
+
+2. **Concatenation:**
+   - The outputs of average and max pooling are combined along the channel dimension.
+
+3. **Convolution:**
+   - A convolution operation (typically with a 7x7 kernel) processes the concatenated output to capture local spatial relationships.
+
+4. **Attention Map Generation:**
+   - A sigmoid activation function is applied to generate the spatial attention map, which scales values to the range [0, 1].
+
+5. **Feature Refinement:**
+   - The spatial attention map is multiplied element-wise with the input feature map to highlight important regions and suppress irrelevant ones.
+
+# How to implement:
+
+1. **Start by defining the attention mechanism**
+
+```python
+
+class SpatialAttention(nn.Module):
+    def __init__(self, kernel_size=7):
+        super(SpatialAttention, self).__init__()
+        self.conv = nn.Conv2d(2, 1, kernel_size=kernel_size, padding=kernel_size // 2, bias=False)
+        self.sigmoid = nn.Sigmoid()
+
+    def forward(self, x):
+        # Average and Max pooling
+        avg_out = torch.mean(x, dim=1, keepdim=True)
+        max_out, _ = torch.max(x, dim=1, keepdim=True)
+        # Concatenate pooled outputs
+        combined = torch.cat([avg_out, max_out], dim=1)
+        # Convolve and apply sigmoid
+        attention_map = self.sigmoid(self.conv(combined))
+        return x * attention_map
+
+```
+
+2. **Add it to MonkeyNET after the last convolution**
+
+```python
+
+class MonkeyNET(nn.Module):
+    def __init__(self, num_classes=10, input_size=(500, 500)):
+        super(MonkeyNET, self).__init__()
+        
+        # First convolutional layer: 3 input channels (RGB), 32 output channels, kernel size 5, padding 2 to preserve size
+        self.conv1 = nn.Conv2d(in_channels=3, out_channels=32, kernel_size=3, padding=2)
+
+        self.attention = SpatialAttention()
+        
+        # Calculate the size of the fully connected layer dynamically
+        self.fc_input_size = self._get_fc_input_size(input_size)
+        self.fc1 = nn.Linear(self.fc_input_size, 16)  # Adjusted for the final size after pooling
+        
+        # Prediction layer
+        self.prediction = nn.Linear(16, num_classes)
+        
+    def _get_fc_input_size(self, input_size):
+        x = torch.zeros(1, 3, *input_size)  # Create a dummy input tensor
+        x = F.relu(self.conv1(x))
+        x = self.attention(x)
+        x = F.max_pool2d(x, kernel_size=(8, 8), stride=8)
+        return x.numel()  # Total number of elements after conv layers
+    
+    def forward(self, x):
+        # First conv -> ReLU -> Max Pooling
+        x = F.relu(self.conv1(x))
+
+        x = self.attention(x)
+
+        x = F.max_pool2d(x, kernel_size=(8, 8), stride=8)
+
+        # Flatten the tensor for fully connected layer
+        x = x.view(x.size(0), -1)  # Output: (batch_size, 128 * 16 * 16) for 500x500 input
+
+        # Fully connected layer -> ReLU
+        x = F.relu(self.fc1(x))
+
+        # Output layer (no activation, to be combined with a loss function later)
+        x = self.prediction(x)
+        # Optionally remove Softmax from here
+        return x
+
+```
+
 
 
 
