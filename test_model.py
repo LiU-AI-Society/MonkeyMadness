@@ -10,10 +10,11 @@ from livelossplot import PlotLosses
 import seaborn as sns
 import numpy as np
 
+
 def plot_cm(all_labels, all_preds, classes):
     # Compute confusion matrix
     cm = confusion_matrix(all_labels, all_preds)
-    #cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]  # Normalize by row
+    # cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]  # Normalize by row
 
     plt.figure(figsize=(10, 8))
     sns.heatmap(cm, annot=True, fmt=".2f", cmap="Blues",
@@ -22,10 +23,6 @@ def plot_cm(all_labels, all_preds, classes):
     plt.xlabel("Predicted Label")
     plt.ylabel("True Label")
     plt.show()
-
-
-
-
 
 
 def test(model, testloader, device, model_name, unique_id):
@@ -43,7 +40,7 @@ def test(model, testloader, device, model_name, unique_id):
     for idx, (inputs, targets) in enumerate(testloader):
 
         # Move data to GPU if CUDA is available
-         
+
         inputs, targets = inputs.to(device), targets.to(device)
 
         inputs = torch.tensor(inputs, requires_grad=False)
@@ -64,18 +61,11 @@ def test(model, testloader, device, model_name, unique_id):
 
     # Compute confusion matrix
 
+    class_names = testloader.dataset.dataset.class_names #
 
-    class_names = testloader.dataset.dataset.class_names #maybe not write dataset twice
-    #translations = [translate[cl] for cl in class_names]
-
-    
     plot_cm(all_labels, all_preds, class_names)
-   
 
     print('Accuracy of the network on the test images: %d %%' % (
         100 * correct / total))
-    
 
-    
     return (100 * correct / total)
-
