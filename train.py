@@ -25,7 +25,8 @@ def train(model, trainloader, valloader, optimizer, objective, device, start_epo
     val_acc_log = []
 
     liveloss = PlotLosses()
-
+    best_val_acc = 0
+    onnx_path = f"best_models/{model_name}_{unique_id}_best_model.onnx"
     for epoch in range(start_epoch, num_epochs + 1):
         print(f'\nEpoch: {epoch}')
 
@@ -93,6 +94,28 @@ def train(model, trainloader, valloader, optimizer, objective, device, start_epo
 
         val_loss_log.append(val_loss)
         val_acc_log.append(val_acc)
+
+        if val_acc > best_val_acc:
+            best_val_acc = val_acc
+            # Set the model to evaluation mode
+            model.eval()
+
+            # Define a dummy input tensor matching the input shape expected by the model
+            # Adjust the shape based on your actual model's input
+            dummy_input = torch.randn(1, 3, 64, 64).to(device)  # Replace 224x224 with your input size
+
+            # Export the model to ONNX format
+            torch.onnx.export(
+                model,
+                dummy_input,
+                onnx_path,
+                verbose=True,
+                input_names=["input"],
+                output_names=["output"],
+                opset_version=11,  # Use appropriate ONNX opset version
+            )
+
+            print(f"New best model saved to {onnx_path} with accuracy: {best_val_acc:.2f}%")
 
         # Live loss plotting
         logs = {

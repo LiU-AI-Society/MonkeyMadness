@@ -14,7 +14,7 @@ import numpy as np
 def plot_cm(all_labels, all_preds, classes):
     # Compute confusion matrix
     cm = confusion_matrix(all_labels, all_preds)
-    # cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]  # Normalize by row
+    cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]  # Normalize by row
 
     plt.figure(figsize=(10, 8))
     sns.heatmap(cm, annot=True, fmt=".2f", cmap="Blues",
