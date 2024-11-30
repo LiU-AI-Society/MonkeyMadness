@@ -1,4 +1,8 @@
-# Classification-Game
+![image](https://github.com/user-attachments/assets/b25bde74-7cee-4ba6-8131-64b97a526405)# Classification-Game
+
+Material to check in:
+Video 1: https://www.youtube.com/watch?v=UZDiGooFs54
+
 
 # What is a convolution? 
 
