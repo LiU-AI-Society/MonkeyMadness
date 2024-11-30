@@ -1,3 +1,4 @@
+![MonkeyMadness](https://github.com/user-attachments/assets/bfcf152a-8cce-458d-8f32-576f164ea3f7)
 # Classification-Game
 
 Material to check in:
