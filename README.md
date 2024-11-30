@@ -3,6 +3,7 @@
 
 Material to check in:
 Video 1: https://www.youtube.com/watch?v=UZDiGooFs54
+video 2: https://www.youtube.com/watch?v=Ilg3gGewQ5U
 
 
 # What is a convolution? 
