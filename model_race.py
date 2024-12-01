@@ -95,7 +95,7 @@ class ModelEvaluator:
             'F1 Score'
         ]
         values = [
-            model_metrics['accuracy'],
+            model_metrics['accuracy']*100,
             model_metrics['precision'] * 100,
             model_metrics['recall'] * 100,
             model_metrics['f1_score'] * 100
@@ -116,54 +116,88 @@ class ModelEvaluator:
 
     def plot_all_models_metrics(self, results):
         """
-        Plot a grouped bar chart comparing different metrics across all evaluated models.
+        Plot a grouped bar chart comparing different metrics across all evaluated models,
+        with an additional subplot showing performance on the 7th class.
 
         Args:
-            results (dict): Dictionary containing evaluation results for each model,
-                            where keys are model filenames and values are dictionaries
-                            containing the calculated metrics.
+            results (dict): Dictionary containing evaluation results for each model
         """
-
         # Extract unique metric names from all models' results
         unique_metrics = set()
         for model_name, model_results in results.items():
             unique_metrics.update(model_results.keys())
-        unique_metrics.remove("class_report")  # Exclude class_report (text data)
+        
+        # Remove non-numeric keys
+        unique_metrics = {metric for metric in unique_metrics if metric in ['accuracy', 'precision', 'recall', 'f1_score', 'class_report']}
+        
+        # Create figure with two subplots side by side
+        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(20, 8))
 
+        # First subplot: Overall model metrics
         # Create a color map for assigning distinct colors to different models
         num_models = len(results)
-        # Example of using colors for a bar plot
         cmap = plt.get_cmap('Paired', num_models)
         colors = [cmap(i) for i in range(num_models)]
 
-        # Set plot configurations
-        fig, ax = plt.subplots(figsize=(12, 8))
-        bar_width = 0.2  # Adjust bar width for better visualization with many models
-
-        # Iterate through unique metrics and plot bars for each model's value
-        metric_positions = np.arange(len(unique_metrics))
-        model_positions = np.arange(num_models) * bar_width
+        # Prepare data for overall metrics
+        metric_positions = np.arange(len(unique_metrics) - 1)  # Exclude 'class_report'
+        bar_width = 0.05  # Adjust bar width for better visualization with many models
 
         model_counter = 0
         for model_name, model_results in results.items():
             model_color = cmap(model_counter / num_models)  # Assign unique color
-            bar_positions = [metric_positions[i] + model_positions[model_counter] for i, _ in enumerate(unique_metrics)]
-
-            metric_values = [model_results[metric] for metric in unique_metrics]
-            ax.bar(bar_positions, metric_values, bar_width, label=model_name, color=model_color)
+            
+            # Prepare metric values (exclude 'class_report')
+            metric_values = [
+                model_results[metric] * 100 if metric != 'class_report' else 0 
+                for metric in unique_metrics if metric != 'class_report'
+            ]
+            
+            bar_positions = [metric_positions[i] + bar_width * model_counter for i in range(len(metric_values))]
+            
+            ax1.bar(bar_positions, metric_values, bar_width, label=model_name, color=model_color)
             model_counter += 1
 
-        # Set axis labels and title
-        ax.set_title("Comparison of Model Evaluation Metrics", fontsize=14)
+        # Customize first subplot (Overall Metrics)
+        ax1.set_title("Comparison of Model Evaluation Metrics", fontsize=14)
+        metric_labels = [m for m in unique_metrics if m != 'class_report']
+        ax1.set_xticks(metric_positions + bar_width * (num_models - 1) / 2)
+        ax1.set_xticklabels(metric_labels, rotation=45, ha='right', fontsize=10)
+        ax1.set_ylabel("Percentage (%)")
+        ax1.legend(title="Models", loc='upper left', bbox_to_anchor=(1.05, 1))
 
-        # Set x-axis tick labels and rotation for better readability
-        ax.set_xticks(metric_positions + bar_width * (num_models - 1) / 2)
-        ax.set_xticklabels(unique_metrics, rotation=45, ha='right', fontsize=10)
+        # Second subplot: Performance on 8th Class
+        # Determine the index of the 8th class (0-based indexing)
+        seventh_class = self.class_names[7] if len(self.class_names) > 6 else None
+        
+        if seventh_class:
+            # Prepare data for 7th class performance
+            seventh_class_scores = []
+            for model_name, model_results in results.items():
+                # Extract precision for the 7th class from the class report
+                class_report = model_results.get('class_report', {})
+                class_precision = class_report.get(seventh_class, {}).get('precision', 0) * 100
+                seventh_class_scores.append(class_precision)
+            
+            # Sort models by their performance on the 7th class
+            sorted_indices = np.argsort(seventh_class_scores)[::-1]
+            sorted_models = [list(results.keys())[i] for i in sorted_indices]
+            sorted_scores = [seventh_class_scores[i] for i in sorted_indices]
+            
+            # Plot 7th class performance
+            ax2.bar(range(len(sorted_models)), sorted_scores, color=[cmap(i/num_models) for i in range(len(sorted_models))])
+            ax2.set_title(f"Model Performance on Herr Nillson Class", fontsize=14)
+            ax2.set_xlabel("Models")
+            ax2.set_ylabel("Precision (%)")
+            ax2.set_xticks(range(len(sorted_models)))
+            ax2.set_xticklabels(sorted_models, rotation=45, ha='right')
+            
+            # Add value labels on top of each bar
+            for i, v in enumerate(sorted_scores):
+                ax2.text(i, v, f'{v:.2f}%', ha='center', va='bottom')
 
-        # Add legend and display the plot
-        ax.legend(title="Models", loc='upper left', bbox_to_anchor=(1.05, 1))
         plt.tight_layout()
-        plt.show()
+        plt.show(block=False)
         
     def plot_top_models_class_accuracy(self, results, top_models, model_folder):
         """
@@ -198,7 +232,7 @@ class ModelEvaluator:
             ]
         
         # Set the width of each bar and positions
-        bar_width = 0.25
+        bar_width = 0.2
         num_models = len(top_models)
         
         # Create bars for each model
@@ -230,14 +264,14 @@ class ModelEvaluator:
             
             # Convert metrics to percentage for easier comparison
             model_metrics[model_name] = [
-                evaluation_results['accuracy'],
+                evaluation_results['accuracy']* 100,
                 evaluation_results['precision'] * 100,
                 evaluation_results['recall'] * 100,
                 evaluation_results['f1_score'] * 100
             ]
         
         # Set up bar positions for overall metrics
-        bar_width = 0.25
+        bar_width = 0.2
         x = np.arange(len(metrics))
         
         # Plot bars for each top model's metrics
@@ -263,7 +297,7 @@ class ModelEvaluator:
 
     def evaluate_onnx_model(self, model_path, show_confusion_matrix=False):
         """
-        Evaluate an ONNX model and optionally plot confusion matrix
+        Evaluate an ONNX model and calculate metrics more accurately
         
         Args:
         - model_path (str): Path to ONNX model file
@@ -271,20 +305,13 @@ class ModelEvaluator:
         
         Returns:
         - dict: Model evaluation metrics
-
-        
         """
-
-
-
-        
-        
         
         onnx_model = onnx.load(model_path)
         onnx.checker.check_model(onnx_model)
         
         # Retrieve input details
-        input_tensor = onnx_model.graph.input[0]  # Assuming one input; adjust index if multiple
+        input_tensor = onnx_model.graph.input[0]
         input_shape = [dim.dim_value for dim in input_tensor.type.tensor_type.shape.dim]
 
         image_size = (input_shape[2], input_shape[3])
@@ -293,6 +320,7 @@ class ModelEvaluator:
             transforms.ToTensor(),
             transforms.Resize(image_size)
         ])
+        
         # Load dataset
         dataset = MonkeyImageDataset(
             self.dataset_path, 
@@ -301,8 +329,7 @@ class ModelEvaluator:
             data_percentage=self.data_percentage
         )
         test_loader = DataLoader(dataset=dataset, batch_size=1, shuffle=False)
-        # Validate ONNX model
-
+        
         # Create ONNX inference session
         ort_session = ort.InferenceSession(
             model_path, 
@@ -341,11 +368,13 @@ class ModelEvaluator:
             all_labels.extend(gt.numpy())
             all_preds.extend(pred.numpy())
         
-        # Calculate metrics
-        accuracy = 100 * correct / total
-        precision = precision_score(all_labels, all_preds, average='weighted', zero_division=0)
-        recall = recall_score(all_labels, all_preds, average='weighted', zero_division=0)
-        f1 = f1_score(all_labels, all_preds, average='weighted', zero_division=0)
+        # Calculate metrics with explicit averaging strategies
+        accuracy = correct / total
+        
+        # Use multi-class averaging strategies
+        precision = precision_score(all_labels, all_preds, average='macro', zero_division=0)
+        recall = recall_score(all_labels, all_preds, average='macro', zero_division=0)
+        f1 = f1_score(all_labels, all_preds, average='macro', zero_division=0)
         
         # Optional confusion matrix display
         if show_confusion_matrix:
@@ -368,10 +397,10 @@ class ModelEvaluator:
         # Verbose logging
         if self.verbose:
             print(f"\nModel: {os.path.basename(model_path)}")
-            print(f'Accuracy: {accuracy:.2f}%')
-            print(f'Precision (weighted): {precision:.2f}')
-            print(f'Recall (weighted): {recall:.2f}')
-            print(f'F1-score (weighted): {f1:.2f}')
+            print(f'Accuracy: {accuracy:.2%}')
+            print(f'Precision: {precision:.2%}')
+            print(f'Recall : {recall:.2%}')
+            print(f'F1-score: {f1:.2%}')
         
         return {
             'accuracy': accuracy,
@@ -380,7 +409,6 @@ class ModelEvaluator:
             'f1_score': f1,
             'class_report': class_report
         }
-
 def get_top_models(results, top_n=3):
     """
     Get top N models based on accuracy
@@ -470,16 +498,21 @@ def main():
     if args.top > 0:
         top_models = get_top_models(results, args.top)
         print("\n--- Top Model Detailed Analysis ---")
+        
+        # Modify this section to prevent duplicate processing
         for model_name, model_metrics in top_models:
             model_path = os.path.join(args.model_folder, model_name)
             print(f"\nDetailed Analysis for {model_name}:")
-            evaluator.evaluate_onnx_model(model_path, show_confusion_matrix=True)
-            
+            # Only show confusion matrix for first top model to prevent multiple plots
+            evaluator.evaluate_onnx_model(
+                model_path, 
+                show_confusion_matrix=(model_name == top_models[0][0])
+            )
         
         # Plot class-level accuracy for top models
         evaluator.plot_top_models_class_accuracy(results, top_models, args.model_folder)
 
-        #ensure we se the next plots
+        # Ensure we see the plots
         plt.show(block=False)
     
     # Save results to JSON
