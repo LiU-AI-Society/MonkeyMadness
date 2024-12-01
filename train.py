@@ -26,7 +26,7 @@ def train(model, trainloader, valloader, optimizer, objective, device, start_epo
 
     liveloss = PlotLosses()
     best_val_acc = 0
-    onnx_path = f"best_models/{model_name}_{unique_id}_best_model.onnx"
+    onnx_path = f"saved_models/{model_name}_{unique_id}_best_model.onnx"
     for epoch in range(start_epoch, num_epochs + 1):
         print(f'\nEpoch: {epoch}')
 
