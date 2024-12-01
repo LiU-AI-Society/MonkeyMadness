@@ -1,4 +1,10 @@
+![MonkeyMadness](https://github.com/user-attachments/assets/bfcf152a-8cce-458d-8f32-576f164ea3f7)
 # Classification-Game
+
+Material to check in:
+Video 1: https://www.youtube.com/watch?v=UZDiGooFs54
+video 2: https://www.youtube.com/watch?v=Ilg3gGewQ5U
+
 
 # What is a convolution? 
 
@@ -168,7 +174,7 @@ Ensembling combines predictions from multiple models to improve accuracy and sta
 
 You could implement ensembling by creating a class that takes a list of models and combines their predictions. This class could run each model independently, then combine their outputs through  majority voting.
 
-It could look like this:
+You could start by adding the following code to the MODEL block.
 
 ```python
 class Ensemble(nn.Module):
@@ -189,19 +195,19 @@ class Ensemble(nn.Module):
 
 The next step is to train a few models, preferably with different hyperparameters (to introduce some variability) and add them to a list.
 
-For this you need to create different optimizers for each model, since these hold the model parameters in them. So if you want three models in your ensemble it could look like this:
+For this you need to create different optimizers for each model, since these hold the model parameters in them. So if you want three models in your ensemble it could look like this: (add these lines to the TRAINING code block)
 
 
 ```python
 
-model1 = ClassificationModel(num_classes=NUM_OF_CLASSES, input_size=IMAGE_SIZE)
+model1 = MonkeyNET(num_classes=NUM_OF_CLASSES, input_size=IMAGE_SIZE)
 optimizer1 = torch.optim.SGD(model1.parameters(), lr=LR)
 
-model2 = ClassificationModel(num_classes=NUM_OF_CLASSES, input_size=IMAGE_SIZE)
+model2 = MonkeyNET(num_classes=NUM_OF_CLASSES, input_size=IMAGE_SIZE)
 optimizer2 = torch.optim.SGD(model2.parameters(), lr=LR)
 
 
-model3 = ClassificationModel(num_classes=NUM_OF_CLASSES, input_size=IMAGE_SIZE)
+model3 = MonkeyNET(num_classes=NUM_OF_CLASSES, input_size=IMAGE_SIZE)
 optimizer3 = torch.optim.SGD(model1.parameters(), lr=LR)
 
 
@@ -241,7 +247,7 @@ acc = test(model=ensemble, testloader=val_loader, device=device, model_name="ens
 
 Why add more layers? Adding a layer to a Convolutional Neural Network (CNN) increases the model’s depth, allowing it to learn more complex features from the input data. New layers, like convolutional, pooling, or fully connected layers, enhance the network's ability to capture patterns such as edges, textures, or object parts. Adding layers can improve model performance but also increases computational requirements and the risk of overfitting.
 
-For this you should change the ClassificationModel. You need to add the convolutional layer to the constructor, the forward method and the get_fc_input_size method.
+For this you should change the MonkeyNET. You need to add the convolutional layer to the constructor, the forward method and the get_fc_input_size method. (This is done in the MODEL code block)
 
 For the constructor add a Conv2d as following:
 
@@ -295,7 +301,7 @@ def _get_fc_input_size(self, input_size):
 <summary><strong> Weight decay </strong> </summary>
 What is weight decay? Weight decay is a regularization technique used to prevent overfitting in machine learning models by adding a penalty to the model's loss function based on the size of its weights. It works by slightly reducing the weights during training, encouraging simpler models with smaller weights, which often generalize better to new data. This technique is especially useful in neural networks, where complex models can easily overfit to the training data.
 
-
+The following lines should be added to the TRAINING code block
 ```python
 weight_decay = 1e-4  # Adjust weight decay as needed
 optimizer = torch.optim.SGD(model.parameters(), lr=LR, weight_decay=weight_decay)
@@ -327,7 +333,7 @@ Why have learning rate scheduler?A learning rate scheduler is used to adjust the
 
 Why momentum? Momentum is an optimization technique that helps accelerate gradients vectors in the right directions, thus leading to faster converging. It works by adding a fraction of the previous update to the current update, which helps to smooth out the updates and reduces oscillation, especially in areas with noisy gradients. This technique mimics the physical concept of momentum, where the optimizer retains a memory of past gradients to guide its current direction.
 
-Add momemntum to the optimizer:
+Add momemntum to the optimizer: (TRAINING code block)
 
 ```python
 momentum = 0.9
@@ -340,7 +346,7 @@ optimizer1 = torch.optim.SGD(model1.parameters(), lr=LR, momentum=momentum)
 
 <details>
 <summary><strong> Herr Nilsson's friend</strong> </summary>
-If you want to get the title of Herr Nilssons friend you might want to give an extra reward to the model when it makes corrects predictions for the squirrel monkey class. You can do this by:
+If you want to get the title of Herr Nilssons friend you might want to give an extra reward to the model when it makes corrects predictions for the squirrel monkey class. You can do this by: (in the TRAINING block)
 
 ```python
 class_weights = torch.ones(NUM_OF_CLASSES)
@@ -349,7 +355,7 @@ class_weights = class_weights.to(device)
 criterion = nn.CrossEntropyLoss(weight=class_weights)
 ```
 
-Remeber that you still want high recall so you still want to predict some of the other monkeys correctly
+Remeber that you still want high recall so you still want to predict some of the other monkeys correctly. You will have to experiment with the weighting factor to get a reasoable result.
 </details>
 
 
@@ -362,18 +368,17 @@ Remeber that you still want high recall so you still want to predict some of the
 
 
 
-Dropout is a regularization technique that helps prevent overfitting by randomly "dropping out" a proportion of neurons during training. These changes are supposed to be implemented in the cellblock for the model.
+Dropout is a regularization technique that helps prevent overfitting by randomly "dropping out" a proportion of neurons during training. These changes are supposed to be implemented in the MODEL block.
 
 #### 1. Add a dropout_rate parameter to __init__ (default 0.5)
 ```python
 def __init__(self, num_classes=10, input_size=(500, 500), dropout_rate=0.5):
 ```
-#### 2. Add two types of dropout layers in the init method
+#### 2. Add one  dropout layer in the init method
 
 ```python
 # Dropout layers
         self.dropout1 = nn.Dropout2d(p=dropout_rate)  # Spatial dropout for convolutional layers
-        self.dropout2 = nn.Dropout(p=dropout_rate)    # Regular dropout for fully connected layers
 ```
 #### 3. Apply dropout after activation functions but before pooling layers in the forwards method
 
@@ -384,22 +389,18 @@ One convolutional block should then look like this
         x = self.dropout1(x)  # Apply spatial dropout
         x = F.max_pool2d(x, kernel_size=2, stride=2)
 ```
-#### 4. Add dropout before the final prediction layer
 
-```python
-# Fully connected layer -> ReLU -> Dropout
-        x = F.relu(self.fc1(x))
-        x = self.dropout2(x)  # Apply regular dropout before final layer
-```
+### You can experiment with how many of these dropout layers you want 
 
-#### 5. Use dropout
+
+#### 4. Use dropout
 To use this model, you can instantiate it with different dropout rates:
 ```python
 # Default dropout rate (0.5)
-model = ClassificationModel(num_classes=10, input_size=(500, 500))
+model = MonkeyNET(num_classes=10)
 
 # Custom dropout rate
-model = ClassificationModel(num_classes=10, input_size=(500, 500), dropout_rate=0.3)
+model = MonkeyNET(num_classes=10, dropout_rate=0.3)
 ```
 
 </details>
@@ -435,7 +436,7 @@ model = ClassificationModel(num_classes=10, input_size=(500, 500), dropout_rate=
 
 # How to implement it:
 
-## 1. Define the loss DistillationLoss
+## 1. Define the loss DistillationLoss (can be done in the TRAINING code block)
 ```python
 class DistillationLoss(nn.Module):
     def __init__(self, temperature=3.0, alpha=0.5):
@@ -458,7 +459,7 @@ class DistillationLoss(nn.Module):
 
 ```
 
-# Next load the pretrained model:
+# Next load the pretrained model: (IN THE TRAINING BLOCK)
 ```python
 teacher_model = models.resnet18(pretrained=False)  # Set pretrained=False since you're loading a custom-trained model
 teacher_model.fc = nn.Linear(teacher_model.fc.in_features, NUM_OF_CLASSES)
@@ -469,7 +470,7 @@ teacher_model.eval()
 teacher_model.to(device)
 ```
 
-# Next, declare your criterion as the Distiliation loss and send both to the training function:
+# Next, declare your criterion as the Distiliation loss and send both to the training function: (also in the TRAINING block)
 ```python
 criterion = DistillationLoss()
 
@@ -509,7 +510,7 @@ Spatial attention operates on the spatial dimensions (height and width) of a fea
 
 # How to implement:
 
-1. **Start by defining the attention mechanism**
+1. **Start by defining the attention mechanism (add these line to the MODEL code block**
 
 ```python
 
@@ -531,7 +532,7 @@ class SpatialAttention(nn.Module):
 
 ```
 
-2. **Add it to MonkeyNET after the last convolution**
+2. **Add it to MonkeyNET after the last convolution (MODEL code block)**
 
 ```python
 
@@ -546,10 +547,9 @@ class MonkeyNET(nn.Module):
         
         # Calculate the size of the fully connected layer dynamically
         self.fc_input_size = self._get_fc_input_size(input_size)
-        self.fc1 = nn.Linear(self.fc_input_size, 16)  # Adjusted for the final size after pooling
+        self.fc1 = nn.Linear(self.fc_input_size, 10)  # Adjusted for the final size after pooling
         
         # Prediction layer
-        self.prediction = nn.Linear(16, num_classes)
         
     def _get_fc_input_size(self, input_size):
         x = torch.zeros(1, 3, *input_size)  # Create a dummy input tensor
@@ -570,11 +570,9 @@ class MonkeyNET(nn.Module):
         x = x.view(x.size(0), -1)  # Output: (batch_size, 128 * 16 * 16) for 500x500 input
 
         # Fully connected layer -> ReLU
-        x = F.relu(self.fc1(x))
+        x = self.fc1(x)
 
-        # Output layer (no activation, to be combined with a loss function later)
-        x = self.prediction(x)
-        # Optionally remove Softmax from here
+       
         return x
 
 ```
