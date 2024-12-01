@@ -366,6 +366,7 @@ Remeber that you still want high recall so you still want to predict some of the
 <details>
 <summary><strong> Implement Drop shield </strong> </summary>
 
+![image](https://github.com/user-attachments/assets/dfc03f58-a9ab-486e-ac51-404a0f5d2f05)
 
 
 Dropout is a regularization technique that helps prevent overfitting by randomly "dropping out" a proportion of neurons during training. These changes are supposed to be implemented in the MODEL block.
