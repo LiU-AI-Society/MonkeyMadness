@@ -12,12 +12,13 @@ import json
 import warnings
 import random
 from sklearn.metrics import precision_score, recall_score, f1_score, confusion_matrix, classification_report
+from Dataset import MonkeyImageDataset
 
 # Suppress specific warnings
 warnings.filterwarnings('ignore', category=UserWarning)
 
 class ModelEvaluator:
-    def __init__(self, dataset_path, image_size=(64, 64), num_of_classes=10, data_percentage=1, verbose=False):
+    def __init__(self, dataset_path, image_sizes = [(64, 64)], num_of_classes=10, data_percentage=1, verbose=False):
         """
         Initialize the model evaluator with dataset configuration
         
@@ -29,23 +30,14 @@ class ModelEvaluator:
         - verbose (bool): Enable detailed logging
         """
         # Import dataset class here to avoid potential circular import
-        from Dataset import MonkeyImageDataset
+
         
         # Create transform
-        transform = transforms.Compose([
-            transforms.ToTensor(),
-            transforms.Resize(image_size)
-        ])
-        
-        # Load dataset
-        self.dataset = MonkeyImageDataset(
-            dataset_path, 
-            transform=transform, 
-            amount_of_classes=num_of_classes, 
-            data_percentage=data_percentage
-        )
-        self.test_loader = DataLoader(dataset=self.dataset, batch_size=1, shuffle=False)
-        
+       
+        self.dataset = MonkeyImageDataset(dataset_path)
+        self.dataset_path = dataset_path
+        self.num_of_classes = num_of_classes
+        self.data_percentage = 1
         # Initialize plot for real-time comparison
         self.model_metrics = []
         self.model_names = []
@@ -279,11 +271,38 @@ class ModelEvaluator:
         
         Returns:
         - dict: Model evaluation metrics
+
+        
         """
-        # Validate ONNX model
+
+
+
+        
+        
+        
         onnx_model = onnx.load(model_path)
         onnx.checker.check_model(onnx_model)
         
+        # Retrieve input details
+        input_tensor = onnx_model.graph.input[0]  # Assuming one input; adjust index if multiple
+        input_shape = [dim.dim_value for dim in input_tensor.type.tensor_type.shape.dim]
+
+        image_size = (input_shape[2], input_shape[3])
+
+        transform = transforms.Compose([
+            transforms.ToTensor(),
+            transforms.Resize(image_size)
+        ])
+        # Load dataset
+        dataset = MonkeyImageDataset(
+            self.dataset_path, 
+            transform=transform, 
+            amount_of_classes=self.num_of_classes, 
+            data_percentage=self.data_percentage
+        )
+        test_loader = DataLoader(dataset=dataset, batch_size=1, shuffle=False)
+        # Validate ONNX model
+
         # Create ONNX inference session
         ort_session = ort.InferenceSession(
             model_path, 
@@ -297,7 +316,7 @@ class ModelEvaluator:
         all_preds = []
         
         # Inference loop
-        for inputs, targets in self.test_loader:
+        for inputs, targets in test_loader:
             # Ensure 4D tensor shape: [batch, channels, height, width]
             if inputs.dim() == 3:
                 inputs = inputs.unsqueeze(0)
