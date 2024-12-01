@@ -1,87 +1,28 @@
-![MonkeyMadness](https://github.com/user-attachments/assets/bfcf152a-8cce-458d-8f32-576f164ea3f7)
-# Classification-Game
-
-Material to check in:
-Video 1: https://www.youtube.com/watch?v=UZDiGooFs54
-video 2: https://www.youtube.com/watch?v=Ilg3gGewQ5U
+# MonkeyMadness
 
 
-# What is a convolution? 
+## BUDGET: 100 Billion Nerual nuggets
 
+## Shop
+| Upgrade                           | Cost         |
+|-----------------------------------------|--------------|
+| Info Infusion             | 1 B NN per % added data      |
+| Resize Rocket                                       | 10 B NN for 2x increase in size       |
+| Whirl and swirl                         | 10 B NN      |
+| Foggy Lens                                      | 5 B NN       |
+| Flip trick                              | 10 B NN      |
+| Need for shift: Tokyo data drift        | 5 B NN       |
+| Cutout mask                             | 5 B NN      |
+| Ensemble enchanter                      | 60 B NN      |
+| Neural boost                      | 20 B NN  per layer. Buy 3 for the price of 2    |
+| Drop shield                             | 10 B NN      |
+| Weigth decay                                      | 10 B NN      |
+| Herr Nilsson's friend                   | Free            |
+| Wisdom extractor                        | 40 B NN            |
+| Speed boost                        | 10 B NN            |
+| Focus Lens                       | 15 B NN            |
+| Hypothesis hustle | 20 B NN           |
 
-The convolution is like sliding a small "window" (called a kernel or filter) over an image to look for patterns.
-
-Here's how it works step-by-step:
-
-Kernel: Think of this as a small grid of numbers (e.g., 3x3).
-Slide and Multiply: Place the kernel on part of the image. Multiply the numbers in the kernel with the corresponding numbers in the image under it.
-Sum Up: Add the results of the multiplication together. This gives one number for that position.
-Move the Kernel: Slide the kernel to the next part of the image and repeat.
-The result is a new image (called a feature map) that highlights certain patterns like edges or textures.
-
-
-
-# Supervised Learning
-
-In this task, you will use supervised learning to classify images of monkeys. Supervised learning is one of the three main areas of machine learning.  
-
-Supervised learning is like teaching the computer to recognize monkeys by using flashcards.  
-
-1. **Labeled Data**: You show the computer images of monkeys and tell it which species each one is (e.g., "This is a chimpanzee").  
-2. **Training**: The computer studies these examples to learn patterns.  
-3. **Comparison**: It makes a prediction of the image and then compares it to the labeled data. It will be penalized based on how "wrong" it is.  
-4. **Prediction**: Once trained, it can look at a new image and guess the species of the monkey based on what it learned.  
-
-It’s called “supervised” because the model learns under guidance (the labeled data).  
-
-## There are some main ingredients:
-
-1. **Data**  
-    - The data has to be labeled, i.e., someone has to manually note down what monkey is present in the image.  
-
-2. **Model**  
-    - It is the model that makes predictions. It does so by looking at the input and making a guess about what monkey is present. The model consists of mathematical operations and weights (these are adjustable). In this task we will use so called Convolutional Neural Network which are very good at handling image data.
-
-3. **Loss Function**  
-    - Somehow we need to tell the computer how wrong the guess is.  
-    - The model will output probabilities for each monkey class. Let’s say it sees an image of an orangutan, then it could perhaps output the following:  
-
-        ```markdown
-        Chimpanzee: 0.70 (70%)  
-        Orangutan: 0.20 (20%)  
-        Other monkeys: 0.10 (10%)  
-        ```
-
-        The correct label is orangutan (100% probability), but the model guessed only 20% for this class.
-
-        Using a loss function like Cross-Entropy Loss, the score is calculated to show how wrong the prediction is
-        The closer the prediction is to 1 (100%), the smaller the loss. 
-        The goal is to adjust the model to make higher confidence predictions for the correct class.
-4. **Optimizer**
-    - Somehow we need to adjust the model to perform better. This is done by calculating, based on the loss how the model should be adjusted.
-
-
-# BUDGET: 100 Billion Nerual nuggets
-
-# Shop
-- more data - Data Potion/ Info infusion : 20 B NN
-- learning rate decay : 5 B NN
-- augmentation differnt kinds
-  - rotate - Whirl and swirl: 10 B NN
-  - blur - ?? : 5 B NN 
-  - flip - flip trick   : 10 B NN
-  - upsample/downsample - Resolution rocket : 5 B NN
-  - shift - Need for shift: Tokyo data drift : 5 B NN
-  - Cutout - Cutout mask : 10 B NN
-- ensemble learning - Ensemble enchanter 60 B NN
-- one more convulutional layers - Neural turbo boost : 20 B NN 
-- Learning rate scheduler : Speed dial : 10 B NN
-- Dropout - Drop shield : 10 B NN
-- Weight Decay : 10 : 20 B NN
-- Mixup - Mixup mixer : 20 B NN
-- Focus on one class - Herr Nilsson's friend
-- Knowledge distilation - Wisdom extractor
-- F**k around and find out - Do whatever you want
 
 
 # Things to try out for yourself
