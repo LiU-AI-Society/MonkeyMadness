@@ -1,5 +1,5 @@
 ![MonkeyMadness](https://github.com/user-attachments/assets/bfcf152a-8cce-458d-8f32-576f164ea3f7)
-# Classification-Game
+# MonkeyMadness
 
 Material to check in:
 Video 1: https://www.youtube.com/watch?v=UZDiGooFs54
@@ -63,25 +63,25 @@ It’s called “supervised” because the model learns under guidance (the labe
 
 # BUDGET: 100 Billion Nerual nuggets
 
-# Shop
-- more data - Data Potion/ Info infusion : 20 B NN
-- learning rate decay : 5 B NN
-- augmentation differnt kinds
-  - rotate - Whirl and swirl: 10 B NN
-  - blur - ?? : 5 B NN 
-  - flip - flip trick   : 10 B NN
-  - upsample/downsample - Resolution rocket : 5 B NN
-  - shift - Need for shift: Tokyo data drift : 5 B NN
-  - Cutout - Cutout mask : 10 B NN
-- ensemble learning - Ensemble enchanter 60 B NN
-- one more convulutional layers - Neural turbo boost : 20 B NN 
-- Learning rate scheduler : Speed dial : 10 B NN
-- Dropout - Drop shield : 10 B NN
-- Weight Decay : 10 : 20 B NN
-- Mixup - Mixup mixer : 20 B NN
-- Focus on one class - Herr Nilsson's friend
-- Knowledge distilation - Wisdom extractor
-- F**k around and find out - Do whatever you want
+## Shop
+| Upgrade                           | Cost         |
+|-----------------------------------------|--------------|
+| Info Infusion             | 1 B NN per % added data      |
+| Resize Rocket                                       | 10 B NN for 2x increase in size       |
+| Whirl and swirl                         | 10 B NN      |
+| Foggy Lens                                      | 5 B NN       |
+| Flip trick                              | 10 B NN      |
+| Need for shift: Tokyo data drift        | 5 B NN       |
+| Cutout mask                             | 5 B NN      |
+| Ensemble enchanter                      | 60 B NN      |
+| Neural boost                      | 20 B NN  per layer. Buy 3 for the price of 2    |
+| Drop shield                             | 10 B NN      |
+| Weigth decay                                      | 10 B NN      |
+| Herr Nilsson's friend                   | Free            |
+| Wisdom extractor                        | 40 B NN            |
+| Speed boost                        | 10 B NN            |
+| Focus Lens                       | 15 B NN            |
+| Hypothesis hustle | 20 B NN           |
 
 
 # Things to try out for yourself
