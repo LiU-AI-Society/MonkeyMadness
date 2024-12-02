@@ -464,7 +464,7 @@ class DistillationLoss(nn.Module):
 ```python
 teacher_model = models.resnet18(pretrained=False)  # Set pretrained=False since you're loading a custom-trained model
 teacher_model.fc = nn.Linear(teacher_model.fc.in_features, NUM_OF_CLASSES)
-teacher_model.load_state_dict(torch.load('Pretrained/Pretrained-Resnet18.pt'))
+teacher_model.load_state_dict(torch.load('Pretrained/Pretrained_Resnet18.pt'))
 
 # set in eval mode:
 teacher_model.eval()

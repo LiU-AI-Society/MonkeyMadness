@@ -1,0 +1,521 @@
+pytorch2.4.1:Ó›
+ï"
+input
+conv1.weight
+
+conv1.bias/conv1/Conv_output_0/conv1/Conv"Conv*
+	dilations@@†*
+group†*
+kernel_shape@@†*
+pads@@@@†*
+strides@@†2Í /opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/conv.py(454): _conv_forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/conv.py(458): forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1543): _slow_forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1562): _call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1553): _wrapped_call_impl
+/var/folders/fv/h3r6wxlx1jl6sf8_c87h35c80000gn/T/ipykernel_43590/960390845.py(35): forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1543): _slow_forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1562): _call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1553): _wrapped_call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/jit/_trace.py(132): wrapper
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/jit/_trace.py(141): forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1562): _call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1553): _wrapped_call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/jit/_trace.py(1497): _get_trace_graph
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(950): _trace_and_get_graph_from_model
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(1046): _create_jit_graph
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(1170): _model_to_graph
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(1648): _export
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(551): export
+/Users/isakknutsson/Desktop/MonkeyMadness/train.py(108): train
+/var/folders/fv/h3r6wxlx1jl6sf8_c87h35c80000gn/T/ipykernel_43590/3385926084.py(72): <module>
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3550): run_code
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3490): run_ast_nodes
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3308): run_cell_async
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/async_helpers.py(129): _pseudo_sync_runner
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3103): _run_cell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3048): run_cell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/zmqshell.py(549): run_cell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/ipkernel.py(449): do_execute
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(778): execute_request
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/ipkernel.py(362): execute_request
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(437): dispatch_shell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(534): process_one
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(545): dispatch_queue
+/opt/miniconda3/envs/vis_rec/lib/python3.9/asyncio/events.py(80): _run
+/opt/miniconda3/envs/vis_rec/lib/python3.9/asyncio/base_events.py(1905): _run_once
+/opt/miniconda3/envs/vis_rec/lib/python3.9/asyncio/base_events.py(601): run_forever
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/tornado/platform/asyncio.py(205): start
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelapp.py(739): start
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/traitlets/config/application.py(1075): launch_instance
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel_launcher.py(18): <module>
+/opt/miniconda3/envs/vis_rec/lib/python3.9/runpy.py(87): _run_code
+/opt/miniconda3/envs/vis_rec/lib/python3.9/runpy.py(197): _run_module_as_main
+
+˘
+/conv1/Conv_output_0/Relu_output_0/Relu"Relu2√/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/functional.py(1500): relu
+/var/folders/fv/h3r6wxlx1jl6sf8_c87h35c80000gn/T/ipykernel_43590/960390845.py(35): forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1543): _slow_forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1562): _call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1553): _wrapped_call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/jit/_trace.py(132): wrapper
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/jit/_trace.py(141): forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1562): _call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1553): _wrapped_call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/jit/_trace.py(1497): _get_trace_graph
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(950): _trace_and_get_graph_from_model
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(1046): _create_jit_graph
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(1170): _model_to_graph
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(1648): _export
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(551): export
+/Users/isakknutsson/Desktop/MonkeyMadness/train.py(108): train
+/var/folders/fv/h3r6wxlx1jl6sf8_c87h35c80000gn/T/ipykernel_43590/3385926084.py(72): <module>
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3550): run_code
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3490): run_ast_nodes
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3308): run_cell_async
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/async_helpers.py(129): _pseudo_sync_runner
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3103): _run_cell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3048): run_cell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/zmqshell.py(549): run_cell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/ipkernel.py(449): do_execute
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(778): execute_request
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/ipkernel.py(362): execute_request
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(437): dispatch_shell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(534): process_one
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(545): dispatch_queue
+/opt/miniconda3/envs/vis_rec/lib/python3.9/asyncio/events.py(80): _run
+/opt/miniconda3/envs/vis_rec/lib/python3.9/asyncio/base_events.py(1905): _run_once
+/opt/miniconda3/envs/vis_rec/lib/python3.9/asyncio/base_events.py(601): run_forever
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/tornado/platform/asyncio.py(205): start
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelapp.py(739): start
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/traitlets/config/application.py(1075): launch_instance
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel_launcher.py(18): <module>
+/opt/miniconda3/envs/vis_rec/lib/python3.9/runpy.py(87): _run_code
+/opt/miniconda3/envs/vis_rec/lib/python3.9/runpy.py(197): _run_module_as_main
+
+Ω
+/Relu_output_0/MaxPool_output_0/MaxPool"MaxPool*
+	ceil_mode †*
+	dilations@@†*
+kernel_shape@@†*
+pads@ @ @ @ †*
+strides@@†2¢/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/functional.py(796): _max_pool2d
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/_jit_internal.py(503): fn
+/var/folders/fv/h3r6wxlx1jl6sf8_c87h35c80000gn/T/ipykernel_43590/960390845.py(38): forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1543): _slow_forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1562): _call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1553): _wrapped_call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/jit/_trace.py(132): wrapper
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/jit/_trace.py(141): forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1562): _call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1553): _wrapped_call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/jit/_trace.py(1497): _get_trace_graph
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(950): _trace_and_get_graph_from_model
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(1046): _create_jit_graph
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(1170): _model_to_graph
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(1648): _export
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(551): export
+/Users/isakknutsson/Desktop/MonkeyMadness/train.py(108): train
+/var/folders/fv/h3r6wxlx1jl6sf8_c87h35c80000gn/T/ipykernel_43590/3385926084.py(72): <module>
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3550): run_code
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3490): run_ast_nodes
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3308): run_cell_async
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/async_helpers.py(129): _pseudo_sync_runner
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3103): _run_cell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3048): run_cell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/zmqshell.py(549): run_cell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/ipkernel.py(449): do_execute
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(778): execute_request
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/ipkernel.py(362): execute_request
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(437): dispatch_shell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(534): process_one
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(545): dispatch_queue
+/opt/miniconda3/envs/vis_rec/lib/python3.9/asyncio/events.py(80): _run
+/opt/miniconda3/envs/vis_rec/lib/python3.9/asyncio/base_events.py(1905): _run_once
+/opt/miniconda3/envs/vis_rec/lib/python3.9/asyncio/base_events.py(601): run_forever
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/tornado/platform/asyncio.py(205): start
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelapp.py(739): start
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/traitlets/config/application.py(1075): launch_instance
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel_launcher.py(18): <module>
+/opt/miniconda3/envs/vis_rec/lib/python3.9/runpy.py(87): _run_code
+/opt/miniconda3/envs/vis_rec/lib/python3.9/runpy.py(197): _run_module_as_main
+
+°"
+/MaxPool_output_0
+conv2.weight
+
+conv2.bias/conv2/Conv_output_0/conv2/Conv"Conv*
+	dilations@@†*
+group†*
+kernel_shape@@†*
+pads@@@@†*
+strides@@†2Í /opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/conv.py(454): _conv_forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/conv.py(458): forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1543): _slow_forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1562): _call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1553): _wrapped_call_impl
+/var/folders/fv/h3r6wxlx1jl6sf8_c87h35c80000gn/T/ipykernel_43590/960390845.py(40): forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1543): _slow_forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1562): _call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1553): _wrapped_call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/jit/_trace.py(132): wrapper
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/jit/_trace.py(141): forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1562): _call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1553): _wrapped_call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/jit/_trace.py(1497): _get_trace_graph
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(950): _trace_and_get_graph_from_model
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(1046): _create_jit_graph
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(1170): _model_to_graph
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(1648): _export
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(551): export
+/Users/isakknutsson/Desktop/MonkeyMadness/train.py(108): train
+/var/folders/fv/h3r6wxlx1jl6sf8_c87h35c80000gn/T/ipykernel_43590/3385926084.py(72): <module>
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3550): run_code
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3490): run_ast_nodes
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3308): run_cell_async
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/async_helpers.py(129): _pseudo_sync_runner
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3103): _run_cell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3048): run_cell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/zmqshell.py(549): run_cell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/ipkernel.py(449): do_execute
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(778): execute_request
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/ipkernel.py(362): execute_request
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(437): dispatch_shell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(534): process_one
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(545): dispatch_queue
+/opt/miniconda3/envs/vis_rec/lib/python3.9/asyncio/events.py(80): _run
+/opt/miniconda3/envs/vis_rec/lib/python3.9/asyncio/base_events.py(1905): _run_once
+/opt/miniconda3/envs/vis_rec/lib/python3.9/asyncio/base_events.py(601): run_forever
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/tornado/platform/asyncio.py(205): start
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelapp.py(739): start
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/traitlets/config/application.py(1075): launch_instance
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel_launcher.py(18): <module>
+/opt/miniconda3/envs/vis_rec/lib/python3.9/runpy.py(87): _run_code
+/opt/miniconda3/envs/vis_rec/lib/python3.9/runpy.py(197): _run_module_as_main
+
+˝
+/conv2/Conv_output_0/Relu_1_output_0/Relu_1"Relu2√/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/functional.py(1500): relu
+/var/folders/fv/h3r6wxlx1jl6sf8_c87h35c80000gn/T/ipykernel_43590/960390845.py(40): forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1543): _slow_forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1562): _call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1553): _wrapped_call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/jit/_trace.py(132): wrapper
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/jit/_trace.py(141): forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1562): _call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1553): _wrapped_call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/jit/_trace.py(1497): _get_trace_graph
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(950): _trace_and_get_graph_from_model
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(1046): _create_jit_graph
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(1170): _model_to_graph
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(1648): _export
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(551): export
+/Users/isakknutsson/Desktop/MonkeyMadness/train.py(108): train
+/var/folders/fv/h3r6wxlx1jl6sf8_c87h35c80000gn/T/ipykernel_43590/3385926084.py(72): <module>
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3550): run_code
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3490): run_ast_nodes
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3308): run_cell_async
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/async_helpers.py(129): _pseudo_sync_runner
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3103): _run_cell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3048): run_cell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/zmqshell.py(549): run_cell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/ipkernel.py(449): do_execute
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(778): execute_request
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/ipkernel.py(362): execute_request
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(437): dispatch_shell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(534): process_one
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(545): dispatch_queue
+/opt/miniconda3/envs/vis_rec/lib/python3.9/asyncio/events.py(80): _run
+/opt/miniconda3/envs/vis_rec/lib/python3.9/asyncio/base_events.py(1905): _run_once
+/opt/miniconda3/envs/vis_rec/lib/python3.9/asyncio/base_events.py(601): run_forever
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/tornado/platform/asyncio.py(205): start
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelapp.py(739): start
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/traitlets/config/application.py(1075): launch_instance
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel_launcher.py(18): <module>
+/opt/miniconda3/envs/vis_rec/lib/python3.9/runpy.py(87): _run_code
+/opt/miniconda3/envs/vis_rec/lib/python3.9/runpy.py(197): _run_module_as_main
+
+√
+/Relu_1_output_0/MaxPool_1_output_0
+/MaxPool_1"MaxPool*
+	ceil_mode †*
+	dilations@@†*
+kernel_shape@@†*
+pads@ @ @ @ †*
+strides@@†2¢/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/functional.py(796): _max_pool2d
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/_jit_internal.py(503): fn
+/var/folders/fv/h3r6wxlx1jl6sf8_c87h35c80000gn/T/ipykernel_43590/960390845.py(42): forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1543): _slow_forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1562): _call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1553): _wrapped_call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/jit/_trace.py(132): wrapper
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/jit/_trace.py(141): forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1562): _call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1553): _wrapped_call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/jit/_trace.py(1497): _get_trace_graph
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(950): _trace_and_get_graph_from_model
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(1046): _create_jit_graph
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(1170): _model_to_graph
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(1648): _export
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(551): export
+/Users/isakknutsson/Desktop/MonkeyMadness/train.py(108): train
+/var/folders/fv/h3r6wxlx1jl6sf8_c87h35c80000gn/T/ipykernel_43590/3385926084.py(72): <module>
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3550): run_code
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3490): run_ast_nodes
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3308): run_cell_async
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/async_helpers.py(129): _pseudo_sync_runner
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3103): _run_cell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3048): run_cell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/zmqshell.py(549): run_cell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/ipkernel.py(449): do_execute
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(778): execute_request
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/ipkernel.py(362): execute_request
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(437): dispatch_shell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(534): process_one
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(545): dispatch_queue
+/opt/miniconda3/envs/vis_rec/lib/python3.9/asyncio/events.py(80): _run
+/opt/miniconda3/envs/vis_rec/lib/python3.9/asyncio/base_events.py(1905): _run_once
+/opt/miniconda3/envs/vis_rec/lib/python3.9/asyncio/base_events.py(601): run_forever
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/tornado/platform/asyncio.py(205): start
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelapp.py(739): start
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/traitlets/config/application.py(1075): launch_instance
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel_launcher.py(18): <module>
+/opt/miniconda3/envs/vis_rec/lib/python3.9/runpy.py(87): _run_code
+/opt/miniconda3/envs/vis_rec/lib/python3.9/runpy.py(197): _run_module_as_main
+
+∑/Constant_output_0	/Constant"Constant*"
+value*J       ˇˇˇˇˇˇˇˇ†2Á/var/folders/fv/h3r6wxlx1jl6sf8_c87h35c80000gn/T/ipykernel_43590/960390845.py(48): forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1543): _slow_forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1562): _call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1553): _wrapped_call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/jit/_trace.py(132): wrapper
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/jit/_trace.py(141): forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1562): _call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1553): _wrapped_call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/jit/_trace.py(1497): _get_trace_graph
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(950): _trace_and_get_graph_from_model
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(1046): _create_jit_graph
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(1170): _model_to_graph
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(1648): _export
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(551): export
+/Users/isakknutsson/Desktop/MonkeyMadness/train.py(108): train
+/var/folders/fv/h3r6wxlx1jl6sf8_c87h35c80000gn/T/ipykernel_43590/3385926084.py(72): <module>
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3550): run_code
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3490): run_ast_nodes
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3308): run_cell_async
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/async_helpers.py(129): _pseudo_sync_runner
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3103): _run_cell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3048): run_cell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/zmqshell.py(549): run_cell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/ipkernel.py(449): do_execute
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(778): execute_request
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/ipkernel.py(362): execute_request
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(437): dispatch_shell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(534): process_one
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(545): dispatch_queue
+/opt/miniconda3/envs/vis_rec/lib/python3.9/asyncio/events.py(80): _run
+/opt/miniconda3/envs/vis_rec/lib/python3.9/asyncio/base_events.py(1905): _run_once
+/opt/miniconda3/envs/vis_rec/lib/python3.9/asyncio/base_events.py(601): run_forever
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/tornado/platform/asyncio.py(205): start
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelapp.py(739): start
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/traitlets/config/application.py(1075): launch_instance
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel_launcher.py(18): <module>
+/opt/miniconda3/envs/vis_rec/lib/python3.9/runpy.py(87): _run_code
+/opt/miniconda3/envs/vis_rec/lib/python3.9/runpy.py(197): _run_module_as_main
+
+π
+/MaxPool_1_output_0
+/Constant_output_0/Reshape_output_0/Reshape"Reshape2Á/var/folders/fv/h3r6wxlx1jl6sf8_c87h35c80000gn/T/ipykernel_43590/960390845.py(48): forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1543): _slow_forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1562): _call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1553): _wrapped_call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/jit/_trace.py(132): wrapper
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/jit/_trace.py(141): forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1562): _call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1553): _wrapped_call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/jit/_trace.py(1497): _get_trace_graph
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(950): _trace_and_get_graph_from_model
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(1046): _create_jit_graph
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(1170): _model_to_graph
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(1648): _export
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(551): export
+/Users/isakknutsson/Desktop/MonkeyMadness/train.py(108): train
+/var/folders/fv/h3r6wxlx1jl6sf8_c87h35c80000gn/T/ipykernel_43590/3385926084.py(72): <module>
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3550): run_code
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3490): run_ast_nodes
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3308): run_cell_async
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/async_helpers.py(129): _pseudo_sync_runner
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3103): _run_cell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3048): run_cell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/zmqshell.py(549): run_cell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/ipkernel.py(449): do_execute
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(778): execute_request
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/ipkernel.py(362): execute_request
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(437): dispatch_shell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(534): process_one
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(545): dispatch_queue
+/opt/miniconda3/envs/vis_rec/lib/python3.9/asyncio/events.py(80): _run
+/opt/miniconda3/envs/vis_rec/lib/python3.9/asyncio/base_events.py(1905): _run_once
+/opt/miniconda3/envs/vis_rec/lib/python3.9/asyncio/base_events.py(601): run_forever
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/tornado/platform/asyncio.py(205): start
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelapp.py(739): start
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/traitlets/config/application.py(1075): launch_instance
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel_launcher.py(18): <module>
+/opt/miniconda3/envs/vis_rec/lib/python3.9/runpy.py(87): _run_code
+/opt/miniconda3/envs/vis_rec/lib/python3.9/runpy.py(197): _run_module_as_main
+
+¯ 
+/Reshape_output_0
+	fc.weight
+fc.biasoutput/fc/Gemm"Gemm*
+alpha  Ä?†*
+beta  Ä?†*
+transB†2Ü /opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/linear.py(117): forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1543): _slow_forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1562): _call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1553): _wrapped_call_impl
+/var/folders/fv/h3r6wxlx1jl6sf8_c87h35c80000gn/T/ipykernel_43590/960390845.py(51): forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1543): _slow_forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1562): _call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1553): _wrapped_call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/jit/_trace.py(132): wrapper
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/jit/_trace.py(141): forward
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1562): _call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/nn/modules/module.py(1553): _wrapped_call_impl
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/jit/_trace.py(1497): _get_trace_graph
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(950): _trace_and_get_graph_from_model
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(1046): _create_jit_graph
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(1170): _model_to_graph
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(1648): _export
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/torch/onnx/utils.py(551): export
+/Users/isakknutsson/Desktop/MonkeyMadness/train.py(108): train
+/var/folders/fv/h3r6wxlx1jl6sf8_c87h35c80000gn/T/ipykernel_43590/3385926084.py(72): <module>
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3550): run_code
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3490): run_ast_nodes
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3308): run_cell_async
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/async_helpers.py(129): _pseudo_sync_runner
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3103): _run_cell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/IPython/core/interactiveshell.py(3048): run_cell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/zmqshell.py(549): run_cell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/ipkernel.py(449): do_execute
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(778): execute_request
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/ipkernel.py(362): execute_request
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(437): dispatch_shell
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(534): process_one
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelbase.py(545): dispatch_queue
+/opt/miniconda3/envs/vis_rec/lib/python3.9/asyncio/events.py(80): _run
+/opt/miniconda3/envs/vis_rec/lib/python3.9/asyncio/base_events.py(1905): _run_once
+/opt/miniconda3/envs/vis_rec/lib/python3.9/asyncio/base_events.py(601): run_forever
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/tornado/platform/asyncio.py(205): start
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel/kernelapp.py(739): start
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/traitlets/config/application.py(1075): launch_instance
+/opt/miniconda3/envs/vis_rec/lib/python3.9/site-packages/ipykernel_launcher.py(18): <module>
+/opt/miniconda3/envs/vis_rec/lib/python3.9/runpy.py(87): _run_code
+/opt/miniconda3/envs/vis_rec/lib/python3.9/runpy.py(197): _run_module_as_main
+
+main_graph*õ Bconv1.weightJÄtZΩ—ißΩ[√é=∞fuΩÂ¥=ºµ|Ωivóº‚o=£<ŸËΩWDêΩ{†Ω°â”ºöÚ1æ g-º∂ï€;Tü2æ‚¥*>!œﬁΩ-Ì<l2æ/Éº=’h]Ωõù±=Ñ¨+æhdéº*6®Ω?gº5'èΩ0	æ›t>¯-æ5î =ÏfC>ﬁ	ºghıΩÄMX>ìöΩQåÆΩ±ªüΩÖ√@ΩUv˘=Æ§=ÙŸ*>Ì"ã;ahÿ=h‘=L„)æbkíΩ∫¿Ω ˚z:PkîΩ¢>FTy=√Ω>Æ|≥=TX>Ÿ	:>ΩM>∂\Ω¨çŸªÜL>ó≈ù=êRæˇ#AæP¶>60=84æÿ.Åº‰Dæ)‰Ôºqä=0pqæ≥∏=ò∞p<6æÀQGær‚Ø;Í´œΩ∆7æc»\ΩomDæb€˝ΩÇCªE>¨%πΩ_@ÙΩ”ˇæÈ&…=%4Ω”ΩÔºd◊AæÃ≥ø= îºúäMºÿô°=$óÑ<∫úÄ9öÀΩï!æ0ßáΩ‚FÍΩCô∂Ω(Ã=#X>Ï*>ÊßΩåËæ8˚Á='Û=¡i">%aªi[=Aêi>ÉæùTc>±O5<Ì
+æ∞≠ΩÜLôΩÒ=ó	º<∫˛=Jÿ†<i,>∏k)æ‰ÆeæÑå æpØ≠=SüdæˆVoæ›3p<‰∂>q`iæÖF√ºrãπΩnÂªΩ&¬˘º/É>ÅUıªc?æ‡SØ=ˆx>eî—º{;P>[H
+>8ÖO>Mó,>ñÌª=õ‡=ù>pæd®Ω˝1ª=oUæ= cæ†ˇŸΩKf∆ΩJ›ΩmDæΩ4æ˛ò“Ω“„W>xO›=úü@>
+æ=·ù¿=®®S>™±€<ùmS>yH∑=PW]>ü*Q>	Ä2>Cû>ÍÁ(<]<ÿ=d§*=˝=^>EêægcùΩv< Ωﬁ%õæuµØæ€Luæ´ÄAæ&	åæ.ê´æÁ’ø=ÃõŒΩò¬ò=[¯.æ˚Äæqˆ.æ∞ã)>Ü∏˝<2ÖÖºA%æ¬+ÿ<5π$=Ezæˆè≥ΩuÔª"4x=ä+tΩ˘`(>7´`=◊µ=%K:>ﬂD/=SI>Ωw) =…¢›=îg>ü‰=˝vΩ<«æKï]Ω)<">üo,æ€¥,=3—<ØÇD>$£èΩõDΩ`J>´sµΩ&àê=/æº˚f!æuáq>¶ò=ù=¬/°=⁄†#=¬ËΩÌ‹âºﬂ$>™6ÈΩª=TÌºmõ»Ωì≤¡=GtæÙÑ+Ω√°æçåpΩ’6∞=Ò¬ΩÊÀæ]üíªj´ı=dÎΩ:pæΩ8É†<Ω>Á*=≥«˘ΩIn$æ=Nk>
+î>îìΩ“OŒ=È>∫º6æp>P∫‹ºmœæC›ÆΩJP0Ωl=‘L˜Ωºê*æ0oΩGä‹ºÂø >Œö%æÏaeΩøÒ:Å∆jºx`5æg^ΩÉvãΩr9ÜΩÄÖ†º≈q>>Ö=¨¢LΩL¿Ω˘2æ¡õæŒìæ,πænûæ≥¬]=q∆/>ñ@Ω|È—ΩK;«Ωfƒˇ<À]Ω√®èΩ<äD>Ωæ∂(BΩêΩ™®=mòΩÁ{3=0Ÿ=xÜï=yıæ∞ÜZ>ﬁÎΩøT1æ&†=æ∂ÓÆºqi>‡Œ≤ºE˘ß<j:9=‚∏VΩ%˚=>}¯™=€ê1æ#ì«=ô∑ø=«ıœ=Bp>™M4>ﬁxΩªMÈΩ˛D¶=f ">∆<≤ΩGÔ;> ÷!Ω°8æÔÕõΩÉ§ΩZŸ->Nyæ∆*Sæu∆√=å∫√Ωƒõ=<∂<Â®∂Ω8˚©<aæ¯§r>»L>≥¢>¡G?>áëj>f¨V=‡»Ç>tIK>6’ô>Œ«”º‘OñΩ—Ω6›]æYz[ΩW0º¿Z™ΩÿüΩEFæöêH>?π>öΩJ`2=.R>n†€Ω¯V	º&Xı;±-;=:æﬁ=Ö)'æV	H=`Çã=ºy>->[Á>µÔΩ∏Ñ>>.v>OåÉ=ÅÇè>’Ûé=iá®ΩÔåF>àQéΩgæÚ¶úº:çIæ•é	=¬¢ΩÅÍædP}æ‹Oå=ÄµÇæ9«˜Ω™>µî;>•†ÉΩLﬁM>ª8QΩÈDæñu_Ω«a=W/¬=a >>È@æ÷ΩÿG*>=ŒÃΩ`ø=∆k8æQ›Ω:êAºz≤ùΩ≠W‚ΩÙÊΩxÛ%>¸¶:>C
+&=»<œ=§˝I>ˆíG>Ü§><9î=˜ÊûΩTF=¿Îæ⁄Ã´=ÚRæJê3>}*æéÌ(>Mq >¯á˙=;èﬂΩ0‘ò<„ªΩJŸæPc7>Ÿ-Œ=ºÔ®Ω´k>G}U>'H= E>$WΩÙ•À;´Œ¨=>´MΩw˚°ΩâπæÆ*æ‘ı>–"æ6Í5æfQ<»œ=æÒ¥!>c‡íºfµ+=÷/ùΩ¨Èºt∑ΩZ?Ω)æ}Õ<(]¥<>Ã=£∆$>’‹AæS62=„∫;>HΩŸm={*?Ω◊+æOÆ≠<¶æ 6>¿çΩ4™Õ=öÍ:æ)Y$ΩØ'=7í}Ω˙'§Ω$YΩΩ„ˇi>ø.æ6$>V2H>]]Ω=1¥:=„>`Æñ=5úo>uÈxΩ{%É>6Õ>Ã„r>®V>cK≈=•Z>®aàΩMÁ>*„z>Ò}L>y«>¡I >≠V»=&«˚=}«8>É
+Ö=:\h=£ŸÃΩWd˜ΩTæÙ$=j‚;æ»ÂΩ€Ø,æ	W§=–’ Ωñ¬µ<x˘æÑôæqÃ?æÉæó!<…ÓRæà<˘[æõG;>ü\§=∏ˇ%Ω? ¶Ω¯Ÿáºi1Ω⁄2>ÆõT:>iÅ>\>˛p+º#.U>.è>‹ÓΩœ˛ºΩÆÃ@ª)8Ú=Å Ñ=á[5>G>†<◊~>D≥Ü<˚≈rº6ËY>y&¯=¡rÎ=b∫êΩ¶[>˝√Pª˛ä>D¢>=â‹Ωo’©ΩKœ∆;)›Ωƒæ˘'ˇΩ-æ^ÿ4>ïâ=‰øπ=»LJ=ÿHJ>Væ∫&>èyq>_æ?ªˆ!"=6s>ß≤{=¶P>ƒ1ª<I”6æ∏ù/æH›˚< m!æ +ö=?Ü@æp∫8æ)üÙΩCÏΩ¶éàΩ˚ˇj=ïpÈ;?Ü>©>‡JD>„ïû=erΩ%ß>+¯>öCæùØ(> >Ôi˝Ω≈“°Ω;# æè	æÿ$3æ«G>fÛæCÔ.<sñº}ë= v>V±ΩËt,=⁄˝„Ω'ùΩﬁ˜<>3™æ" æÒ|Ω3¬YΩ™Ä9>œÀˆ<Æ‹J>‹P>,Kê>ÿqã>ÃHc>Uú<s˝<≠~@>∫‰ΩÂuP>„)9È§ºKÌe>¯28>Ê˜j>r»‰=P≤>ò¡>·∂<>Vì‡=3é	æÓÈªº(>UAˇ=ˆÀã:P3*æ¡@9>ΩIﬂºX™ >Ö$∫<¯⁄ç;Æ∑†<°í>†i<ÄG?Ωu\Ωe◊j>Ω+Eæ£¶–Ω%/√Ω}/–Ω}RˆΩÿ¶ú=LÆΩªLè.æI∏Ω<w>W±ˇ=,0§>XrœΩcìä>ÜÚK>®"é<2∂ñ>>-ñ=Ó|ΩLD
+>@>#æ“¯<éSñΩ£õΩî›9>X>ø∑3æ2Óº¢'æ=¡<æ§àæÄ>1KÁ=€9^=Y6·ΩºoÔ=ÀÑ>Á
+é>AM&>
+¥=˜c=
+p5>@“Ì=rı=ùM=©¯>∑7=T¿ΩNA>3pè>Òú>nó¥Ω"Ûˇ=Òz≥<Ø æ¨ÊΩ ÒA>EêC>˚?=b#¥=;¯æzåæÄy<s©YΩŒ¡æ=Z˝Ω=@í@æX=æ/eæo∫>.`r=∑1>?ÚÊΩ§ß>˛Ò;‹√ù=∞ æ›ÀNºÓ–9>‹¶Ω˛Ø!æ«Hú<I<Ù$æΩ«€Ω˛+êΩxÓc:~ãΩB4¡=d∆ÂΩ=∆æ„∂¶Ωû:˝Ω*Æ>®<:ıl=∫
+´Ωê–<H"Ω3≠”=ôŒæ:ﬁiºÆøJ<m,π<ZL8æOÅ%æò§ÊºˆI=>¯√Ω¬∂æÆ[D=$jõ<◊¡=2l7=å[,>¯¡m>‡Sü<lˇ4>ÑÖE>QËΩÕæ=ﬂ\ä>{ø9>[∞<hƒ:>òÜ«ΩÊ+h>ÚÚ™=$ﬂªõ´0>µßº¥É±=£∏ΩK≤c>h1>‹[ˇ=êÓª† 0>Ì[j=vöTΩ+IŸ=ö!ö=ﬂºa>œD>£Yk=B√<cı¿<Ü_Ω¨ı;*˛=)ù*æ&0º¸HúΩUNY>Òo=R‚ªÿÜ)ºû”=@n>∞ΩØÆ÷=zÛ<^Ü3æHÀ1æmm.Ω®ûÿ<Ñ>#˘ =ëäSºÚÜ"æ˝π-ºrL,>qE˜Ωâ´=ÑhVΩÕáU=∏∆¨=o¬úΩBz%ætR=?ï æR»=åß•ªúº
+>2P8>˚D=«ƒΩSãÀº*ì B
+conv1.biasJÄÏˆˆΩ”UãΩC·¨> AΩ™´ú=ÅO>†”y;)Ùêº˙Q√Ω˜u2>{"∑<áÙ¶=)QΩ·Ù%=QåNΩ‘=˚‡ΩOÁΩí˚`Ωp”ü=∞HVæÂ…º˚	æc›=4â∫€¸IΩ4ísæg
+æ¬l?=âì>∑ãä>”¿Ω*úê Bconv2.weightJÄê¸≈3ºò⁄<1µ¯º}ﬂ=uu!ªÖ!E=∏ó9=ztY=çΩÀºº_*=ÀcàΩ\º˝ÕsΩ«KÖº©~4Ω,óÖ<JÁ≈ºöÚº√ì<.*É<YÒFΩ≈jáΩΩ4ÅΩæ|äΩH´ªTÄºª…ªY≤°ªíπº+Ê⁄º≠a∏ª-oΩD˚}<#8c;È:o=\÷f=‰•^Ω3ÆΩwéöΩ>#+Ω\≈_ΩÎu∞Ω’¢™Ω6nGΩ∞%îΩm%SΩÍ¸÷Ωæ∆∑Ω˘wÍ;pŒôΩ“éΩçÔΩs5ÜΩBcªº+ûVΩ¶uΩQı†Ω,F…ΩÿmûΩ+‚§º2é æX—ºüõ=ΩÓÒ_=?L|º`Ÿ;/!á<±k=êÙ4=-∆Ω°’º|0<E=45 ºdßÑΩÜ—<9ü<®	=Ωπùù<F†ºüûπºHèΩ´“}ΩO+ºxé;ΩÃÙ§<Uá	º	zœΩL§÷Ωòç¿Ω‰¯\Ω[µmΩ∂ØWΩ»D=ËÿΩπbºE@ΩÖ4T=æ.πº„–éΩKŒãº;<èΩºe°ªQû—<
+âîºıêßºXfΩ|Ø!=ò6·<‘#ºMÊ∫<‹ßöΩ™ÙôΩÑŒ<¬ÇΩß*{Ωó.UΩÏ à=ÍSÖ;î4y=kÄ=-ö<·›∑= ¬ =å‰4=V'í<¨aÊΩ ºè:»&ßΩ·SÎ;JıíΩ÷∫∞Ω¬D*;˝¡º—"æ;*LwªÕ≈M=VÂR<®∫#Ω≠ÙºÒ˝§ªMä®ºêú"=g1=ÇGÇ<éú;=˙Ñ Ω˛çΩsﬂÚº0º<Ú”Ö<#h|< n<!ˆÎ;íµá;‚6j∫…‹IΩsz`Ω‚ —;t(†<€o=˛–;O=‚=∞X=^'<<Ç[@∫É01=◊ÙïºÃ§
+=ïÒã;˙˛/=œqøºVã<7öN=1ùª£BΩ∏–ZΩøNwΩ≤¢ΩWy;˙´[=@+9˛gI<iÈ5=8›Ì<)¥=E«â=\6{=¢íºÚö@=ÙRé=ç√í=ßZ=Xqﬂ<“VDΩ¶“ªµû<n_˛<É]=¿•'=¿ô›º»!R=£ÒºógïºGR”<eºó	 Ω.UU;»m#=p!≥=ﬂ.ò<Ú3¶<$π<wJ¨<™E=Ÿ±n=Q∂Ô;¢ê=Õòé=jHÑ<˘˛E<◊	ù={ºè=Ó@v=Ë‰ï<.$C=BG=Ôá∆º∞ØL<gø;ΩÄU∫F|œ<±√nΩ·ù=Ωgòã=ävª˚ãΩ3ÈË<ö:<I®=øwÎ<«‚<'#Ω7©_:àÔ!ΩH9t∫ dΩƒJI=\ıOº´v™ºBÇWºŒßJº90‹<∫ƒ]=Ûn–<Ä[9=È◊ªi∏bΩh2;&˙D=!Ωùì=à á=èô¿=”%À=K´è=kVÎº>€m=∆˚G=¶“Cº<–¢<ƒπ¢=0Ñ™=-[’<G∏=ıøJ<~†õ=£ë=8>ï<á7#Ωê+ΩX%
+Ω™X	=°«6Ωk=cª<9iΩ¸<≠ôΩ>[	ªb5O<∆?M=K'Ωº¯Îß<€i∫º”Ï_=±k º¸ËŸ<©]QºÍÓV=,=˜*=ÏîÙ<s6Oºﬂ«gΩwÿW=è!x=@VÊ;ÏY%ΩÛN^=ÕÑº'!'=Ωø-=ÙK[=Y<=OX@Ω¡√Tº-M=T>D=7q"ª∫^Ω†T∏ºC†<¬ÛºÓ2Ω¡/NΩß§Q<h¢∫∏ß4;[=h/ƒº¶2Ω Åù<¿•∏<+ll=À8]<˙_=]"Ω»?Ωs∫ªñÎ<ﬁË”ºÙLAºäÆ<9ö·ºÊ==wÂÂ<`•º80< ß>=’q<WΩ`÷=$ñ-=™ªºÑ?<°Ü	=dßú;|QΩ"TΩTß-ΩcÍ1=0˝»ºà
+óª•⁄V=3ëUΩóD‡<¶ΩÌä<qWmΩÑ∞›º√<§ºeΩ§jÁ9êÑDΩ 'à=s(≥<Û-0ΩÀ´Ï< R,Ω¯¶¢<Êú<3ºÇºÓ&ã<`ÉA=U;F’aΩ≤>Ω[Ò;",ÛºB}Ωp$≤<8·T∫–ÔΩÓ¢CΩ§∏L=Hßº0\R=∑/âº1∫˜<t^YΩÎπ<´›Âº™=àYTΩC/º„±˚<ÿŸWΩCÈ;¥]=aaHΩk≤=≈@=„<
+(gº≥ÎôºÒ˙Ω!N3=˘ÌcΩ~¢WΩŸ =ÚÃºb•I=Òg}=yı3=Á](ΩnœºI’VΩ2™©<C#àª˜"<£r\Ω2õ◊º#ΩÙ†=íàΩID8Ω‹ÿºæ<=∏˚˛º≥*ºW*Rπ¯üºë5ΩQº1=doΩ‡o;%ÈEª0¢mΩ‹ñJ=&UΩül=∂ÄΩ∂wç<∏⁄ΩªL¯<F:=ÛÇõΩºrΩÒçΩÌrªà¸T=ã<Øª’ºı§ºUΩòŸ≥º≥E,Ω·3fΩOå©ºî˙ΩèØ=ΩØLΩ‰∆_Ω+Îµª⁄v˚<]jΩP^Ω€é;<wuº2®	Ω∂§—∫q–7º,*ÎºzUﬂ<◊èÅΩz˛ºú~<òfÖºÎLÑºmï <GÁhΩªJAΩã·=a±áºÉÇ=BÎ£;èæp<®da∫æÏ Ω
+ Â;Wë]= ,˛<ZC∑º5Ä=ûΩ-RÙ<∏¨™º‘ﬂÜ<@h4=Ü‰<`¥A=rΩhœ<]·È:á™ ºèÛiΩbÑº’‰º‚ÿª√èvΩéôﬂ∫_≥©ºò_ ºQ®Ã<÷ÜíΩs€º¶	∫ÛR=Ç∞ºõ≠oΩN≠ºÎ=–ª	=ÕÃìπzY–<Rƒ<‰<‘‚^=ªº{rºm–™ªg:a=ä∏È<`è=$#‚ºñy¯<]ø<Ë9ù;E¨ÚπÖH∂∫Ç:<‚≠DΩwò<	üÒºóÇ‰º√Pà<1F<B‰ä=É\Ω¸˜âº@èåºá
+º¬%=/º»Ü<x7Z= ﬁ)=«=ëd= zLΩÌı<üb
+<E>Ñº44Ωr¸n∫ò"=fóª≥#ı<!
+¯ª≥ﬁ ΩI£ÿ<m<ëº;ôÈºÅwƒªyœ=Ã>Ω1/MΩ¸rºçÿ=!cÏºtñ<ÛXO=êj¸ºˇ&Ñ<è(C=àÒ‚;)nΩ`¢ºªm=,◊Ωˇ(Ø=aÙ#º/‹ú<‡=.⁄¢ªk÷OΩ0ßΩ<d?º1œ=kü≥<oU.=qi¢< „eºˆsÇ<$ó3Ωﬂp–ª—¨«<1ˆÉ<KÇ=*˝=ªÜ7=B;Û2ü=‡ë<'Ñ=≠ÎR=6pΩüÈ≥<Ω+=¢L%º‰Ö=3¸=<V<Ω◊è=ûï¡<[\º∏xØ<Ûı=¬;’ªU›<Hb=√:cªÅÇ√;’'s<Lxæ<fﬂ˘ª◊)»<∑÷=ä2=≤V;‚ÔYΩ√Ë’<Ù›,=<ã<”àΩÅ	„º?p◊<πä%=åvi=ÙXI=;UB=¨◊Lº8‚û:4ÅÜ=%∏Œº?¨ºRbB=éÃºÛ\PΩ}CªGÑT=àÖnΩ·p`Ω*ãÏ:˙`ºªdm=«° º∂AΩÛJ <‘cGºs•=MH≠<<‹+Ω∞IΩßn†º≤Ã}º9µΩˆóCΩ‰*=ñ|(ΩøºÚ>%ºÑIúºá/!ΩÖ= 	pΩ’‹¶ΩMıåΩv3nΩy"Ω3ÒüΩD≈¬<lD=Vw"=XëR=∂Â»<!Ç=Ìÿ*ªµ«Ü=5tx=‰f=xÏ±ºäû	Ω9π0=≈Zª∆Â
+ΩMÅTΩ®ˇx=ü>ôªg÷=F‘Ω1[ï<œ`Ω;9∞,Ωá«èºx9A=VZ™º-∂%Ω®CŒºYV;ΩX2·<ì•±:√Ω§Í¶ºﬁîá<–'9ΩÅé=g4û<`ıπ∏Î(Iº˝6±ºfπøª9é‡:üÛ◊ºø;=+?Ω~œ}Ω_¶Aª>IH=x'¯<≈©PΩ+‡ Ω∆√:Ωa¯B=ß€.=SŒ!ΩŒªÂº&ΩÎπ&=æƒJ;l&%ΩK∆ ΩèäºÔHç<©ÓÌºb+Ωq ›<ÂX==O;Úä∫Ã==IG=¬ßu<πç<ç¥†∫”)Ωì÷G<KΩO=«≈Ó6e*˜<˛£r= ≈=t©ßºS:"=@@ΩEuΩ¡UzΩe?=	ıºﬁ@=É?KΩn≈êºsö“ºE8Œºàö€<ÀûéΩ´û·<íDà<˝|Ω√Â2ΩÛ,
+º“Pâ=∫bº0"=ﬂgG=tØ]ªÏ=:‰6=äÂ¿∫®QΩéö:ê hΩ8Ä¨<Á/Ωñï=Yu:=KñNΩêhΩn“P∫~ˆdΩãh5<@=ñÍF=E0Â<uumΩÉÑ»<ÊÉáºmˇ˜<?Kƒ;Áxª5ΩJ›º_¢s=¸\º¢ó=
+ÕN=RôHΩÁ˝; óΩóvTΩ˝5]=Ωm©=œ}‚;D]⁄<†¯å=yn3=ˇU=»hòº4Æ<Ë™)<ºÆ¬ºmá\;.ã;8ln=÷Jú∫ΩúÕº{}KΩ¨‡<Îú<√æ<ú¢CπuM¯<¬Åß<§⁄HΩ˛˝8=8ÌT=Ë˚;=§¡¨ª/Q=ÕòΩ™·«<Pï<82á=√\Æ<“â/=∂Ω·|ª<≈≈<ê3á<xÔïºÈèΩ÷"Ω¸˚N=á®ÍªãßÖº∏dkΩ<∑oΩCÀïº©kÀºH€=√TºΩπÄº?8]= ‹!ºÔ4Ωt:^Ω2Œ'=â qº8ôùº#m?<Xõ=ÜÔm;ç‰≠º/¨=òÒ˚<M’$=ﬁ•Œ<≈
+œ=ŸÓº=¬0=d4@=yæ=ìÄñ<Õc=ˇœH=ï™;='9=⁄Ç >’kâ<∫Ó¿=ú8D=R¸>Z º∏P;√á>bı
+=Æ∆˘; Ω{J=◊Ω^ƒ<0˚Æªyé4= Ç= °É</ƒ6Ωp
+G<f∞Àºh=Ñ7«º‡–<òHy=Cg]<EˆØ;Æª=<6=6ÿHº‚j‘<<)Ç=ó¥ò=)Î<ß=“gΩº=πiΩQôµº€±Ω<ö^÷;∂ÙZ=çCU=OÌª'Ù‘<Ωo?= ¿<¡-ﬂº≈W)=°U[=ìDsº˜„=3“F=ZÆ%ºB-≥<Ü⁄vª*å∆;øs{=¶7É=ÿö^=]L1ΩíˆjºNΩ˝'´Ωò°Ω∑Cà<—PûΩ@"ıΩ˛ ãΩ∂CÁºõ≠æ¶Zºê+√;≈¬ º›Ü=≥Ø<,	&<ãk-ªó¬†=cüº÷∞£ºiO=1Ë6ΩfÎ=HO~<¸ûÀº6ó=ﬁ¥∫<\AÒª∑,ÄΩ‘q¿;i+iº|`?<…<.?º„A< è|=# “º
+ªü=GE%Ω§çºsJëºÓÈ_=·=4AΩÛM<yS}ºª>ΩÔ.z<:EMΩê¸ªSºcã©ΩàDº;∑ΩËSÅΩ±Rv=ª∏8="á=Ç˛d=O‘º≠Pª<¸ =ÀQ¡<ø\xΩŒ#nΩ«4Û;0#Ω˝∞;=nä<ƒmºê∑=ö:'Ωè_îΩÏaº=”yΩV^a<å¶9=]‘<)ÉyΩÖ–
+=[8ºﬂg}ΩÊzd<}ß9º¿¯Íº<Y.Ω∫∆>;ó·ˆ9 f-ΩÍ±h=®+–º
+=LÔÊ:TΩ…‘Wº^f∆<Ø-Ωã≠ Ω8õwºƒDΩN0”;%2˝º‚˜0<ê:3<“ŸÇΩˇ†Ÿº≥`Ñ∫j=pC˘ªõû=Ÿ°ºz[=¸îu=r,·ªd÷Ä<˜ˇò=©[Æ=lÈ‡<ﬂ˛ó=.áIªm®%=º´y<ç˜ÒºOû=™Äﬁ=ì°è=l
+H=Pv=∞f∑º€(ˆ<¸˜q= ´=ı._Ω§HΩ˙(H=áß™º•$ª*cN<√ßG=8D=/Y Ωn= V!Ωr@ª<˝V>ΩíYΩ‘Gh<k}úªÂ0$=Ì¡Ñºaó™Ω√q€=Áãe=ˇX∞ª„≈=XÁ=ù˛úΩuΩÜΩ¬•X<BÜΩX
+IºŸ‹=Z%^Ω˘XgºYÒéª∫ŒÎ∫ÔÙa<∞ÔB=„ıΩ›|E=.b=ÉÊNΩΩtΩ{eÉºq\5Ωj6jΩ‰‚<ºﬂ¿ª¢ÜΩÔOzºQt∫<™]®<õ†W<÷0MΩKÆ'º∂‚ ∫∆ŒÁ<å<◊u$Ω`1=‡ui=∑@%=ò.FΩîzSΩû†Wºï‰}=Í≥yºîA˚∫"">Ωq@∞º–3Ω˛ãQºØóå<ﬂﬁ=§·¶<ÁÄ‘ºC5cΩx©.=j
+üºtVç<‰<¨ºæ√Ω8«Zºh§òºõ=ßŒóº`≈1Ω›xVΩ]ô∏tñûªEtﬁºÈºï>à=¢∫3Ω}qºßìÈ∫úØ+ª‘Zªº1Ö”ºg5nΩÄR<C≈≈<)ú<óÆ\=√—Kº¥ÀÈ<¥Õw=_n=Q™'=Î
+=∞[*=êµ∑oÅ=zº9,Ω”ÌD<÷»’;Æ¨Ô<∑ÓŒ;ÀÕ2Ω8¶K=wN=:';<:m =&Æµ;è)=êjÅ∑_äº¯„ﬁº„<‰<fŒ[Ω¨ï=zj<Ùı8;£)íº-`DΩEj:≤3"ΩÂ⁄ºÒ¥≈ºıöAºX,íºò·º~îS=Ø„ﬁ;≥ÙΩΩd=n≤]ΩR≠ºï_Ä=JñºëÇP;RTΩ¥Ó<Ñ	⁄<Áx≤ºﬂÈ∑ºKo∏<'71ªLÆ=ÃÍJΩp∫oΩu0=Yg¢Ω!äNΩ˙Ñ=ΩT'c=Kö/ΩI7Ø=A=2ÀtΩ¸œªƒçŸ;8ù;ªë=‘_í=#â‘<ëùm=˙‚.º!ê8=à´=øŒ«∫(N]ºwx=Ω6´<˙ñº>å6ΩÇQë<i¯¬<õsP=¡P[=Q@œ<«—ºåô=íéÓ;y&Q=»û<«éΩ≠bE=ü1BΩ*C=ÿ—ΩÒﬂÂ<ÜY ;U„ΩFÙÜºdL~ΩÄk<Ru®ºåñΩﬁˇRºÒbÆºCÛ€<iE=ÍV)Ωh‰ƒº-M=êøº˚ﬂ
+=+E·ºáJàΩ˚e;•G=ã˙KΩ“‹tº2õ+='∆ºàÑ=¸˛MΩnë√º~¶PΩ_zºö&ºGº^§ºÁà<Ãÿ<=é{Ω Ωı©>=iÑ<—ßΩ6-§ºº3÷<~d=ì<˙;É<°)√ºá#¯;áÌá=|ÿ'ΩÇÀBΩúY%ΩF≠ªlçZΩ@
+¿:zTç<:ÍC=`E∞=ïÍ≈Ω∞s„ºè)ΩÅˇºÃNΩ!=Á@M=,ŒÚºÜ=+˛∫mÜ=p…P=L =ãΩo«Ú<’Ô÷º-fU=QG;pàªCÓöΩ2Ä,ºãî◊<4Ê+∫◊˚ºÍ∑=,€<Ú⁄†;´πΩ¢
+ΩAΩü<”≠/Ω√≠Ω§Lí<Â¥ZΩ
+„4ΩΩÓØ∫≠¿<€±ºáìgº-œP=tYÇºJ6ΩZ√€º¬:Ω´uì=§dΩΩ™â¬º≤Äï=∂ﬂΩ97ú‹º¸å=>¶=o5Ω˘âã=ÒM<j <≤!Ω¿ãeΩ∆DΩi@ºQxÕ<2bìªâî·<∂ö5=óÛ<IjK=∫OÒºtØ6∫ SΩó)=Iì;Æ}#ºHTæºÛ∏ÚªS„ªùˇN=nôªe:¬<Åπ"Ωh—<;Wˇº èô<ív_ΩçwÅºë{„ºLMΩH<Yyﬁ<ÂUªØ˝_=`
+<õE∫<©Eìº¥mHº2ã=)6Ω+a_=EêÀ;†•DΩzÛâ<MΩ_É<ä_ˆ<ek= VΩpÈﬂ<q™_ºCÃNΩà˝4Ω ∑ ΩëN`<l;nΩ¿W˙º}JQº*uç<s!ª∏á =b¢ºN Ò;Fÿ4Ω⁄5`=—˝B=ôàªY=t˘9=îﬁÑº†ïﬁ<RÉ™<ù˘;π˜äº˛©%=—E="_=<0˛<fƒG<ñ(>=∆ÓÑ;œÆõªAp=ˆj=ÇïVΩa˚<ΩO¨§=Ñ”O=4‘j=õ—<™ÊZ<„PÑ=…ÓC∫òp=ª¥
+='ÌÜ=ªH<≥˚'=EJ&=Òñx=4∂§ª4:¢ºÉ≥«º”n=qΩ≠`ΩßÓ;É•_Ω©G=ø"i<ò]Ω^È;≤∑VΩë~Êªö®XΩ˛ˆ$Ωi¥£<´w{ΩÕ7K=ÓΩe
+ΩMY_=Œ;ΩXåîºÂÿ°<˜¯h;P¯<1Ω`PiΩ;Ul=Qñ«ºD˛Ωªx•º∞|∑;’*3:I˘á<Ñ?‹º$I†Ωºbm=1;Õ≥<é¿Aºx==PÛkΩ÷Uo=·∞ºÎD=õ£0=Œû=.ï%ºê·Ω`j5=≈ËzΩJ¿TΩÊ“<hõH=Ùö“º]`îºMƒÔ<’]kΩ;∂û<ﬁ«º26;</=¶bvΩà:jΩÁÜºD’Y=Ú]ΩØ{Û<ë›ï<1Y@Ω|k:ΩQ3;¥ç/Ω>F`=ûØ(Ω8—$=w)C=⁄˜ÖΩ·¥–ªQ•ºOã-=Nd7=ÄX={ë=Y¯<úhtΩ¥PlΩ®`l=k=ﬂ8Q=p`Ï< uO:,wWºÂE=Y°ë<å•Ω&4Ω~KÈºÔ çΩÊ ¡ºò8˙≥©=Öxâ=F⁄7Ωé6‘ªÉö<˛ÚJΩ‘'Ω˙VÈ<Å=1=H3=!ΩÁ<ñ~9Ω4ÂΩ,™°ª∂+=7ã7=x[
+ΩM98Ωß,√ºÁ–º/àÍº±4R<√öºµDΩÈkKΩ¿-n=∏¿E;P,®=f«(Ω^ìê=cΩ0å9=ˇﬁ=ﬂ°DΩeÑ™ºŒç=É±ò=X‡ºÙx/Ω®·(<'ï<IÖ¢ºâ
+9Ω‚q˘9"Q=—QÄ=ç£<Ã¨q=≈πºñ9=Ár¶ºòáBΩn9°;=wÖª(%<f˘ <ÏèPΩv€*ºÑxº’Á?Ω–«TΩ˝ºT+Å=†¨!</„jΩîy<oÑ<I∆0ºÍÕÙ;cW@=Û’°ºüÆ‚ªı®=¬Àû=fß®ªW	; Õ=1",=∏Í$ª¯Íç=Fö$;‘ÜÈ=Æwª6IÂ:agùº€B<Ω◊ÜhΩ‹®º:îE=º#ƒ=CÂ∏:ÜÍ3ΩC7∏ºÀñe=àI9ΩKÌn=z–º§ =X7=‘s=›â_Ωƒ6è<'åA=∑ÆIΩA—Åª a5=Fõ=ú√);àœ<§k≠º0ë=Ãäå<ÿ•Ω≈·´ºzq¿ªÄâqª˙= ~É=ù\=VÛ9=ô76<‹ó!º#_^ΩH=’Å°ºfã~Ω.†Œ<ßP}<Ü¨<üm+Ω…=•ﬂÊª˝iΩX
+öºÃ£¶ºê|ø<«≤Ÿ<(†˚<5Ö˘ºyŸ?=ªdëª,<«6Ä=Óf4=Ph`=¡fÅ=ö«ƒ=Ω‡È<È\û=%ò<ÿó∏=Æ÷Ÿ=m#≈=â”=ÈHå=Z	<>;¿∫=]T>j¯=¨Bs=dΩ>ˇ>™µŒ=ÅÉ"Ω/5‹ºÍ,Ω cºDºú=7ıˆ<âáºﬂŸe=ÓÈg={ÈB=dé∆ºœî=Ta5ºêNﬁ<öï¿ºâ <lÚÂ<)¢†=˙ÿ<ﬁC‰<ﬂæº˝Æ=Ó¶|ºëo|=*á˚<Sq
+∫∏`BΩ◊üÙπ@∑=üˆ<Ã'&Ω°|UΩ‘˛VΩn] =∂åΩ“ÓP<œ.<íy=Î°=”a Ω£É	<ÏÛ∏º ’øºﬁH'Ωñ£I;~\J<?x=gQ=qèY:±÷t=∑¡zºdiX=˘là<üN¿Ω„∂@Ω\/ÊΩ60ΩS°©Ω1ÍΩ ê¶Ω˙›Ωﬁ\ãΩEw£=ÿ†=¸∑`=NÊî=É|m=QbÕ=≥6Å=7Á>ulæ=ñD^=¢R7Ωúi∫º≤	6<Öˇ±Ωœ0,=π» <∞µáΩI8D=}J=<≤Å=ï¶˚º°ëªcÖNΩ}Çr=æ3å=ÇåÌ∫òÍÄ=2Z=g8=J€ë<,Pˆ<NÔΩsı%<IËe=	¢eΩm¢‚ºkiﬂ<«nΩw_îΩ»ÛÉ<‚}<VÑ=âØV<x!ººS?Dº˘ÒÜΩµèºØR='*ΩúΩ˙éõΩ7≤⁄ºò⁄îº™˜ª¯›∏=„¿ª:úºˆπΩ*+áΩZ`<ÿ*‡;!ä≠=AÇ=i£=jvÙº÷+¬<ÆÖΩYÇΩ„BåºKpH=48Q=¢PΩﬂñJΩ¶BΩ∞ÌΩÿ¢<MÕΩW=áx9G~§;Ø,(=^˙≈ºo¯tΩ⁄ç<Çº©”aºÊÃhΩı»=Ω~X¡<ïó=9∑˙<¸>YΩ‡Û¢ª™≤ÿº@r¥Ω¸œ|;»k	Ω˚Ã9Ωïp1º=Ê$=û°=Í¬ó=◊=dç£=âÉ= ∏©=D49=!8>ïê⁄;‚ ^ºrﬁ;VÊ±=SèØ=oj"=l.N=3u=¬nã=÷§Ó< ∫&9÷ûEΩÔkNΩ‘µºb†‡º3*	=√P6ΩkØ&=—MΩ.-=lØ∂ºh•œ;ˇK-=ÚSÎ<ΩXΩö√WΩ‚≥Ó<À6U=˜Yè<îBB=;o±ºcΩÈÂS∫D9Dºtêí=»òà=fáºÜ#∫;rÏ;RˇΩÏFÜΩ≠<1∆9Ω¥ïQΩ∑+(=…ÉRΩ¨n†<2o„<≥p<SQΩäÃ5Ω⁄é^=ö˛Ωl|<œå Ωì~®º =sE=√ô¡ª£t„<‹R•<“/√<◊ÉÕºÓñ7Ω2ﬁ°ºítãºg¢PΩäKçºW¢´ºÔTa=J2Ωπ¥ºR»ÒºMO˛<õÉ=–>¶º±(=ÇŒê=õG©;r5ıºÆp1Ω$Ë€º°'<Ô=¬Ö]<¬
+Z=˘Âm=Â_#Ωˆ∑\ºÏ4IΩlÁ[=™ë,ΩYΩßnà;'ºAíÄ=n®2=—ΩŒ.3Ωjx£<8CΩΩ25ΩJ7Ω—˛3<°õ<·d=e∏#<ª˙_ºì)RΩ±A	<pÑ⁄º¿ <0	Ω`=†S¢;Ñ˚YΩ'E˘;E=bŸ)<Wï€<sEΩ∫-=yªº~=d≥RΩáˆ„ºÆÅ$<yO-Ωs°ºWﬁì9ˇûW=s⁄Òº¨„iΩpﬂ∫Yê‡ºÔæÇ;ôDtΩ= Ω£ÀΩ•cXΩÚ~=.¯ƒºüe»ª8»#<2U=KOΩ1V<3õaª;=¸2j=ˇ…bº<¯ =ÎN=»˚ºSÏÎºr}MΩÑ?¬<4ıÙ∫1¶<ƒ!àºº∏UΩ‹‚=.v= ∑Ω¶	Ω`RΩ¸ﬁº&¨j=Œ∫˙õ<MÏC=0Z†<¶Rÿ=Å`=¥ÀÜ<»K=|É†º≥å=Õ6—ºùóïºÿ‡ºN¢Bπ~QuªZ†.Ω€}∫t´BΩm‰=^/<÷uªº»i	;£`ô<Cç=Ä∏ªÖo=5â=‹˝Ä<WR%Ω1cLΩ"µ	<OÃ÷<ïë={ÇáΩÍÌï=Ÿ¥^=…ñ¢ºˆúº'YÑ<fë∫˜í¸;∫ôI=ìº/Ê[º42< ?HΩ!î™<«3Ω;5º˛8®ºçíLºg_£ΩY„ö<Dß©<ÊÄy<ßÍuΩÖêˇº	±<‰⁄6=æç=qô=¢^=<Œ=®	ºÙAº|£ª÷æ¢ΩΩ7≈=¶°g=„Ç?Ω≠tªF»n=„{Ω∫4Ω_Á<RWûº.mZ=1I$=ÌrΩLXÑ=⁄ı=	
+Õ<õw¿<‰Ω#Ëºˆ◊U=i‰Ω÷X<íˇ©;f<≈º+Z¨:æÓN=C5?:æ+â∫Å€<≈tIº3ƒçΩ›êl=q#¢=8D•πÅºΩÔiΩÒ∫k<|§≤=hØ=CŸ;≠{âº°∂i=ÿìΩ%”DºcCÙ<i@TΩe Ö=˝Í<P˝πΩÜ‹Ω¡ßtº"$ΩÛ≈_;,ËºP`_Ω—ﬁ<!À∆=âΩ ª%Ã=∑Ä≠Ω_æΩé/?=˘≈û<•Ù#ºl$Áº'6ìºcjº„CSΩ§üºGƒ=YVDΩ”—…ª∫—.=ÆÏo=ág<;æ4=:“L=˛D±ª] åº¥êI=£ì◊ΩÇá~º[o=$“®ΩÌxΩI√=u:Ω√‘ΩûxΩâƒÑ;π“°∫z/ø<Ù˚MΩ'òÔºŸA=CSsΩ~?ÃΩ{v2ªYˇΩç6»<©”ª∆bKº êk;mÒΩÿ%[98Ñ>ΩÔ‹º÷_úº
+}i= =‘·]ΩÆ¸ºE‹Sª5åºK˙ºû¿=Á+3=ˆR.ΩP	Ωõﬂº§’€ªäVPΩ{∏,Ω=æ<†Ã˘º´∫3ΩzpëΩ~eºñSΩLÎªå/RΩD∂bΩPäΩúë∞Ω0ïº˘°Ω>QΩÏøØ<ìîÍªùœØ<¡“;=-ì<]’\<àΩ∑˙v<]‘∫ºDΩü Ωòv’º∞õâΩw[pΩ%õΩÕÀ<v√ΩÔÜË<πSCº\ﬁC<∂=
+$Á;—ˆ+<≈÷ˇ<“úΩ¢I&ªˆ^øª–º#¨Ωl0,Ωo¿ºoHúΩñ=üΩ∂ˇ¿<ºÌ«<C4|ºC≈á<Fã+ΩˇëÉºäu<¯ôª∫D<ﬂhΩ(_Ò<≈˜∑<áøÎº®#Óª1çF=µà
+<§5 =Œ™0ΩlªΩ¡bºÖ⁄(Ωé¢4ª¥àºZÌâºä@¬º{=ºúL•ΩÏ6ÂªMdu<&I(Ω·“<Í∏:ΩÄ˘<√°-=ï#Ω¶F¿<∞Ô¥;£˚=ûRÕ<¶˛Gº»∑<Â–T;"M ΩF*Ω?‰'<s5=Sù<c£Ω*Ó;5l\ΩW<ÌÌ‚<!SèΩÇmΩE7í=W§=aÅº¿∆åº	•=µE‰;#9Ö=]yºõá=ÛwΩ‚–\ºFΩ$˜rΩxˇYΩ|b7ºà><$úº'ÁZ<¿/a=÷	ï=≈Tì=JÅ,=c)ΩÎFLΩÕí< ÊÇ<ã‡N=ü0Óªù¡◊º÷UE=r≤ﬂ;gÀ˘ºûˆΩ©Q=∆ûçºÛ|=3€\=_≥Ö<‹kx<•¿< W<ÜfºIz*ΩﬂÚc=lT0Ω†≥ò=&˜È<´=ˆµ=¸≤ç=Zπ>=ì¯Ö=MŒC:yu=¿ˆ”;˘Nªi—ºæîº*r</3oΩ¨æC:à,<l»íº÷`ó<œ(,=	ò}<ôíïº"xΩ˛ß=åöó<Ëúà=∑@ñ=HÒj=œKI=)pﬂ<^Rì<Anû;œ,=ô´.ΩHÙ—:ÓXΩﬂå-=¶íDΩÛáŒ<ÅHΩr¡$Ω•›º≤€;}º5ΩlÕX=ÓÊç<Má≠ºÉ˜…=Î≥Ú<…k1=◊¢ü=Ÿâ=-Í‘<ª^/=Ωéã=ìB=1X<Êè=°¬–;ê É=i–=Ë…çº÷<@º9≈†º¶∑7Ω˝ÅΩ≠°6<N∫)ΩÜ?ΩŒåªùÖ:È˘iΩ≈0»º⁄ŒP==¢ü=J∞ê<@EΩ0RΩi“/=ôø<∏<Ù£ºaô—<¥ºq3Ωd<k‚|ºÅúcΩ(⁄.=Aê=˚º;<K˙áªCwò;‘ìΩÚÊ =n˙T=‰£ºø+@Ωêå6ºfº=e*3=ƒ<í=àhUΩPÄ§<É°∞<k=(•x=⁄$r=4j Ω˙@=†YΩËé º5œ!=Öc†º,Ò;vèLºd6;,qΩ9j‡ªûñXºÜ®RΩÓÿ=º¸√º?<AΩL=¡≈°;ÒDΩSE˘ºJ<K6=#”‚ºRº= Éﬂ;~bªbÔÛºÃªUÜº∫%J’πZv ºØ(†=pAºs=<“˘;R&Ωø∫é=0A=2¿ºıe=ÁãΩÛ,¨Ωö+‰<Ã¡Qª«yûΩ˘£L=ÿ=Ωu&ΩU=¸ì:<Œ™‘<à =_÷*=ßÄº6á=[≤(=
+Ω*ó≤ªÃ¯Ä<-¸Ω˜ì=ÃWö=◊ÄªömW=ÕW÷=B˘2=w±z=lõ=ÇV==0£∞<YüÑ=Öºj=ˆO>¯ª=ÀC)=ZÍ,>˙±|>yjÙ<d«=RW>“=.‰ºµπ-Ωf™ΩºeÍ<≈ÿΩ†	&ºfıs:ZU©<ÓXä<mR©=Ï'D=(c=H˝˝º’ì™=\ó%ª%≤H=∑]=“°Pº}ÜØ<Ì%´ºCÅÆºtΩfΩ2ÖJΩ÷w8=Ÿ<8=¯Fhºùâ„:aó¡ºâE<11Â<b˝˘<◊Ø0Ω¶™¶<@õ<Ô∑ºâ0IΩÀ…§º∑	F=ôÙ–ºaØH=”#ô<ÅºÔô◊<9ΩÌ<À˝É<«àD∫5?<†ø=óX=’	=H=gqé=D–u=æÆ#=çﬂ4<\ÕΩ˘?N=›È8Ω4ÙÃΩ¶V§º§‹$=ˇ ≤ΩHVÎ=g°_=9§;ìc®=‰7>Ò+:=s∏=Å(?>’2j=…™C=Û›ΩÅπ[º’Õº√√;¿–\Ω¥.AΩ≈≥ó<çt<J¿˚ºÁFºô‹7ΩµWé=ìÙj<[ÏΩØ°ò<=•f<æΩ˚1ò<Gº5Å;=5«Ω/’
+Ω⁄€fΩ¶Gˇºà)S=ZØ0Ω7]ªèÈ=‡îwºX"äΩ¯à¢<ÓÏWΩuÔ˛:1‹ï=0†‰ΩÓ◊î=˜∆Gºe>≤ªûÓã=¯ﬂ˙<J=a≤=Dz≠:ã∏kΩ—2ì=L2X=€·{ºW;)î¡=óå!=¢ég=RSå=5hΩ˘ù‘<˙oΩ,"4Ω˚ò∆º•x=•˛çΩÚÑ…º†õ=¥0uΩ©bLΩ›Rºqˇ!ΩJLΩ01ÂºCì^Ω⁄∂G<6“m<+RnΩo©Ωÿ˚ºFﬁΩë≈nΩ‘÷úΩ»CΩõ‚äΩ|ãΩ#ÚΩõÂù=Bã=îtVº«„ºÅﬂ—=F(º˙F“<Wxê=ﬂ‡ØΩ=˛∑=£ø%ºjﬂ¡<!√*=‰w∑<»¯o<KJ@<^\·=∞§ºÔ	Ÿ<Üÿ<ì(⁄<CHﬁ=◊f‡=ÊΩäÙî=Ú¢»=|<iWÌ;7–<hªiΩ’ÃSΩ+≈ﬁºñ…T=ë3Ω0EºMÃ(=<(Ωxà>=‘õXΩ¶Û1Ω”öå;ºñ;º˙R0=äXΩ'{;=ìRV=(5Ü<îYxΩ1à=ùlt=ÑóÖΩÖœä= ¬7=ƒ¶æ—¬KΩ1Ω?-ÀΩåcΩ∂ùª%∫)Ω™p±<¬D‚<ﬂæyo;+üô<3Lè<|¬kºv‡#=õcΩ•aY==ä®<SFΩ"Ë=ﬂ\<¨q=«ÍŸ<CSª<%?<t#=ªè<∞,=Ñû<Y=ûÒ/=≤x“∏èº,Ωƒ .ºÏ_QΩÌ≤&=ı´R=,Ü¶ΩÜ~àªΩ¡:Û=¡º‚g4=#ÉΩ?Ü>ºÄ¥â;<b(=ïOΩ™îoΩöÔ∫ºHQ=*i,ºg◊=¬[¨ª˛T£º»•≤∏0U1Ω„‚{<0dΩ|¶†Ωmâ<Z≤JΩÉô{ºG;O‰º∆—0ΩÆ"∆ªŸ}º∫DΩ·=\ºíHΩÀê<é◊<ÖLZ=ãÒôΩ[`ãΩ3FΩ€Ä√Ω]}Ú<^∑ <Ä·Ωÿƒ=èb¡º≥Î<&û<%SÒº¶±;π§ôº£÷Œ∫f„ª6°Ω9¥í<È?»<	t∫í›ª>gΩQ¥I=Ïƒ8º»Í˘<£∏BΩ|Ü;ˆnﬂ<ƒîΩt=kûA=bæS=‚n9Æ”5=x±ö;:bÖ∫üª<æ5=Ü{+=[°ΩÃ˜Ω¬‡<%kΩ≠Ml<éÃd;∏O=_Iè=NzΩëÇ•º~95ºcg÷ºñ¬ÇºëÂ <ë®<É˘Ω<9<˝ªTtù<wˇ™;Õ€1=g0OΩb˛BΩ»sªÜˇËªÃΩ€≈=*ñÁºÜ® æá•9=£ç=≤˛‘Ωë»jΩa˝ÂºÓ†uΩ[Ä='\<w?;¨	–;		ü;Z.Ω8Xa==öL=àìΩ†Gò=òQ™=:º’ΩÈÚâ;%=ã ÌºÇ‘º£YÉ9ù˚ÑºıÚ	>.Üô=l¶´Ω⁄⁄&=zõ†=÷8ë<#bI=+|¡<}æΩ¿tO=#¢ΩÆñ∏º…m§ºöFπº˝PŒ<HÒº÷$ΩGmΩƒQ“=ÖmÒ=ïìΩik0ºH"ö=Ô"óΩ‹vÇº>≈Ø=úê=‘ÒÏ<íÎU<i&˘ª˝D7Ω˛≠ΩP˛R<ï0Ω£◊*Ω<MqΩô≠	>Ùo=|+˘Ω?Xé=|é=B0úΩa´/=Mœô=1Ídº§È⁄=,/;=61‚Ωt¿ù=|=∆¡Ω=K®èºÍÛ@º¸r2<S´˝<ÁÒûºOnUΩO∫ºÕ˙œ<ÍLΩÌcR= Ωn<›=Õq¿=ÏcÔΩºDç=‹c<ãoΩÂDä=OΩj<s$ÙΩM,…=¸ûD=a≥æ,¯M=r=aÎºΩLØºNàì=ákáºt=>.¨6=ÃñπΩ~‡ﬂ=ó≥=ÜNâºÓ¨µ=ç›&<y†OΩ£ö¥=≤G=\u§Ωï$<s[=f€Ω˜‘ë=dÛ;l†º-*¥<,/ <˚ΩÈ–ô<ÉØ™º!YU=ßnΩ) <:ºvÿ<mïΩ…LT=ƒ›ÿ<ƒ!–ª∫ºΩ)Êº"Z[Ω	í≥Ωzk®=è<ÿ≥·Ωuß—ºñ’ºTˆ"æ†"Æ=ßwµ=±p¥ΩûÂX=Å+ƒ<œ.æå≤4;ªâyºX˙ãΩ„»fº:ˇº—f]ΩRõÅ<gnŒ<ØÓª”‚•º6ôLΩ–=‘c=Ù¬=”Á;6˝£º}Ù?ΩV‘¬º˙Œº≈s	=¶ú¨<Ü´=†IêºÊ8ΩYá=S4\=TN=∏B»;jr7=¶ á=<Gæª/ü-ΩßùÇ;q¡3Ω1ºé@pº¬'T="‰ <ﬁ¿à<´ï=—_#=Nè_=§…∞<c_∫’#=TßJ;Óí<£J«;bò@=TOºÙÔûºõ#Ë<iÆ=.=±]'º#µGºwuËº)∆«º¿	⁄º;I=–n=vÿv<ÄIØ=<ÿ6=Á€{=◊†;=”¯ë=ï’ïªVÉ=ÓÑS=Â=Ω7îC=≈çÄ=ì≈:=oøï=ãw¸=˛≥
+>Zπsº<f9=Sí|Ω π^ΩêÓ;e#=sxÜΩ*ÚLΩ/±9<0#≈º_;¿º\¬7=sm™=üDÜ=[`=ì´o=ù£M=pµª|¢î=‹ß=D2/Ωáàé=¥H!<†«â=åWî<AÉ=§^x=h¢DΩ˚9:ΩZà-ΩŸuË<¿¡5=üêLΩ$@G=¿g=®Q˜ª˛T\=E•:=ÎH<m.ΩC’â=ì†º‰òìº>ê$ΩZaï<9u <–fΩ#z=˙ :h-'Ω<ÚΩ+å†=K<$Ω°ÎÁºP∏BΩlcX;)üÄΩ„¯ºrﬂ Ω$÷∏ΩGÒ™ºMÆΩEk8<∫Üú=ãJ;∏˙CΩ≤‘=ütó=›oºC>õê0=wú5=Òë.Ω@˘¡<”l°º6]=—§¿9»]éΩˆ‹8;„’YΩ4+^ΩÿAZ=√AR=ôÜëΩªÁ<{=Ó£=ﬂÏ<lH<≥=>®+=£zº©Â=)ri=‡ô;=/ıMΩ˜9ÇºÜŸ€º}g <°œùªàΩÿÔ0<$Ö<|Ä8( 'ºæ≈g=Ì)#Ω˚XôººÔÖ∫πã#ºgàäΩ6=ﬂjΩ‰˝ª2∫¬ïJ<ﬂº±Ä=B¯Ù;41ÇΩ‹òΩk35ºé◊N<≥¶<*í≠ΩÖ9∫π[<ŸÂØºÜµ∏Ω˛‘5<[€ª5€;Ωæ%	="Ï©ΩÆs±<7Ämª¯5;2q€ºæ;=Æ=âI˙;… SΩWœ=¬fºßn&ª°5•ºHäÇΩ≈1∫<˘∂6Ω2*8º#O≈<aÀΩË¿‚º>H¯<	HªΩﬂk≥Ω∑qŒ<œU(ΩÀb0<7rT=dçzΩ,∑•ºG`à=ç)Ü<[m8=)˚ø=]<ºj`Ä=ÆÕ=Œ’Ñ=A⁄ª=J =ÿÑ+ºÇïΩkîï=9òΩ ¿Ö;∞Øπ=¥SñΩ.<´PªSº;¸∞úº^Æ=4ƒ=€ZΩ7M£;@eÃºP6Ìº*=ÇDΩ∂<s⁄˝ºæé˙<†±<ΩM
+=àj<Wr.=;»º´´Ω":°ΩÉû=v˘tºÀÚÃªåe_=J~Éº„£ü=ÕhXº?]Ω∂¸…ª<UΩîï‚<£Õã;Nt2=wàîΩ~g;¡”FΩ,√Çº®¬ùºämµº·MD=nïºG„†<e6≥<5∞ΩÃÈNΩÙnkªaLHΩ>ùp=kÏ≤<–¬<¯^ñ<X®==ÕP;<5ªq9∏<¡n;=‘;d]ÅΩƒ¿sΩ\ˇRΩ∞«º±F–º\·>ml.>‡pƒ=£˚=Í ¯=•ç!> ¡Á=ç◊Ô=Ìt>ås•<N˛*=o>Ω´<<p3ΩÍv°ºÍﬂ =3¥ç<&HY=ü´·=êÌç=z«D=iE§=P1ã=ˇÄ¶=u5<=Í~¶<åÑ√=Ã3q=òß˚º˝ª¨<ç‰Å=ï√=ü¢C=/==eg=	Eººﬂı >«ÌT=º>DÉ>ô¶>m	∑=®Uº=»Î=˛„X=‡!¥º»ˆõΩ˘gëΩuü<d:#<Ë˛ª$OºÊvÅΩ4,#∫¬·jΩÎ¸Ωê7ÜΩÈÛÄ<p/Ω ﬂG<ñ•‹<ªºÊªíª(<Æ‹Ω≤jºKˆº…0‹º—Öﬁ;/õ<∞Çº≤/#=LΩ‘˜=Y!a=p›º@:¥<d=¡åÖ<LΩ=J=/ΩmÌ Ω™Ávºµéè;‡áÃºÛ 	ΩBCpΩâÚ<ŒX¥<≠Ä›<Ø‚<Ò U=°£s= Õó<ÍlÕº%t<umÕ<?≠;®Î˜<©åé=J~>˘ê&>
+>üDØ=Êã>~&Ê=[c‘=ØëÀ=d+=”NûºåÅ2;ÿë=”1W=zè&=ñÇΩm¸Lº¥	Ω!\Ω{¿ç=[V˚ªãÍOº\$ç=hΩ ¬=+B>=áÅ<üËÌΩoÀº4Åá∫Ïõ‘ªgËcΩ©"<;ˆ‹Ω>j´Ωd…sΩÛ_SΩFyºº®=q3Ω¬bºé`“ºˆΩb=f©; +f=i≈ºΩ§U∞Ωù‰ÀΩÇÛΩêÒçΩ…«ÑΩÎëΩF¬›ΩËoüΩ“>”ö>Ü»=L+>åUÃ=∏o¸=ÿH%>°!>‰é=
++àºÕ"Ω¬0’º‰vôº;ıÍΩÊA°Ω«l∫ΩæW"Ωy~ªºû∞!ΩxÅ¶ºÕBΩ≈5™ºÇ÷<‹ºº%ëdΩ∫dÑ<¡5Áº‹£C;i‹ΩHΩz©+=£hΩJs<=ª¬ˇ;Î‘=Ã%¿<EkΩçµΩK–àΩﬂ;©Ωcÿ<Ω˜ıj<ÙáÆºœ„<ª}˛º∏Ü=˛à==g=ˆ1=Äÿ˜<OÌL=í¢º;
+ƒD=‘U=‚¬æ∞æîﬂ–Ω™∫öΩñ·ìΩ˛˙ÿΩçˇﬂΩ<ãΩò†YΩ«¸ΩÏΩA‡´ΩùÂ£ΩHl	æˆæÙ=ëΩÕÑΩ=fçΩ'%»º{ lºòG=5ìy∫”ÿ9Ω—ËN<r=`
+∫©3; ä<u®_<9‡Ω6#B;I`8ŸÎä<∫dΩÛ¢U= €0Ω(≈&=RQ∆;íky:˜1®ºaÔ•º¶¯≠º»GŸπ3LYΩˆ*m9Vp…=p0Œ=¯7Ï=¿„Æ<Õ4É=Çù=´èn∫?©E=Õ=≠k=`W;ñ =∂vØ<ìòÿºLı==Â≥âªNpΩq< <ù¡=	◊;ªW=‡@H=*ª'=èG<qçÄºûZ=ÀQΩf#=.$^;WvEΩ•Ù(=˚Ì<=<!*l<ÓëæºD‘==ã"K<ØAÑΩêˆ7Ω1°UΩ¨ˆ†Ω=∫;Zˇº¿éΩßT©º˛ºå<ˆ∑mºä±ëºu2ΩÒµEº@Wí<àç$=øº<Ë›˜ºwa=Ÿ•Æ<¢nΩèÅëª8|?ΩOΩXªÕH?º∫uÈºªá<fÔ’ª@Á ;‚&=èıMΩk=√±/=
+∏•ºè(&Ω%<¸7<LêΩÇd<]
+Ω xÍº“”ΩˇçªrÙ#Ω‚	»º=’*<Jx=nêº
+G=µw=r3†=®û¨ºac;=≤Òº˛ΩQÉB=_PΩW<Øß{=§)∆<ãj)=≤≈¶:¿^j=´Ω:<…a5<É†Âº-€=E >Ω£=‘ÀK=^Ï< üÖ=∫ÆŸºqCΩª(;µ*:¶È¨º∆®ﬁ<o≈;|∑È<o‘LªÅ¨çΩJyäº‰SΩª®8=$ @=Ä\É=∂Û=mΩ°Öu=≥ªª∫,uΩ¬≤Ω¶¶S=D}ü<Ô\Ω˘`º‡ûfΩÔ5C=4G_= uºƒÒ˜º%Óµ<âR=hâΩ{≤ººΩ∏•º¿ƒ6=ä¬º·MΩ¿=—ü?Ω…ÜíΩ™ÒO=∑≥wΩƒ®ºÊË´º9UX=±‚º0ÑΩD%”<F”Â<ó-Ïºı6éº˘∞º;‰‡v=¿ªé<c±?=vø=$çºNƒó=Ö˙=ñ≈ù<*nƒ;b˝=J±RΩØBQ=ò»U<X∆<a—Ωæ=Op=<cΩ\*«=»º¯<l{XºÄ˝ï∫RGΩ€Åò=ÍÆ_=E_—ºmê=˙ËÉΩ ã„ºx&ÜΩ7SdªVpsΩ–TΩ?!Ôºﬂ©’º»
+=—„è=:BzΩ¬Ò’º±~-º†πﬂº>ıΩ‰¡Ö<ÚÎ =Íêã=§rò=Ü:BΩ2§VΩ7ﬁz=?%ΩÈnw=“gÑ;VF˚º?0è=¿V<.Z•ªYí=y;@=æöbΩ≈L=†M7ΩJ+ﬁº¨eC=(ü<º™6úºµ∂˝<˚hp=™O=‚9 =N«G=Ì+.==’ƒ=
+ﬁË;[FÚºıÈ∆º €= };`]BΩUŒ<
+kΩP ü=*˛º§=Û√E<ËN6=≠=ú©aΩBS±ºÇnñ=3)ﬁ=¡HΩzÇπª˜©ª=ÿ˜><ÅáΩ<UûΩb™^ºº∏ù=≠ﬂ√ºÚg=5¯º`E’<ª∂=ﬂµÜ=cÔÒº]≥iºmXºî–:º3m‰º;S<ÈGMΩ˚◊P=yœπ;Ç‚ºÉ\Tº’±É<	»§=ÄÔìº¡≠ΩHΩØ° =àXº\L˙;YNå=!Säº≠<)ã=Î:wΩøE/<∑b-=Ñ0Ω’Æ=R@QΩw%iΩÒuö<!=7ﬂX=Âˆ<˚é©ºf—˜º}E<OÍ=îKØº[å<Ÿ 4ΩPÚ¨π √XΩhh0=ØÈÑº{0?=ísØ<¸Ï<›ÌΩQU=∑–=1Î=2ï„;]WÕ;Å¨a<Ÿxu<®=a∫Û∫;Ω9LÈº⁄ﬂg<U•gΩ‹Z=ù|ˇ:~x‚º˘Á<’¸ëΩ˘\Ωc˚=g@OΩÂ¢UºB|Dºﬁg<πÂØºHI-=fë;’à©ºauÜΩ )ëΩ•	^<3SàΩ∏åûΩ
+õN<tyΩÖ QΩ"âºÿ8°ΩOÄΩ”◊·º.bΩ?HÇΩ∏ÿ&ºô{∞Ω3(Âªe8<kÜΩÃt_ΩQü_Ω÷ŸΩ{ =ªŸó·<[cãΩô≠Ω„	Z=⁄Yl=é¡6º∂?hΩhfq=Ñ#†=sk=¨=¯ãª∆ÕXΩdJ¸;ˆˇº•È°º]$¢;·ÄÆºH£º/ºQ<b∑8=fµ^º{˘ª‚G#º≥◊¯<z∑J<ÈñΩ™D(ºµ÷8Ω®ñJ<K`≤º≠Gº)Ωj⁄h=Î÷9Ω¨ù*Ωñ]Ω}†®<≠(ΩFeVΩ}=Æ#
+=y˝º 9ò:wn<w Ω…*K=Ï<mΩ%<{5<JïÏ<◊„√º;ΩÍÌQ=è•º~xΩIØºÌ` ΩØµ˘º{: =ƒ§≠Ω¶*.Ω»L=ÙÙ/Ω√Èx<î‹<Ã'Çºêê¯∫¯ΩHîº<Ù[Ω*A^Ω¯“º™–pΩ†<ÔIÍ:œ	^=WÕ=xMDΩÖ3ºâñp={D≠Ω78Ω‘£=¿VÕª/ß^=jfa=Z÷<©w√=πµœ:ØB5<ckh=†í≤=éáûºlÂ\=ı˜eΩ
+¸<óÉ«ºnKPΩ\ÉºG^Ωx?Ω($ΩmÊï<DóÑ<—1¿ΩBa®<2∏ò=„‹/Ω"2°=˝Ñv=rﬂ;Ωo„0Ωg÷õΩ˙T˜<?ÉºßÇêª|ZÌº1>Òº√ÆÈ<T4 Ωõπ4=bÈ<•ÃÂ<wﬁ~=¢¢=0ÆΩD>ö=‰= 5˘7Åoè=öÿù=òJ9Ω5T=˙åó=ÂtΩ‹Aµ=˚ìªì?˚<uÆ<âá =.„Sº«ˇÖº¿Jc=πÍöº_}∫ØbΩÓã≤ΩpV-=ÒÃ∑=kÃºH`í<j!=ˇ®–º{ÒMºN<`|º®˝Ω¨ó3ºFí{ΩñY=|T=•æÍÒÂªj©D=gG;¥ı%ªP„û=Ω‘ΩùÇ0ºñ9W=S≠õº≥oJ=.ßû=ˇ:ÉΩ«ªO<≥j¥=œç<=Õs=3+“∫xKΩ˛8ò=˚/Ù<và˘∫÷$Ω˜ÛÎ;j,A=
+ÿ;ΩcA‡ªVõ Ωè†<ˆø =∏ôΩ!_ª4©…<nÒË<ekΩÚß<;ß\—<¶6º±3<L´¸Ωfe™<jBà;AóëΩì'&Ω< –<ºˆ
+æRy`=>‚é<4~äΩ€ñ<&™8º˝§ÃΩA2”ºÑK:<XÄÕΩkØrºv‹m=o f=Úr\=Dîº&(q<”]`=)AΩΩ=¿h…º—fÆºQØª;ôæ¸<ùúËºZ=´fΩ–‹ºwL.ΩÕ≠ºY=Ωï<ÄqŒ;Y›T=ºbΩÆlWºzäºLC=¬$Ω!„iΩÁWâΩú2πΩ∫ÅkΩhdΩÍÃπΩzÔŸΩÛëè<DØºP≈ΩFÉ[Ω;⁄ºΩ=¡ªáÒ_Ω˚M;‚í;~ô;—,R;û&^Ω÷—ó<˛@Ωﬁ∑º´ˇÊªW‰ZΩ6¬ºQ;"ëΩ¶l®<›Ü‹ºgbû<˙Ï∫OÒøºYeÇΩE’Ω9&<i¨NΩ—m√<Ú’úΩ(;∏£=Ë#ºÉöº‡l<I	<±)é;ïwÍªO,æ<ö4D=©¥z=ˇ "ºª+Ω≥%›<ÄÚS=7J˛<‘¨@πKo´<’A Ω8e/Ωr¿Áºî=ÛÃ =∂d]<ä≠’ºôºLΩÖtº˛–Ø;!j=û{}<èo=Ω®kº>Æ2=ó–j< T=@/%ΩÑ]=©f•º˚‘=iud=E}<=øT=€K´ª?Û4Ω BCΩn{zΩ€Ï…ºŒ¸^Ω´üïº^E¡ºŸR-ΩQﬁ˚;x‘=S.ºí˙Û:∆;•;>tüº±.)Ωc_√ºø&=‰i.ΩŒ€ZΩgàº◊’rº6Æ$<PòºÀôΩ-ä"Ω¯ﬁäºFH ΩÌ3)="S`=óXΩc'Ò< Äøª50|Ω˘Ù¢:	÷m=àÔ¬ºÙùº	ó+ΩÃÊΩòºΩgœ∆<ÖÈ`Ω6.Ω‘≤7ΩöS"º$8ú=ÑNù=$ù€<F∞<wC=å´gΩ$bu=@‹˘ºIGΩ„5&º•å˙<@lg=	4
+=≤©S<%v;¨#é<~óÜºî¸$ºä>é∫B;è=^ë º-<±ñ=∫ß=πon<<¡ î=≠‹E<œÜ.<6 Ω÷&=Ω¢¶ΩÄ≠ΩÇ÷wº®ßΩÍºÅÑΩÅù¿=ï¶ø=8zq=™ƒ=‚|É=[pSΩ†Œ=cõI:?	J=#íÚº}{‰ª_WΩü£<Ê•:ºÚ§ˇº	x<ÀÏ≠ª,=ÇoD=TÏgΩ¯ Ê<ùΩe={‘Ω∂Dº´\,ºŸF[Ωœ‘<#µg=Ia≠=óˆæª»7ã=`Êõ=+å¿;ﬂ§=ƒŸ£=’ÕóΩR@ºÍ	Q=4¢CΩg≠<5Ω=>¬Ω.LvºÃ2.=:¨ΩGB=aWè=TMΩBñëªùÄ·;◊º=Ÿ]=†?@ªs	˛π¨Ì=&k[=R
+“<†¥Õ=˛Y=À∏Œ<MÄ=ﬁ9‚=◊Vº	=¸ø˘<AL…ªûvΩ1É;êN=–'<Cà$Ωçí√<]ˇ,=Ïæ?Ω•Ω¥)æªóH=UΩ≈dí<H{ôª≈i£º„⁄z<ß[Ë<;n≥<©õ=Ó;îª(?íΩõﬁ´ºj#<"‹=;Ñ)ºmÁh=$È´ΩïXF=’"Â<å(µΩÈûºlí=tÉâΩë%âºìo¶º—9@=l.;v†Ñº»¬6=≠/=<;Àe=*RB
+conv2.biasJ@Yw=Q@Õ;	∆=√m¨º≠-õ=ïáöª€Á	Ω˛ÉΩåÃ÷ª%ÁΩ‡¨Ωq`=Îœ =œÓAΩŸø{Ω7ÄΩ*î
+@B	fc.weightJÄÒ√]æªæÁ^zºñ)Ω‚˛=¶s∑ªIÙ>Âê‰ΩÆ¢T< [ΩSÅØΩüˆu<∂ISΩ»€ >o∆>W¥ñ===Ä≠«Ω£±ﬁ=/∏Ω≤LÖΩ92æ…,>ˇQÆºjU=Q«>Ω‘'>/#>J<>∂ïi=jXé=	}º™¡ä=H†h=2*xΩÈ—zΩ°⁄è>˜§n>äõºúC~>∏∆•=jÁ{>X
+NΩπfº=KÉºa˝Ω'Êø=å
+->Üm?æñùJæ3ØæΩTh\æ\;>>];ΩÛBì=Õ^∑Ωû–6>RÆ%>…íCΩ•µi=`ﬁDª>Áù<bWï<„≠º<`
+˚ºùp=Q|'>g43>(π¸=óˇ<Ω;iyÆ=sÌÜº.ƒXºzàØº¡Ç<IIÖ=†Ï=(®Ω=úÏıΩÀ‹=¢éº(Hæù6
+=óó÷ΩOhW<H…À=ü’	æL”ßΩêoƒ<u¡∂Ωü<—Ωæ "ÒºÏ]‘=xıÿ;ê•lΩ¯≥ΩZ∏X>7◊=Ãµ…Ω«∞>bmæÀ],=:Ü
+æ•iΩÄéΩ¶ÊAæœìä<D∏
+=D6æç Ωïå>n–=·ríΩ¥0°Ωb¶&;⁄öñª˜QΩü≤êΩ®ºuΩRŸ†ºûs'ºÎ+¢ΩOœΩ,±3Ω#CÄΩ} /æ"ö…=L€≥Ωø5YæmæΩ˘n…=¢ <›[KΩ[<E=
+ñä=s˛ÔΩà7”=ıRıΩ˘bŸΩgú<ıAæº©”}<ˆ6üΩo:’<ÔF =w%Ä=ï©=‰µΩ⁄º"æ%Ô´Ω_c æŒÆÏΩÉB˚º–wΩQπ ΩkMn>òj3=ù#>Ä-tΩ»y[=+gÈΩt!¥=»ª Ù\=.GéΩ%⁄=íµ
+<öQmΩÒ~Eæ>˙œ"ΩúGΩ=ùÑΩFaù:NªÉ>ü†ì>iyå>èÕ>ƒ¥&æ 7´=Ω6æÜ	>¥∆Ö=N›ë=ù∂9æyΩœÛ-æ}DlΩ÷ñæ‘ﬁå∫6Ω=£‹´=ˇ¨:q>>^.u=ÈW	æL èΩ√+p=˛wΩÉ≈8æ]Pæ6µΩ†à±Ω•:oæØ`æ<*æ¸B˙ΩDiñΩï!æ=’]AæÊy∫ΩÿºÉ=å∑öΩôiçæù	^æ·Õôæ0ΩÜ§Ω˘ôä=e8&=d∂ï=ã§>/(>ˆlâΩÜÁ1=#o£æg‹Ω]dùæëÈ˜Ωs-V>˚ŸGæªﬂ>Åø æ	6æ ∫æ˛™(æãUæurÿΩ™⁄æ¨?æø›*Ωh)ΩœÈ;øƒ%>£NeΩŒ6l>ò/(ΩzDâ>ƒ,hΩ∆i¢;⁄çËªÌ=®›Y>C¶õ=q}UΩ„Øª=* æ_Ω⁄PãΩCÚâΩ∆òdΩ∆”í<UdªΩª"êΩ∆Õ<‚˙-Ωë◊°ΩdU∏<{√ﬂΩMñâª±∑Ñ=◊Vm;ƒŸ%=qÒΩ[’æwõ)>™◊£º*læ2/#ΩŒ<¡º€æ`≈^<]Eæ—”}=ú91>Œ∞ Ω¢öèΩ”ﬁ‚=Wì=·ººîK"æ»í >◊¸3Ω›«Ï=~ê\Ωé¸Î=A·ær‚Ω;:ΩÓ16<ˇJæ°8>·â8>]—>%ß=›âæÍ˝Ω =m∑æ4F>ƒÙ<æu_ºˆæÉÓ≤Ω˜€∞Ωvoœºê¯ß;¸∞ºy>7#
+ºA0ΩÔ“ÀªjøÉ:xe9Ω)í>Ω‹…>O=⁄l>ŒÓ˚<î™H>;øèΩ•›ª…Œ6> íºU6–=îaΩdäˇ= ÌWºÀ∑å=ŸªΩF\π=®‚Ô=õ£0>.™)>ó‡º¥É)ΩO∫ÿº§ˆ›ΩÕ$ΩΩˆ‚Ωºó=üœ≈º
+
+ê=π
+>“zΩ 0>alæ»yΩr€;ÛgΩ‹o>¨–X>≈·≠ºy¯H>4pì=H∂Ωíó»Ωº¥]æ¿I›ΩØÊ=ç˚“=§§ÛºóÓ=©’ΩI£ÃΩ∂KΩ—7£<_Â”<™ΩåÛF>Eˆô=7mÄ>ÛM>S»à=Éæ‚=´Ê¥ΩGã∫=÷π=äÒÍΩëÄ=≥1¥Ω9ò=÷hSΩÏ êΩé±ÒΩí¨Ωæ|=4`4<gVªn∆PΩ'«‰ΩQ>¥<\ÃÍºõ≈8Ωµ∂h=sÖΩ∞Ó<É {ªË¨˙ΩÔ(æ
+ª	æãÊvΩ∂
+Q>˚“€=t>÷˙:&´2ΩA|Ω¨ÂOΩM˛æ¶¢læÄ∆sæ¯çfæ•5æˆ4"=†‘ºå?ø∫æø=.ìÉΩ’áŸ<µuZΩã:œΩf∫MÜ–=√€&=IË˜º¨{Ω?0Dæﬂ.æóŸÒΩt†=ÿË–Ω{◊≤=WH€Ω¨ ˝<ÔmI=Ëú°Ωy
+æÎã˚ΩπΩ∫ø;iU≥Ω≠0ΩúPRº =˛CôΩ.èŒ=kr+ª®¨ˇ=3πí=ÿNºƒúÆ<ÀªßΩ
+
+=ˆ—=Í‰ü=ËÜh=ü¿6Ω«rìΩ›`j=óÜ˙=’M>c‹ÅΩ¸ú<=ò*æ*‚¥ºè/µΩû<=Ë¨Rº≤|≤º÷˚<'€%Ω¶f>ˇn™ΩMÌ=ïùŸΩ4T#=±äöΩ√Ω<*>H=•{=rc˘=ñùæŒYéΩÄVõ>q1ç>Iµ‡ΩjD∆=∆V+æ2⁄<áΩåD)ΩÙlæ∑ÛΩ◊‚Âº%á…Ω»<Ïp¨=º*Ωπ·8=ª"æ◊Õ=óA°=ÁÃ©ΩøÕÒº:g=;mÛ=l·n=;ê=ï*ΩüËΩBsA=O‘w=$>
+ªm§6Ω˜$$=wLΩ∆›ΩåPÜΩåﬁô=´%>?¿Ω§ÿkªô)•=˜π”ºû)Åºﬁ∑Ω.Úõ<pæ;åØìºz$=dπΩ8iûºÂµ=‰:Ω(Œæ“ã^Ω◊1˘ΩWB	ΩlBΩ¯»=“_Í=◊˝íΩa4	>˙ˆŒΩ≤”>∏jK>ë=3ÒÎ=Iﬂ>7;∞=œõΩùŒæsÿ÷ª8éΩNø„ΩV˘#=!›y=ëlAæü4æùÁΩSæ[lYΩ≈aæ}"æº˛¿ΩwŸÃΩÑºMMª”ΩΩqÁƒ<ŒÙÅΩ]w¶=hˇ/Ω˛°kºó„=Z_*;(”9>∏‰≥=)l´Ωã¡(>Ô~÷=÷naΩàΩ¬ÒJΩÎä=eI>EåÚ=ÜÖ)>4,>}µœº:Z=^„.>˛ãﬁ=g•æ>–cΩ=©Ω7vΩı#÷Ω‚§N=|€->&Û;>u(i>π~HΩò`>>sc«ΩH¢‹=x2>r•<óPËΩ.igæ
+ä∫Ω}·ÇΩ*_RæX‰>¢È˛Ωq¸á=U≠ºÕvΩ{¸Ω⁄— >Gx“=Ω6øº@Ú¬=*>)>£3=*7
+Bfc.biasJ(⁄NæóÜ ΩtåÍ<aó÷º0ñ>v.ùº ∆§Ω¥F<pâ\>é–©ΩZ
+input
+
+
+
+@
+@b
+output
+
+
+
+B
