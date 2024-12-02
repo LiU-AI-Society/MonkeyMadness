@@ -1,9 +1,6 @@
 ![MonkeyMadness](https://github.com/user-attachments/assets/bfcf152a-8cce-458d-8f32-576f164ea3f7)
 # MonkeyMadness
 
-Material to check in:
-Video 1: https://www.youtube.com/watch?v=UZDiGooFs54
-video 2: https://www.youtube.com/watch?v=Ilg3gGewQ5U
 
 
 # What is a convolution? 
@@ -123,8 +120,8 @@ transforms.RandomVerticalFlip(p=0.2),  # Randomly flip the image vertically with
 ### Need for shift: Tokyo data drift
 
 ```python
-transforms.RandomHorizontalFlip(p=0.2),  # Randomly flip the image horizontally with 20% probability
-transforms.RandomVerticalFlip(p=0.2),  # Randomly flip the image vertically with 20% probability
+transforms.RandomAffine(degrees=0, translate=(0.1, 0.1)) # Randomly shift image by up to 10% of its size
+
 ```
 
 ### Foggy Lens  
@@ -464,7 +461,7 @@ class DistillationLoss(nn.Module):
 ```python
 teacher_model = models.resnet18(pretrained=False)  # Set pretrained=False since you're loading a custom-trained model
 teacher_model.fc = nn.Linear(teacher_model.fc.in_features, NUM_OF_CLASSES)
-teacher_model.load_state_dict(torch.load('Pretrained/Pretrained_Resnet18.pt'))
+teacher_model.load_state_dict(torch.load('Pretrained/Pretrained-Resnet18.pt'))
 
 # set in eval mode:
 teacher_model.eval()
