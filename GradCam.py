@@ -88,7 +88,7 @@ def save_grad_cam_heatmap(cam, img, file_path, str_pred=None, str_target=None, b
 
 
     # Add title with prediction, ground truth, batch accuracy, and epoch information
-    title = "Where does the model look?"
+    title = "Where does the model look to classify?"
     
 
     # Set the title with a background for contrast
