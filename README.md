@@ -241,7 +241,7 @@ acc = test(model=ensemble, testloader=val_loader, device=device, model_name="ens
 
 ```
 
-Then to save it:
+Then to save it (do this it has trained in the TRAINING BLOCK): 
 
 ```
 # Export the model to ONNX format
