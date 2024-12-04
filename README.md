@@ -78,12 +78,18 @@ It’s called “supervised” because the model learns under guidance (the labe
 | Wisdom extractor                        | 40 B NN            |
 | Speed boost                        | 10 B NN            |
 | Focus Lens                       | 15 B NN            |
+| Skip Connection                       | 15 B NN       |
 | Hypothesis hustle | 20 B NN           |
 
 
 # Things to try out for yourself
-- Different learning rates
-- Batch sizes
+- Batch size
+- Epochs 
+- Learning rate
+- Kernel & Maxpooling sizes
+- Optimizers
+- Batch normalization
+
 
 
 # Instructions on how to implement things from the shop
@@ -579,5 +585,186 @@ class MonkeyNET(nn.Module):
 
 
 
+
+</details>
+<details>
+<summary><strong> Skip Connections</strong> </summary>
+Residual connections (ResNet architecture) address the vanishing gradient problem in deep neural networks by:
+
+-Allowing direct information flow between layers
+-Enabling training of much deeper networks
+-Creating "shortcut" paths for gradient flow
+-Helping to mitigate the vanishing gradient problem
+
+## Implementation
+1. Create a Residual Block Class (perhaps in the modelblock over the current model)
+```python
+class ResidualBlock(nn.Module):
+    def __init__(self, in_channels, out_channels, stride=1):
+        super(ResidualBlock, self).__init__()
+        # Main convolutional path
+        self.conv_block = nn.Sequential(
+            nn.Conv2d(in_channels, out_channels, kernel_size=3, padding=1, stride=stride),
+            nn.BatchNorm2d(out_channels),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(out_channels, out_channels, kernel_size=3, padding=1)
+        )
+        
+        # Shortcut connection
+        self.shortcut = nn.Sequential()
+        if stride != 1 or in_channels != out_channels:
+            self.shortcut = nn.Sequential(
+                nn.Conv2d(in_channels, out_channels, kernel_size=1, stride=stride),
+                nn.BatchNorm2d(out_channels)
+            )
+    
+    def forward(self, x):
+        residual = x
+        out = self.conv_block(x)
+        out += self.shortcut(residual)  # Add shortcut connection
+        return F.relu(out)
+```
+
+2. Modify Your Model to Use Residual Blocks
+```python
+class MonkeyNET(nn.Module):
+    def __init__(self, num_classes=10, input_size=(500, 500)):
+        super(MonkeyNET, self).__init__()
+        # Initial layers with residual blocks
+        self.conv1 = nn.Conv2d(in_channels=3, out_channels=32, kernel_size=3, padding=1)
+        self.res_block1 = ResidualBlock(32, 32)
+        self.res_block2 = ResidualBlock(32, 32)
+        
+        # Rest of your model remains similar
+        # ...
+```
+
+
+## Key Benefits
+- Enables training of deeper networks
+- Mitigates vanishing gradient problem
+- Improves gradient flow through the network
+- Often leads to better performance with increased depth
+
+## Considerations 
+
+- Works best with networks deeper than traditional architectures
+- Batch normalization often used in conjunction
+- Can be applied to various network architectures
+
+##  Experimental
+
+- Start with 1-2 residual blocks
+- Gradually increase network depth
+- Monitor validation performance
+- Adjust block complexity as needed
+
+
+<details>
+<summary><strong> Example of Skip connections and 2 added layers  </strong> </summary>
+```python
+import torch.nn as nn
+import torch.nn.functional as F
+import torch
+from torchsummary import summary
+
+class ResidualBlock(nn.Module):
+    def __init__(self, in_channels, out_channels, stride=1):
+        super(ResidualBlock, self).__init__()
+        # Convolutional layers
+        self.conv1 = nn.Conv2d(in_channels, out_channels, kernel_size=3, padding=1, stride=stride)
+        self.conv2 = nn.Conv2d(out_channels, out_channels, kernel_size=3, padding=1)
+        
+        # Shortcut connection
+        self.shortcut = nn.Sequential()
+        if stride != 1 or in_channels != out_channels:
+            self.shortcut = nn.Conv2d(in_channels, out_channels, kernel_size=1, stride=stride)
+
+    def forward(self, x):
+        residual = x
+        
+        out = F.relu(self.conv1(x))
+        out = self.conv2(out)
+        
+        # Add shortcut connection
+        out += self.shortcut(residual)
+        out = F.relu(out)
+        
+        return out
+
+class MonkeyNET(nn.Module):
+    def __init__(self, num_classes=10, input_size=(500, 500)):
+        super(MonkeyNET, self).__init__()
+
+        # 4 convolutional layers with progressively increasing channels
+        self.conv1 = nn.Conv2d(in_channels=3, out_channels=32, kernel_size=3, padding=1)
+        self.res_block1 = ResidualBlock(32, 32)
+        
+        self.conv2 = nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3, padding=1)
+        self.res_block2 = ResidualBlock(64, 64)
+        
+        self.conv3 = nn.Conv2d(in_channels=64, out_channels=128, kernel_size=3, padding=1)
+        self.res_block3 = ResidualBlock(128, 128)
+        
+        self.conv4 = nn.Conv2d(in_channels=128, out_channels=256, kernel_size=3, padding=1)
+        self.res_block4 = ResidualBlock(256, 256)
+
+        # Calculate the size of the fully connected layer dynamically
+        self.fc_input_size = self._get_fc_input_size(input_size)
+        self.fc = nn.Linear(self.fc_input_size, num_classes)
+
+    def _get_fc_input_size(self, input_size):
+        x = torch.zeros(1, 3, *input_size)
+        
+        x = F.relu(self.conv1(x))
+        x = self.res_block1(x)
+        x = F.max_pool2d(x, kernel_size=(2, 2), stride=2)
+        
+        x = F.relu(self.conv2(x))
+        x = self.res_block2(x)
+        x = F.max_pool2d(x, kernel_size=(2, 2), stride=2)
+        
+        x = F.relu(self.conv3(x))
+        x = self.res_block3(x)
+        x = F.max_pool2d(x, kernel_size=(2, 2), stride=2)
+        
+        x = F.relu(self.conv4(x))
+        x = self.res_block4(x)
+        x = F.max_pool2d(x, kernel_size=(2, 2), stride=2)
+
+        return x.numel()
+
+    def forward(self, x):
+        # First conv -> Residual Block -> Max Pooling
+        x = F.relu(self.conv1(x))
+        x = self.res_block1(x)
+        x = F.max_pool2d(x, kernel_size=(2, 2), stride=2)
+
+        # Second conv -> Residual Block -> Max Pooling
+        x = F.relu(self.conv2(x))
+        x = self.res_block2(x)
+        x = F.max_pool2d(x, kernel_size=(2, 2), stride=2)
+
+        # Third conv -> Residual Block -> Max Pooling
+        x = F.relu(self.conv3(x))
+        x = self.res_block3(x)
+        x = F.max_pool2d(x, kernel_size=(2, 2), stride=2)
+
+        # Fourth conv -> Residual Block -> Max Pooling
+        x = F.relu(self.conv4(x))
+        x = self.res_block4(x)
+        x = F.max_pool2d(x, kernel_size=(2, 2), stride=2)
+
+        # Flatten the tensor for fully connected layer
+        x = x.view(x.size(0), -1)
+
+        # Fully connected layer
+        x = self.fc(x)
+
+        return x
+```
+
+
+</details>
 
 </details>
