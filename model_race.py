@@ -128,7 +128,7 @@ class ModelEvaluator:
             unique_metrics.update(model_results.keys())
         
         # Remove non-numeric keys
-        unique_metrics = {metric for metric in unique_metrics if metric in ['accuracy', 'precision', 'recall', 'f1_score', 'class_report']}
+        unique_metrics = {metric for metric in unique_metrics if metric in ['accuracy', 'class_report']}
         
         # Create figure with two subplots side by side
         fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(20, 8))
@@ -136,7 +136,7 @@ class ModelEvaluator:
         # First subplot: Overall model metrics
         # Create a color map for assigning distinct colors to different models
         num_models = len(results)
-        cmap = plt.get_cmap('Paired', num_models)
+        cmap = plt.get_cmap('tab20', num_models)
         colors = [cmap(i) for i in range(num_models)]
 
         # Prepare data for overall metrics
