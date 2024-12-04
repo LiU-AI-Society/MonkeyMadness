@@ -241,6 +241,23 @@ acc = test(model=ensemble, testloader=val_loader, device=device, model_name="ens
 
 ```
 
+Then to save it:
+
+```
+# Export the model to ONNX format
+            dummy_input = torch.randn(1, 3, IMAGE_SIZE(0), IMAGE_SIZE(0))  # Example shape (batch_size, channels, height, width)
+
+            torch.onnx.export(
+                ensemble,
+                dummy_input,
+                "saved_models/MEGA_ENSEMBLE.onnx",
+                verbose=True,
+                input_names=["input"],
+                output_names=["output"],
+                opset_version=11,  # Use appropriate ONNX opset version
+            )
+```
+
 
 </details>
 
