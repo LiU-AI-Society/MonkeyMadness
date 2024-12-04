@@ -57,7 +57,6 @@ class GradCAM:
 
 def save_grad_cam_heatmap(cam, img, file_path, str_pred=None, str_target=None, batch_accuracy=None, epoch=None):
     # Resize the heatmap to match the input image size
-    print(img.shape)
     heatmap = cv2.resize(cam, (img.shape[0], img.shape[1]))
 
     # Normalize and convert heatmap to 8-bit color image

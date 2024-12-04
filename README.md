@@ -472,7 +472,7 @@ teacher_model.to(device)
 ```python
 criterion = DistillationLoss()
 
-model, t_loss, t_acc, v_loss, v_acc = train(model, train_loader, val_loader, optimizer, criterion, device, start_epoch=START_EPOCH, num_epochs=EPOCHS, model_name=MODEL_NAME, unique_id=ID, teacher_model = teacher_model)
+model, t_loss, t_acc, v_loss, v_acc = train(model, train_loader, val_loader, optimizer, criterion, device, start_epoch=0, num_epochs=EPOCHS, model_name=MODEL_NAME, unique_id=ID, teacher_model = teacher_model)
 ```
 
 
