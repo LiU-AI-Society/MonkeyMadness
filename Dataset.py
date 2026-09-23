@@ -266,6 +266,31 @@ class MonkeyImageDataset(Dataset):
 
 
 
+class UnlabeledImageDataset(Dataset):
+    """
+    Flat directory of images with no label information (no class subfolders).
+    Used to run inference on held-out test data without exposing gold labels
+    to whoever runs the model -- pairs with predict.py / evaluate_submission.py.
+    """
+    def __init__(self, root_dir, transform=None):
+        self.root_dir = root_dir
+        self.transform = transform
+        self.image_paths = sorted(
+            os.path.join(root_dir, f) for f in os.listdir(root_dir)
+            if f.lower().endswith((".jpg", ".jpeg", ".png"))
+        )
+
+    def __len__(self):
+        return len(self.image_paths)
+
+    def __getitem__(self, idx):
+        img_path = self.image_paths[idx]
+        image = Image.open(img_path).convert("RGB")
+        if self.transform:
+            image = self.transform(image)
+        return image, os.path.basename(img_path)
+
+
 if __name__ == "__main__":
 
     transform = transforms.Compose([

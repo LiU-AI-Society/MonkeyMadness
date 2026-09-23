@@ -10,3 +10,12 @@ venv/
 .env
 
 .DS_Store
+
+# Held-out test evaluation artifacts -- gold labels must never be committed
+gold_labels.csv
+predictions.csv
+hidden_test/
+
+# Leaderboard runtime data
+leaderboard/*.db
+leaderboard/venv/
