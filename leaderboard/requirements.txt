@@ -1,0 +1,9 @@
+flask
+onnx
+onnxruntime
+torch
+torchvision
+pandas
+scikit-learn
+matplotlib
+seaborn

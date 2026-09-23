@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "leaderboard",
+      "runtimeExecutable": "leaderboard/venv/Scripts/python.exe",
+      "runtimeArgs": ["leaderboard/app.py"],
+      "port": 5000
+    }
+  ]
+}
