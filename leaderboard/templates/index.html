@@ -58,8 +58,9 @@
         <label for="team_name">Team name</label>
         <input type="text" id="team_name" name="team_name" maxlength="64" required>
 
-        <label for="model_file">Model file (.onnx)</label>
-        <input type="file" id="model_file" name="model_file" accept=".onnx" required>
+        <label for="model_file">Model file (.onnx) &mdash; if your export also produced a
+            companion file (e.g. ending in .onnx.data), select both files together</label>
+        <input type="file" id="model_file" name="model_file" accept=".onnx,.data" multiple required>
 
         <button type="submit">Submit</button>
     </form>

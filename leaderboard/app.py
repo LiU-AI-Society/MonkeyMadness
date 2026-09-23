@@ -6,6 +6,7 @@ import tempfile
 from pathlib import Path
 
 from flask import Flask, jsonify, redirect, render_template, request, url_for
+from werkzeug.utils import secure_filename
 
 import db
 
@@ -49,14 +50,24 @@ def submit():
         return render_template("index.html", leaderboard=db.leaderboard(DB_PATH), error=message), status
 
     team_name = request.form.get("team_name", "").strip()
-    model_file = request.files.get("model_file")
+    # Accept one or more files under the same field: an ONNX export that uses
+    # "external data" (weights stored outside the .onnx protobuf) needs its
+    # companion file uploaded alongside the model, not just the model itself.
+    uploaded_files = [f for f in request.files.getlist("model_file") if f and f.filename]
 
     if not team_name:
         return reject("Team name is required.", 400)
     if len(team_name) > MAX_TEAM_NAME_LEN:
         return reject(f"Team name is too long (max {MAX_TEAM_NAME_LEN} characters).", 400)
-    if model_file is None or not model_file.filename.lower().endswith(".onnx"):
-        return reject("Please upload a .onnx model file.", 400)
+
+    onnx_files = [f for f in uploaded_files if f.filename.lower().endswith(".onnx")]
+    if len(onnx_files) != 1:
+        return reject(
+            "Please upload exactly one .onnx model file. If your export also "
+            "produced a companion file (e.g. ending in .onnx.data), select "
+            "both files together.",
+            400,
+        )
 
     wait = db.seconds_since_last_submission(DB_PATH, team_name)
     if wait is not None and wait < COOLDOWN_SECONDS:
@@ -64,10 +75,19 @@ def submit():
         return reject(f"Please wait {remaining}s before submitting again.", 429)
 
     with tempfile.TemporaryDirectory() as tmp_dir:
-        # Save under a fixed name, not the uploaded filename -- avoids any
-        # path-traversal concern from a crafted filename.
-        model_path = Path(tmp_dir) / "model.onnx"
-        model_file.save(model_path)
+        # Keep each file's original (sanitized) name rather than renaming it.
+        # A model exported with external data has a literal companion
+        # filename (e.g. "model.onnx.data") baked into the graph -- onnx
+        # resolves that name relative to the model's directory, so both
+        # files must land in the same temp dir under their original names.
+        model_path = None
+        for f in uploaded_files:
+            safe_name = secure_filename(f.filename)
+            dest = Path(tmp_dir) / safe_name
+            f.save(dest)
+            if safe_name.lower().endswith(".onnx"):
+                model_path = dest
+
         predictions_path = Path(tmp_dir) / "predictions.csv"
 
         try:
@@ -87,6 +107,22 @@ def submit():
 
     scores = _parse_worker_output(result.stdout)
     if scores is None or not scores.get("ok"):
+        # The participant only ever sees the generic message below -- log the
+        # real detail server-side so an organizer can tell "bad model" apart
+        # from "worker crashed" (e.g. missing dependency, bad env var path).
+        app.logger.warning(
+            "Scoring failed for team %r (exit code %s).\nstdout:\n%s\nstderr:\n%s",
+            team_name, result.returncode, result.stdout, result.stderr,
+        )
+        error_detail = (scores or {}).get("error", "")
+        if "should be stored in" in error_detail:
+            return reject(
+                "Your ONNX file references external weight data that wasn't "
+                "uploaded (a file usually named <yourmodel>.onnx.data). Please "
+                "select both that file and the .onnx file together, or "
+                "re-export your model as a single self-contained .onnx file.",
+                400,
+            )
         return reject(
             "Could not score your model. Make sure it's a valid ONNX classifier "
             "with the expected input shape.",
