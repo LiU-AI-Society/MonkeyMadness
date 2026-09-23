@@ -2,3 +2,4 @@ torchlens
 torchsummary
 onnx
 livelossplot
+onnxscript
