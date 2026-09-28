@@ -19,3 +19,6 @@ hidden_test/
 # Leaderboard runtime data
 leaderboard/*.db
 leaderboard/venv/
+
+# docs
+docs
