@@ -107,7 +107,7 @@
 			<div class="flex items-center gap-5">
 			<div class="text-right">
 				<div class="text-base-content/50 text-xs tracking-[0.25em] uppercase">Submit at</div>
-				<div class="num mt-1 text-lg">{submitUrl.replace(/^https?:\/\//, '').replace(/\/$/, '')}</div>
+				<a href={submitUrl} class="num text-base-content mt-1 block text-lg hover:underline">{submitUrl.replace(/^https?:\/\//, '').replace(/\/$/, '')}</a>
 			</div>
 			{#if submitUrl}<QrCode text={submitUrl} size={84} />{/if}
 			</div>
