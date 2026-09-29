@@ -83,11 +83,11 @@ export function flowBananas(from: Element, to: Element, { count = 14, spread = 1
  * A continuous stream from a moving point (e.g. the dragged file under the cursor) into an element.
  * Returns a stop function; bananas already in the air finish their flight.
  */
-export function streamBananas(from: () => Point, to: Element, { interval = 110 } = {}): () => void {
+export function streamBananas(from: () => Point, to: Element | (() => Element), { interval = 110 } = {}): () => void {
 	if (reducedMotion()) return () => {};
 	const timer = setInterval(() => {
 		const a = from();
-		const b = randomPointIn(to);
+		const b = randomPointIn(typeof to === 'function' ? to() : to);
 		const dist = Math.hypot(b.x - a.x, b.y - a.y);
 		if (dist < 40) return; // cursor is already inside the target
 		const jitter = { x: a.x + (Math.random() - 0.5) * 16, y: a.y + (Math.random() - 0.5) * 16 };
