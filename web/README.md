@@ -35,15 +35,18 @@ leaderboard/venv/bin/pip install onnx onnxruntime pandas scikit-learn matplotlib
 # 2. Test set, kept outside the repo in ~/.monkeymadness/:
 #      hidden_test/       flat folder of test images (no class subfolders)
 #      gold_labels.csv    filename,label   (label = common name, e.g. mantled_howler)
-#    It was made by moving 20 random images per class out of Monkey/training
-#    (seed 2026), so teams never train on them. Copy the folder to the server.
+#    It is 20 research-grade iNaturalist photos per species, never part of the
+#    training data. To rebuild it (or on a new machine):
+python3 web/scripts/fetch_inaturalist.py      # 40 candidates/species + credits.csv
+#    ...review ~/.monkeymadness/inat_candidates/, list bad ids in excluded.txt...
+python3 web/scripts/build_testset.py          # picks 20/species (seed 2026)
 
 # 3. Web app
 cd web && npm install
 ```
 
-Sanity check: submit `saved_models/base_line.onnx`. It should score well
-above chance (10%). If every model scores 0%, the gold labels don't match the names in
+Sanity check: submit `saved_models/base_line.onnx`. It scores about 23%
+(chance is 10%): real-world photos are much harder than the training set. If every model scores 0%, the gold labels don't match the names in
 `Monkey/monkey_labels.txt`.
 
 ## Development
@@ -59,12 +62,10 @@ node scripts/simulate.mjs http://localhost:5173 4   # fake teams submitting
 ```sh
 cp .env.example .env.production   # then set ADMIN_PASSWORD (and paths if not the defaults)
 npm run build
-node --env-file=.env.production build     # listens on 127.0.0.1:3000
+node --env-file=.env.production build     # listens on 127.0.0.1:$PORT (3895)
 ```
 
-Keep it running with the systemd user service in `deploy/monkeymadness.service`
-(install steps in the file), with your reverse proxy in front for HTTPS. The
-proxy must not buffer `/api/stream` (a long-lived Server-Sent Events stream),
+Put your reverse proxy in front for HTTPS. The proxy must not buffer `/api/stream` (a long-lived Server-Sent Events stream),
 or the live updates stall; the app already sends `X-Accel-Buffering: no`.
 
 Things that break if missing from `.env.production`:
