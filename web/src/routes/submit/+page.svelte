@@ -49,9 +49,19 @@
 		setFiles([...e.dataTransfer.files]);
 	}
 
+	const isModel = (f: File) => f.name.toLowerCase().endsWith('.onnx');
+
+	/**
+	 * Drops add up, so the .onnx and its .onnx.data can arrive in separate drags:
+	 * a new .onnx replaces the old .onnx, a same-named file replaces its old copy,
+	 * anything else is added. (A stale .data file is harmless: the server only
+	 * reads the one the model references.)
+	 */
 	async function setFiles(list: File[]) {
 		if (!list.length) return;
-		files = list;
+		const newModel = list.some(isModel);
+		const kept = files.filter((f) => !list.some((n) => n.name === f.name) && !(newModel && isModel(f)));
+		files = [...kept, ...list];
 		error = null;
 		charged = false;
 		await tick();
@@ -123,7 +133,7 @@
 	});
 	const step = $derived(tracked ? { queued: 1, scoring: 2, done: 3, failed: 3 }[tracked.status] : 0);
 	const sizeLabel = (bytes: number) => (bytes > 1e6 ? `${(bytes / 1e6).toFixed(1)} MB` : `${Math.ceil(bytes / 1e3)} KB`);
-	const ready = $derived(!!files.length && !!team.trim() && cooldownLeft === 0 && !busy);
+	const ready = $derived(files.some(isModel) && !!team.trim() && cooldownLeft === 0 && !busy);
 </script>
 
 <svelte:head><title>Submit · MonkeyMadness</title></svelte:head>
@@ -157,7 +167,10 @@
 					{#each files as f (f.name)}
 						<div class="num text-sm">{f.name} <span class="text-base-content/40">· {sizeLabel(f.size)}</span></div>
 					{/each}
-					<span class="text-base-content/40 text-xs">Drop another file to replace</span>
+					<span class="text-base-content/40 text-xs">
+						{files.some(isModel) ? 'Drop a .onnx.data file to add it, or another .onnx to replace' : 'Now drop the .onnx model file'}
+					</span>
+					<button type="button" class="btn btn-ghost btn-xs text-base-content/50" onclick={() => ((files = []), (charged = false))}>Clear</button>
 				</div>
 			{:else}
 				<div class="relative flex flex-col items-center gap-3">
