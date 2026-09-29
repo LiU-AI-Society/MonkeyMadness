@@ -35,18 +35,16 @@ leaderboard/venv/bin/pip install onnx onnxruntime pandas scikit-learn matplotlib
 # 2. Test set, kept outside the repo in ~/.monkeymadness/:
 #      hidden_test/       flat folder of test images (no class subfolders)
 #      gold_labels.csv    filename,label   (label = common name, e.g. mantled_howler)
-#    It is 20 research-grade iNaturalist photos per species, never part of the
-#    training data. To rebuild it (or on a new machine):
-python3 web/scripts/fetch_inaturalist.py      # 40 candidates/species + credits.csv
-#    ...review ~/.monkeymadness/inat_candidates/, list bad ids in excluded.txt...
-python3 web/scripts/build_testset.py          # picks 20/species (seed 2026)
+#    It is the validation split of the "10 Monkey Species" dataset (239 images;
+#    33 that duplicate training images are skipped). Downloads ~570 MB:
+python3 web/scripts/install_testset.py
 
 # 3. Web app
 cd web && npm install
 ```
 
-Sanity check: submit `saved_models/base_line.onnx`. It scores about 23%
-(chance is 10%): real-world photos are much harder than the training set. If every model scores 0%, the gold labels don't match the names in
+Sanity check: submit `saved_models/base_line.onnx`. It scores about 41%
+(chance is 10%). If every model scores 0%, the gold labels don't match the names in
 `Monkey/monkey_labels.txt`.
 
 ## Development
