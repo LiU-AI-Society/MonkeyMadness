@@ -60,7 +60,7 @@ node scripts/simulate.mjs http://localhost:5173 4   # fake teams submitting
 ```sh
 cp .env.example .env.production   # then set ADMIN_PASSWORD (and paths if not the defaults)
 npm run build
-node --env-file=.env.production build     # listens on 127.0.0.1:$PORT (3895)
+node --env-file=.env.production build     # listens on 127.0.0.1:$PORT (3985)
 ```
 
 Put your reverse proxy in front for HTTPS. The proxy must not buffer `/api/stream` (a long-lived Server-Sent Events stream),
