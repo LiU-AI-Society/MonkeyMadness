@@ -1,10 +1,13 @@
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { env } from '$env/dynamic/private';
 
 // Same env var names as the Flask leaderboard, so an existing setup carries over.
 const REPO_ROOT = path.resolve(env.MONKEY_REPO_ROOT ?? path.join(process.cwd(), '..'));
 
+// The held-out test set lives outside the repo so it can never be committed or served.
+const PRIVATE_DIR = path.join(os.homedir(), '.monkeymadness');
 const VENV_PYTHON = path.join(REPO_ROOT, 'leaderboard', 'venv', 'bin', 'python');
 
 export const config = {
@@ -12,8 +15,8 @@ export const config = {
 	// leaderboard/venv is where the README sets up the scoring dependencies.
 	python: env.PYTHON ?? (fs.existsSync(VENV_PYTHON) ? VENV_PYTHON : 'python3'),
 	worker: path.join(REPO_ROOT, 'leaderboard', 'worker.py'),
-	testDir: env.LEADERBOARD_TEST_DIR ?? path.join(REPO_ROOT, 'hidden_test'),
-	goldCsv: env.LEADERBOARD_GOLD_CSV ?? path.join(REPO_ROOT, 'gold_labels.csv'),
+	testDir: env.LEADERBOARD_TEST_DIR ?? path.join(PRIVATE_DIR, 'hidden_test'),
+	goldCsv: env.LEADERBOARD_GOLD_CSV ?? path.join(PRIVATE_DIR, 'gold_labels.csv'),
 	labelsTxt: env.LEADERBOARD_LABELS_TXT ?? path.join(REPO_ROOT, 'Monkey', 'monkey_labels.txt'),
 	dataDir: path.resolve(env.DATA_DIR ?? 'data'),
 	maxUploadMb: Number(env.LEADERBOARD_MAX_UPLOAD_MB ?? 50),

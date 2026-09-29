@@ -32,19 +32,18 @@ python3 -m venv leaderboard/venv
 leaderboard/venv/bin/pip install --index-url https://download.pytorch.org/whl/cpu torch torchvision
 leaderboard/venv/bin/pip install onnx onnxruntime pandas scikit-learn matplotlib seaborn
 
-# 2. Test set. Put the real one in place:
+# 2. Test set, kept outside the repo in ~/.monkeymadness/:
 #      hidden_test/       flat folder of test images (no class subfolders)
 #      gold_labels.csv    filename,label   (label = common name, e.g. mantled_howler)
-#    Both paths are gitignored. Until you have them, make a FAKE set from the
-#    training images (scores against it are meaningless):
-python3 web/scripts/make_fake_testset.py
+#    It was made by moving 20 random images per class out of Monkey/training
+#    (seed 2026), so teams never train on them. Copy the folder to the server.
 
 # 3. Web app
 cd web && npm install
 ```
 
-Sanity check: submit `saved_models/base_line.onnx`. It should score around
-40%. If every model scores 0%, the gold labels don't match the names in
+Sanity check: submit `saved_models/base_line.onnx`. It should score well
+above chance (10%). If every model scores 0%, the gold labels don't match the names in
 `Monkey/monkey_labels.txt`.
 
 ## Development
@@ -76,7 +75,7 @@ Things that break if missing from `.env.production`:
 
 ## Event checklist
 
-- [ ] Real `hidden_test/` + `gold_labels.csv` in place; baseline scores ~40%.
+- [ ] `~/.monkeymadness/` (test set + gold labels) present on the server; baseline scores well above 10%.
 - [ ] `ADMIN_PASSWORD` set; cooldown back to 60 s (only the dev `.env` has 5 s).
 - [ ] Reset in `/admin` to clear rehearsal data; set the end time.
 - [ ] Projector: open `/`, press ⛶. The QR code points at `/submit` on the address the projector opened, so open it via the public URL.
