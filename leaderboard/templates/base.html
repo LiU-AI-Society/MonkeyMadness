@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}MonkeyMadness Leaderboard{% endblock %}</title>
+    <style>
+        /* Everything inline -- no CDN or web fonts, so the page does not depend on event Wi-Fi. */
+        :root {
+            --bg: #f3efe2;
+            --surface: #fffdf5;
+            --surface-2: #ece6d3;
+            --text: #1c2a20;
+            --muted: #5a6a5e;
+            --border: #d9d1ba;
+            --accent: #2d7a47;
+            --accent-ink: #ffffff;
+            --banana: #f2c230;
+            --gold: #d9a900;
+            --silver: #98a2a8;
+            --bronze: #b5703a;
+            --good: #2d7a47;
+            --bad: #b3261e;
+            --error-bg: #fdecea;
+            --error-ink: #7a1c14;
+            --shadow: 0 1px 2px rgba(0, 0, 0, .06), 0 4px 16px rgba(0, 0, 0, .06);
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0e1812;
+                --surface: #15231a;
+                --surface-2: #1c2e22;
+                --text: #e8eee5;
+                --muted: #9db0a2;
+                --border: #2a3d31;
+                --accent: #5cc083;
+                --accent-ink: #0e1812;
+                --banana: #f5cd4a;
+                --gold: #f0c419;
+                --silver: #b7c0c5;
+                --bronze: #d38b52;
+                --good: #6fd394;
+                --bad: #ff8a80;
+                --error-bg: #3d1714;
+                --error-ink: #ffb4a9;
+                --shadow: none;
+            }
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        }
+        main { max-width: 960px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+        a { color: var(--accent); }
+        h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); line-height: 1.15; margin: 0; }
+        h2 { font-size: 1.15rem; margin: 2rem 0 .75rem; }
+        .muted { color: var(--muted); }
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            box-shadow: var(--shadow);
+        }
+        .num { font-variant-numeric: tabular-nums; }
+        .error {
+            background: var(--error-bg);
+            color: var(--error-ink);
+            padding: .75rem 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+        }
+        button, .button {
+            font: inherit;
+            font-weight: 600;
+            padding: .55rem 1.1rem;
+            border-radius: 999px;
+            border: 1px solid var(--accent);
+            background: var(--accent);
+            color: var(--accent-ink);
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        button.secondary, .button.secondary { background: transparent; color: var(--accent); }
+        button:disabled { opacity: .6; cursor: progress; }
+        {% block style %}{% endblock %}
+    </style>
+</head>
+<body>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    {% block script %}{% endblock %}
+</body>
+</html>

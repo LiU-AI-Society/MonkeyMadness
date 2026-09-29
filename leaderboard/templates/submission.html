@@ -1,0 +1,289 @@
+{% extends "base.html" %}
+
+{% block title %}{{ submission.team_name }} · MonkeyMadness{% endblock %}
+
+{% block style %}
+        .back { display: inline-block; margin-bottom: 1rem; }
+        .summary { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1rem; }
+        .stat { padding: .75rem 1rem; min-width: 7.5rem; }
+        .stat .label { font-size: .8rem; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+        .stat .value { font-size: 1.5rem; font-weight: 800; }
+        .stat.big .value { font-size: 2.2rem; color: var(--accent); }
+
+        .show { margin-top: 1.5rem; padding: 1.25rem; }
+        .show h2 { margin-top: 0; }
+        .caption { min-height: 3em; margin: 0 0 1rem; font-size: 1.05rem; }
+        .stage { display: grid; grid-template-columns: minmax(0, 360px) 1fr; gap: 1.5rem; align-items: start; }
+        @media (max-width: 700px) { .stage { grid-template-columns: 1fr; } }
+        canvas { width: 100%; aspect-ratio: 1; border-radius: 10px; background: var(--surface-2); display: block; }
+        .legend { display: flex; align-items: center; gap: .5rem; font-size: .8rem; color: var(--muted); margin-top: .5rem; }
+        .legend span { flex: 1; height: .5rem; border-radius: 999px;
+            background: linear-gradient(90deg, #00f, #0ff, #ff0, #f00); }
+
+        .bars { list-style: none; margin: 0; padding: 0; }
+        .bars li { display: grid; grid-template-columns: 11rem 1fr 3.4rem; gap: .5rem; align-items: center; padding: .2rem 0; font-size: .9rem; }
+        @media (max-width: 420px) { .bars li { grid-template-columns: 8rem 1fr 3rem; font-size: .8rem; } }
+        .bars .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .bars .track { height: .7rem; border-radius: 999px; background: var(--surface-2); overflow: hidden; }
+        .bars .fill { height: 100%; width: 0; background: var(--muted); border-radius: inherit; transition: width .12s linear; }
+        .bars .pct { text-align: right; }
+        .bars li.is-pred .name { font-weight: 700; }
+        .bars li.is-pred .fill { background: var(--accent); }
+        .bars li.is-true .name::after { content: " ✓"; color: var(--good); }
+
+        .controls { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin-top: 1.25rem; }
+        .controls label { margin-left: auto; font-size: .9rem; color: var(--muted); }
+        .controls select { font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: .3rem .5rem; }
+
+        .verdict { margin-top: 1rem; padding: .75rem 1rem; border-radius: 10px; background: var(--surface-2); font-weight: 600; display: none; }
+        .verdict.shown { display: block; }
+        .explain { margin-top: 1.5rem; color: var(--muted); font-size: .95rem; }
+        .explain p { margin: .4rem 0; }
+{% endblock %}
+
+{% block content %}
+    <a class="back" href="{{ url_for('index') }}">← Leaderboard</a>
+    <h1>{{ submission.team_name }}</h1>
+
+    <div class="summary">
+        <div class="stat big card"><div class="label">Accuracy</div><div class="value num">{{ "%.1f"|format(submission.accuracy * 100) }}%</div></div>
+        <div class="stat card"><div class="label">F1</div><div class="value num">{{ "%.1f"|format(submission.f1_macro * 100) }}%</div></div>
+        <div class="stat card"><div class="label">Precision</div><div class="value num">{{ "%.1f"|format(submission.precision_macro * 100) }}%</div></div>
+        <div class="stat card"><div class="label">Recall</div><div class="value num">{{ "%.1f"|format(submission.recall_macro * 100) }}%</div></div>
+        {% if rank %}<div class="stat card"><div class="label">Team rank</div><div class="value num">#{{ rank }}</div></div>{% endif %}
+    </div>
+
+    <section class="show card">
+        <h2>Your model in action</h2>
+        {% if showcase %}
+        <p class="caption" id="caption" aria-live="polite"></p>
+        <div class="stage">
+            <div>
+                <canvas id="stage" width="512" height="512" role="img"
+                        aria-label="The test picture with a heatmap of where the model looks"></canvas>
+                <div class="legend">not important <span></span> very important</div>
+            </div>
+            <ol class="bars" id="bars" aria-label="How sure the model is about each monkey"></ol>
+        </div>
+        <div class="controls">
+            <button type="button" id="play">Pause</button>
+            <button type="button" class="secondary" id="replay">Replay</button>
+            <button type="button" class="secondary" id="skip">Skip to end</button>
+            <label>Speed
+                <select id="speed">
+                    <option value="0.5">0.5×</option>
+                    <option value="1" selected>1×</option>
+                    <option value="2">2×</option>
+                    <option value="4">4×</option>
+                </select>
+            </label>
+        </div>
+        <div class="verdict" id="verdict" aria-live="polite"></div>
+        <div class="explain">
+            <p><strong>How does this work?</strong> We hide one small square of the picture behind a grey patch and ask your model again. If the model suddenly gets much less sure about its answer, that square was important for its decision, so it turns red. Squares the model ignores stay blue.</p>
+            <p>It is the same idea as the GradCAM block in the notebook, done a different way: GradCAM looks inside the network, while this only needs the finished model file you uploaded.</p>
+            <p>Every team sees the same picture. It comes from the training data, not the hidden test set.</p>
+        </div>
+        {% else %}
+        <p class="muted">The preview is not available for this submission, but its score counts as normal.</p>
+        {% endif %}
+    </section>
+{% endblock %}
+
+{% block script %}
+{% if showcase %}
+<script>
+    var data = {{ showcase|tojson }};
+
+    var STEP_MS = 180;          // one patch position at 1x speed (~26 s for the full sweep)
+    var INTRO_MS = 3000;        // each intro scene at 1x speed
+    var HEAT_RES = 64;          // resolution of the heatmap grid drawn over the photo
+
+    var canvas = document.getElementById("stage");
+    var ctx = canvas.getContext("2d");
+    var S = canvas.width;
+    var caption = document.getElementById("caption");
+    var verdict = document.getElementById("verdict");
+    var playBtn = document.getElementById("play");
+    var speedSel = document.getElementById("speed");
+
+    function pretty(name) { return name.replace(/_/g, " "); }
+    function argmax(a) { var best = 0; for (var i = 1; i < a.length; i++) if (a[i] > a[best]) best = i; return best; }
+
+    var pred = argmax(data.base_probs);
+    var basePred = data.base_probs[pred];
+    var W = data.input_size[1];
+    var H = data.input_size[0];
+
+    // Bars, one per class.
+    var barsEl = document.getElementById("bars");
+    var bars = data.classes.map(function (name, i) {
+        var li = document.createElement("li");
+        if (i === pred) li.className = "is-pred";
+        if (i === data.true_index) li.className += " is-true";
+        li.innerHTML = '<span class="name"></span><span class="track"><span class="fill"></span></span><span class="pct num"></span>';
+        li.querySelector(".name").textContent = pretty(name);
+        li.querySelector(".name").title = pretty(name);
+        barsEl.appendChild(li);
+        return { fill: li.querySelector(".fill"), pct: li.querySelector(".pct") };
+    });
+    function showProbs(probs) {
+        probs.forEach(function (p, i) {
+            bars[i].fill.style.width = (p * 100).toFixed(1) + "%";
+            bars[i].pct.textContent = (p * 100).toFixed(0) + "%";
+        });
+    }
+
+    // Heatmap: each patch position adds "how much less sure did the model get"
+    // to every grid cell it covers; a cell's heat is the average over the
+    // patches that covered it. The final maximum fixes the colour scale, so
+    // colours do not shift while the sweep is running.
+    var drops = data.steps.map(function (s) { return Math.max(0, basePred - s.probs[pred]); });
+    var sum = new Float32Array(HEAT_RES * HEAT_RES);
+    var count = new Float32Array(HEAT_RES * HEAT_RES);
+    function cellsOf(step) {
+        var y0 = Math.round(step.y * HEAT_RES), x0 = Math.round(step.x * HEAT_RES);
+        var y1 = Math.min(HEAT_RES, Math.round((step.y + data.patch[0]) * HEAT_RES));
+        var x1 = Math.min(HEAT_RES, Math.round((step.x + data.patch[1]) * HEAT_RES));
+        return [y0, y1, x0, x1];
+    }
+    function addStep(i) {
+        var c = cellsOf(data.steps[i]);
+        for (var y = c[0]; y < c[1]; y++) for (var x = c[2]; x < c[3]; x++) {
+            sum[y * HEAT_RES + x] += drops[i];
+            count[y * HEAT_RES + x] += 1;
+        }
+    }
+    var maxHeat = (function () {
+        for (var i = 0; i < data.steps.length; i++) addStep(i);
+        var m = 0;
+        for (var k = 0; k < sum.length; k++) if (count[k]) m = Math.max(m, sum[k] / count[k]);
+        sum.fill(0); count.fill(0);
+        return m || 1;
+    })();
+
+    // Same JET colours as the GradCAM block in the notebook.
+    function jet(t) {
+        function c(v) { return Math.round(255 * Math.min(1, Math.max(0, v))); }
+        return [c(1.5 - Math.abs(4 * t - 3)), c(1.5 - Math.abs(4 * t - 2)), c(1.5 - Math.abs(4 * t - 1))];
+    }
+    var heatCanvas = document.createElement("canvas");
+    heatCanvas.width = heatCanvas.height = HEAT_RES;
+    var heatCtx = heatCanvas.getContext("2d");
+    function paintHeat() {
+        var img = heatCtx.createImageData(HEAT_RES, HEAT_RES);
+        for (var k = 0; k < sum.length; k++) {
+            if (!count[k]) continue;
+            var rgb = jet(sum[k] / count[k] / maxHeat);
+            img.data[4 * k] = rgb[0]; img.data[4 * k + 1] = rgb[1]; img.data[4 * k + 2] = rgb[2];
+            img.data[4 * k + 3] = 140;
+        }
+        heatCtx.putImageData(img, 0, 0);
+    }
+
+    var photo = new Image();
+    var modelView = new Image();
+
+    function draw(showModelView, stepIndex) {
+        ctx.imageSmoothingEnabled = !showModelView;
+        ctx.drawImage(showModelView ? modelView : photo, 0, 0, S, S);
+        if (showModelView) return;
+        ctx.imageSmoothingEnabled = true;
+        ctx.drawImage(heatCanvas, 0, 0, S, S);
+        if (stepIndex != null) {
+            var s = data.steps[stepIndex];
+            var x = s.x * S, y = s.y * S, w = data.patch[1] * S, h = data.patch[0] * S;
+            ctx.fillStyle = "rgb(128,128,128)";
+            ctx.fillRect(x, y, w, h);
+            ctx.lineWidth = 4;
+            ctx.strokeStyle = "#f5cd4a";
+            ctx.strokeRect(x, y, w, h);
+        }
+    }
+
+    // Playback: scene "modelView" -> "guess" -> "sweep" (one patch per tick) -> "done".
+    var scene, step, timer = null, playing = true;
+
+    function speed() { return parseFloat(speedSel.value); }
+    function schedule(ms) { clearTimeout(timer); if (playing) timer = setTimeout(tick, ms / speed()); }
+
+    function tick() {
+        if (scene === "modelView") {
+            draw(true);
+            caption.textContent = "This is what your model sees: the picture shrunk to " + W + " × " + H + " pixels.";
+            scene = "guess";
+            schedule(INTRO_MS);
+        } else if (scene === "guess") {
+            draw(false, null);
+            showProbs(data.base_probs);
+            caption.textContent = "First guess, nothing hidden: " + pretty(data.classes[pred]) + " (" + Math.round(basePred * 100) + "% sure).";
+            scene = "sweep"; step = 0;
+            schedule(INTRO_MS);
+        } else if (scene === "sweep") {
+            addStep(step);
+            paintHeat();
+            draw(false, step);
+            showProbs(data.steps[step].probs);
+            var now = data.steps[step].probs[pred];
+            caption.textContent = "Hiding square " + (step + 1) + " of " + data.steps.length + ": now "
+                + Math.round(now * 100) + "% sure it is a " + pretty(data.classes[pred]) + ".";
+            step++;
+            if (step >= data.steps.length) scene = "done";
+            schedule(STEP_MS);
+        } else {
+            finish();
+        }
+    }
+
+    function finish() {
+        clearTimeout(timer);
+        while (step < data.steps.length) addStep(step++);
+        scene = "done";
+        paintHeat();
+        draw(false, null);
+        showProbs(data.base_probs);
+        caption.textContent = "Red = the parts your model needed most to decide.";
+        var text = "Your model says: " + pretty(data.classes[pred]) + " (" + Math.round(basePred * 100) + "% sure).";
+        if (data.true_index != null) {
+            text += data.true_index === pred
+                ? " Correct! 🎉"
+                : " The right answer is " + pretty(data.classes[data.true_index]) + ".";
+        }
+        verdict.textContent = text;
+        verdict.classList.add("shown");
+        playing = false;
+        playBtn.textContent = "Play";
+    }
+
+    function start() {
+        clearTimeout(timer);
+        sum.fill(0); count.fill(0); paintHeat();
+        verdict.classList.remove("shown");
+        showProbs(data.base_probs.map(function () { return 0; }));
+        scene = "modelView"; step = 0;
+        playing = true; playBtn.textContent = "Pause";
+        tick();
+    }
+
+    playBtn.addEventListener("click", function () {
+        if (scene === "done") return start();
+        playing = !playing;
+        playBtn.textContent = playing ? "Pause" : "Play";
+        if (playing) tick(); else clearTimeout(timer);
+    });
+    document.getElementById("replay").addEventListener("click", start);
+    document.getElementById("skip").addEventListener("click", finish);
+
+    // Start once both pictures are loaded; people who prefer less motion get the result right away.
+    var loaded = 0;
+    function onLoad() {
+        if (++loaded < 2) return;
+        start();
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) finish();
+    }
+    photo.onload = modelView.onload = onLoad;
+    photo.src = data.image;
+    modelView.src = data.model_view;
+</script>
+{% endif %}
+{% endblock %}

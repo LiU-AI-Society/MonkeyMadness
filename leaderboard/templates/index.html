@@ -1,68 +1,220 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MonkeyMadness Leaderboard</title>
-    <style>
-        body { font-family: system-ui, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; color: #222; }
-        h1 { margin-bottom: 0.25rem; }
-        table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
-        th, td { padding: 0.5rem 0.75rem; text-align: left; border-bottom: 1px solid #ddd; }
-        th { background: #f5f5f5; }
-        tr:first-child td { font-weight: 600; }
-        form { margin-top: 2rem; padding: 1rem; border: 1px solid #ddd; border-radius: 8px; }
-        label { display: block; margin-bottom: 0.5rem; }
-        input[type=text] { width: 100%; padding: 0.4rem; margin-bottom: 0.75rem; box-sizing: border-box; }
-        button { padding: 0.5rem 1.25rem; }
-        .error { background: #fdecea; color: #611a15; padding: 0.75rem 1rem; border-radius: 6px; margin-top: 1rem; }
-        .rank { color: #888; width: 2.5rem; }
-    </style>
-</head>
-<body>
-    <h1>MonkeyMadness Leaderboard</h1>
-    <p>Best submission per team, scored on the held-out test set.</p>
+{% extends "base.html" %}
+
+{% block style %}
+        header { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: .5rem 1rem; }
+        header p { margin: .25rem 0 0; }
+        .live { font-size: .85rem; color: var(--muted); display: flex; align-items: center; gap: .4rem; }
+        .live::before {
+            content: ""; width: .55rem; height: .55rem; border-radius: 50%;
+            background: var(--accent); animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 50% { opacity: .3; } }
+
+        /* Podium: 2nd - 1st - 3rd on wide screens, 1st - 2nd - 3rd stacked on phones. */
+        .podium { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; align-items: end; margin-top: 1.5rem; }
+        .podium .place { padding: 1rem; text-align: center; border-top: 6px solid var(--medal); text-decoration: none; color: inherit; }
+        .podium .place:hover { border-color: var(--medal); outline: 2px solid var(--medal); }
+        .place-1 { --medal: var(--gold); order: 2; padding-block: 1.75rem !important; }
+        .place-2 { --medal: var(--silver); order: 1; }
+        .place-3 { --medal: var(--bronze); order: 3; }
+        .place .medal { font-size: 2rem; line-height: 1; }
+        .place .team { font-weight: 700; font-size: 1.1rem; margin-top: .4rem; overflow-wrap: anywhere; }
+        .place .acc { font-size: 2rem; font-weight: 800; }
+        .place-1 .acc { font-size: 2.6rem; }
+        .place .meta { font-size: .85rem; color: var(--muted); }
+        @media (max-width: 600px) {
+            .podium { grid-template-columns: 1fr; }
+            .podium .place { order: 0; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .75rem; text-align: left; padding: .75rem 1rem !important; border-top: 0; border-left: 6px solid var(--medal); }
+            .place .team { margin: 0; }
+            .place .acc, .place-1 .acc { font-size: 1.5rem; }
+            .place .meta { display: none; }
+        }
+
+        .layout { display: grid; grid-template-columns: 1fr 260px; gap: 1rem; align-items: start; }
+        @media (max-width: 820px) { .layout { grid-template-columns: 1fr; } }
+
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: .6rem .75rem; text-align: left; border-bottom: 1px solid var(--border); }
+        tbody tr:last-child td { border-bottom: 0; }
+        th { font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); font-weight: 600; }
+        td.rank { color: var(--muted); width: 2.5rem; }
+        td.team a { color: inherit; font-weight: 600; text-decoration: none; overflow-wrap: anywhere; }
+        td.team a:hover { text-decoration: underline; }
+        .bar { display: flex; align-items: center; gap: .5rem; min-width: 8rem; }
+        .bar span { flex: 1; height: .5rem; border-radius: 999px; background: var(--surface-2); overflow: hidden; }
+        .bar span i { display: block; height: 100%; background: var(--accent); border-radius: inherit; }
+        .bar b { min-width: 3.4rem; text-align: right; }
+        @media (max-width: 600px) { .wide { display: none; } th, td { padding: .5rem; } }
+
+        .feed { list-style: none; margin: 0; padding: .25rem 0; }
+        .feed li { padding: .5rem 1rem; border-bottom: 1px solid var(--border); font-size: .9rem; }
+        .feed li:last-child { border-bottom: 0; }
+        .feed a { color: inherit; text-decoration: none; display: flex; justify-content: space-between; gap: .5rem; }
+        .feed a:hover .t { text-decoration: underline; }
+        .feed .t { font-weight: 600; overflow-wrap: anywhere; }
+        .feed time { color: var(--muted); font-size: .8rem; display: block; }
+        .empty { padding: 2rem 1rem; text-align: center; color: var(--muted); }
+
+        details.upload { margin-top: 1.5rem; }
+        details.upload summary { cursor: pointer; padding: 1rem 1.25rem; font-weight: 700; list-style: none; }
+        details.upload summary::-webkit-details-marker { display: none; }
+        details.upload summary::before { content: "＋ "; color: var(--accent); }
+        details.upload[open] summary::before { content: "− "; }
+        .upload form { padding: 0 1.25rem 1.25rem; }
+        .upload label { display: block; font-weight: 600; margin: .75rem 0 .3rem; }
+        .upload .hint { font-weight: 400; color: var(--muted); font-size: .9rem; }
+        .upload input[type=text] {
+            width: 100%; padding: .55rem .7rem; font: inherit; color: var(--text);
+            background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+        }
+        .upload input[type=file] { font: inherit; max-width: 100%; }
+        .upload button { margin-top: 1rem; }
+        .scoring { display: none; margin-top: .75rem; color: var(--muted); }
+        form.busy .scoring { display: block; }
+{% endblock %}
+
+{% block content %}
+    <header>
+        <div>
+            <h1>🐒 MonkeyMadness Leaderboard</h1>
+            <p class="muted">Each team's best model, scored on the hidden test set. Click a team to see its model in action.</p>
+        </div>
+        <div class="live">Updates every 15 s</div>
+    </header>
 
     {% if error %}
-    <div class="error">{{ error }}</div>
+    <div class="error" role="alert">{{ error }}</div>
     {% endif %}
 
-    <table>
-        <thead>
-            <tr>
-                <th class="rank">#</th>
-                <th>Team</th>
-                <th>Accuracy</th>
-                <th>Precision</th>
-                <th>Recall</th>
-                <th>F1</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for row in leaderboard %}
-            <tr>
-                <td class="rank">{{ loop.index }}</td>
-                <td>{{ row.team_name }}</td>
-                <td>{{ "%.1f"|format(row.accuracy * 100) }}%</td>
-                <td>{{ "%.1f"|format(row.precision_macro * 100) }}%</td>
-                <td>{{ "%.1f"|format(row.recall_macro * 100) }}%</td>
-                <td>{{ "%.1f"|format(row.f1_macro * 100) }}%</td>
-            </tr>
-            {% else %}
-            <tr><td colspan="6">No submissions yet.</td></tr>
+    <details class="upload card" {% if error %}open{% endif %}>
+        <summary>Submit a model</summary>
+        <form id="upload" action="{{ url_for('submit') }}" method="post" enctype="multipart/form-data">
+            <label for="team_name">Team name</label>
+            <input type="text" id="team_name" name="team_name" maxlength="64" required>
+
+            <label for="model_file">Model file (.onnx)
+                <span class="hint">&mdash; from <code>saved_models/</code>. If your export also produced a
+                companion file (ending in .onnx.data), select both files together.</span></label>
+            <input type="file" id="model_file" name="model_file" accept=".onnx,.data" multiple required>
+
+            <div><button type="submit">Submit</button></div>
+            <p class="scoring" aria-live="polite">🍌 Scoring your model on the test set&hellip; this can take up to a minute. Keep this page open.</p>
+        </form>
+    </details>
+
+    <div id="board">
+        {% set medals = ["🥇", "🥈", "🥉"] %}
+        {% if leaderboard %}
+        <section class="podium" aria-label="Top three">
+            {% for row in leaderboard[:3] %}
+            <a class="place place-{{ loop.index }} card" href="{{ url_for('submission', submission_id=row.id) }}">
+                <div class="medal" aria-label="Place {{ loop.index }}">{{ medals[loop.index0] }}</div>
+                <div class="team">{{ row.team_name }}</div>
+                <div class="acc num">{{ "%.1f"|format(row.accuracy * 100) }}%</div>
+                <div class="meta num">F1 {{ "%.1f"|format(row.f1_macro * 100) }}% · {{ row.attempts }} {{ "try" if row.attempts == 1 else "tries" }}</div>
+            </a>
             {% endfor %}
-        </tbody>
-    </table>
+        </section>
+        {% endif %}
 
-    <form action="{{ url_for('submit') }}" method="post" enctype="multipart/form-data">
-        <label for="team_name">Team name</label>
-        <input type="text" id="team_name" name="team_name" maxlength="64" required>
+        <div class="layout">
+            <section>
+                <h2>All teams</h2>
+                <div class="card">
+                    {% if leaderboard %}
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Team</th>
+                                <th>Accuracy</th>
+                                <th class="wide">F1</th>
+                                <th class="wide">Precision</th>
+                                <th class="wide">Recall</th>
+                                <th class="wide">Tries</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in leaderboard %}
+                            <tr>
+                                <td class="rank num">{{ loop.index }}</td>
+                                <td class="team"><a href="{{ url_for('submission', submission_id=row.id) }}">{{ row.team_name }}</a></td>
+                                <td>
+                                    <div class="bar">
+                                        <span><i style="width: {{ '%.1f'|format(row.accuracy * 100) }}%"></i></span>
+                                        <b class="num">{{ "%.1f"|format(row.accuracy * 100) }}%</b>
+                                    </div>
+                                </td>
+                                <td class="wide num">{{ "%.1f"|format(row.f1_macro * 100) }}%</td>
+                                <td class="wide num">{{ "%.1f"|format(row.precision_macro * 100) }}%</td>
+                                <td class="wide num">{{ "%.1f"|format(row.recall_macro * 100) }}%</td>
+                                <td class="wide num">{{ row.attempts }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <div class="empty">No submissions yet. Be the first! 🍌</div>
+                    {% endif %}
+                </div>
+            </section>
 
-        <label for="model_file">Model file (.onnx) &mdash; if your export also produced a
-            companion file (e.g. ending in .onnx.data), select both files together</label>
-        <input type="file" id="model_file" name="model_file" accept=".onnx,.data" multiple required>
+            <aside>
+                <h2>Latest submissions</h2>
+                <div class="card">
+                    {% if recent %}
+                    <ul class="feed">
+                        {% for row in recent %}
+                        <li>
+                            <a href="{{ url_for('submission', submission_id=row.id) }}">
+                                <span><span class="t">{{ row.team_name }}</span><time datetime="{{ row.created_at }}"></time></span>
+                                <span class="num">{{ "%.1f"|format(row.accuracy * 100) }}%</span>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <div class="empty">Nothing yet.</div>
+                    {% endif %}
+                </div>
+            </aside>
+        </div>
+    </div>
+{% endblock %}
 
-        <button type="submit">Submit</button>
-    </form>
-</body>
-</html>
+{% block script %}
+<script>
+    // Show submission times in the viewer's local time.
+    function formatTimes(root) {
+        root.querySelectorAll("time[datetime]").forEach(function (el) {
+            var d = new Date(el.getAttribute("datetime"));
+            if (!isNaN(d)) el.textContent = d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+        });
+    }
+    formatTimes(document);
+
+    // While scoring runs (up to a minute), lock the button and stop refreshing.
+    var form = document.getElementById("upload");
+    var busy = false;
+    form.addEventListener("submit", function () {
+        busy = true;
+        form.classList.add("busy");
+        form.querySelector("button").disabled = true;
+    });
+
+    // Refresh the board every 15 s for the projector by re-reading this page,
+    // so the board has one template, not a second copy in JavaScript.
+    setInterval(function () {
+        if (busy || document.visibilityState !== "visible") return;
+        fetch("{{ url_for('index') }}")
+            .then(function (res) { return res.ok ? res.text() : Promise.reject(res.status); })
+            .then(function (html) {
+                var fresh = new DOMParser().parseFromString(html, "text/html").getElementById("board");
+                if (!fresh) return;
+                formatTimes(fresh);
+                document.getElementById("board").replaceWith(fresh);
+            })
+            .catch(function () { /* offline or login expired: keep the current board */ });
+    }, 15000);
+</script>
+{% endblock %}

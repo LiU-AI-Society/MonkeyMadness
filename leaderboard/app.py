@@ -5,7 +5,7 @@ import sys
 import tempfile
 from pathlib import Path
 
-from flask import Flask, jsonify, redirect, render_template, request, url_for
+from flask import Flask, abort, jsonify, redirect, render_template, request, url_for
 from werkzeug.utils import secure_filename
 
 import db
@@ -21,6 +21,11 @@ TEST_IMAGE_DIR = os.environ.get("LEADERBOARD_TEST_DIR", str(REPO_ROOT / "hidden_
 GOLD_LABELS_CSV = os.environ.get("LEADERBOARD_GOLD_CSV", str(REPO_ROOT / "gold_labels.csv"))
 LABELS_TXT = os.environ.get("LEADERBOARD_LABELS_TXT", str(REPO_ROOT / "Monkey" / "monkey_labels.txt"))
 DB_PATH = os.environ.get("LEADERBOARD_DB", str(BASE_DIR / "leaderboard.db"))
+# The "model in action" image: the same public training image for every team,
+# never a hidden test image (it is shown to participants).
+SHOWCASE_IMAGE = os.environ.get(
+    "LEADERBOARD_SHOWCASE_IMAGE", str(REPO_ROOT / "Monkey" / "training" / "training" / "n7" / "n7027.jpg")
+)
 
 MAX_UPLOAD_MB = float(os.environ.get("LEADERBOARD_MAX_UPLOAD_MB", "50"))
 COOLDOWN_SECONDS = float(os.environ.get("LEADERBOARD_COOLDOWN_SECONDS", "60"))
@@ -34,9 +39,18 @@ app.secret_key = os.environ.get("LEADERBOARD_SECRET_KEY", "dev-only-change-me")
 db.init_db(DB_PATH)
 
 
+def render_index(error=None):
+    return render_template(
+        "index.html",
+        leaderboard=db.leaderboard(DB_PATH),
+        recent=db.recent_submissions(DB_PATH),
+        error=error,
+    )
+
+
 @app.route("/")
 def index():
-    return render_template("index.html", leaderboard=db.leaderboard(DB_PATH))
+    return render_index()
 
 
 @app.route("/leaderboard.json")
@@ -44,10 +58,25 @@ def leaderboard_json():
     return jsonify(db.leaderboard(DB_PATH))
 
 
+@app.route("/submission/<int:submission_id>")
+def submission(submission_id):
+    row = db.get_submission(DB_PATH, submission_id)
+    if row is None:
+        abort(404)
+    board = db.leaderboard(DB_PATH)
+    rank = next((i + 1 for i, r in enumerate(board) if r["team_name"] == row["team_name"]), None)
+    return render_template(
+        "submission.html",
+        submission=row,
+        rank=rank,
+        showcase=db.get_showcase(DB_PATH, submission_id),
+    )
+
+
 @app.route("/submit", methods=["POST"])
 def submit():
     def reject(message, status):
-        return render_template("index.html", leaderboard=db.leaderboard(DB_PATH), error=message), status
+        return render_index(error=message), status
 
     team_name = request.form.get("team_name", "").strip()
     # Accept one or more files under the same field: an ONNX export that uses
@@ -99,6 +128,7 @@ def submit():
                     "--gold", GOLD_LABELS_CSV,
                     "--labels_path", LABELS_TXT,
                     "--predictions_out", str(predictions_path),
+                    "--showcase_image", SHOWCASE_IMAGE,
                 ],
                 capture_output=True, text=True, timeout=TIMEOUT_SECONDS,
             )
@@ -129,8 +159,15 @@ def submit():
             400,
         )
 
-    db.record_submission(DB_PATH, team_name, scores)
-    return redirect(url_for("index"))
+    showcase = scores.pop("showcase", None)
+    submission_id = db.record_submission(DB_PATH, team_name, scores)
+    if showcase:
+        db.record_showcase(DB_PATH, submission_id, showcase)
+    else:
+        # The score counts either way; the organizer log says why the
+        # "model in action" part is missing.
+        app.logger.warning("No showcase for team %r.\nstderr:\n%s", team_name, result.stderr)
+    return redirect(url_for("submission", submission_id=submission_id))
 
 
 def _parse_worker_output(stdout):
