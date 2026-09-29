@@ -15,8 +15,7 @@
 
 	const links = [
 		{ href: resolve('/'), label: 'Scoreboard', hint: 'Live standings' },
-		{ href: resolve('/submit'), label: 'Submit', hint: 'Upload your .onnx model' },
-		{ href: resolve('/admin'), label: 'Admin', hint: 'Organizers only' }
+		{ href: resolve('/submit'), label: 'Submit', hint: 'Upload your .onnx model' }
 	];
 	const leader = $derived(live.snapshot?.leaderboard[0] ?? null);
 	const active = (href: string) => page.url.pathname === href;
@@ -98,6 +97,8 @@
 			<div class="flex-1"></div>
 			<p class="text-base-content/40 p-6 text-xs">
 				<a class="link" href="https://www.liuais.com/" target="_blank" rel="noreferrer">liuais.com</a>
+				<span class="mx-1">·</span>
+				<a class="link" href={resolve('/admin')} onclick={() => (open = false)}>admin</a>
 			</p>
 		</aside>
 	</div>
