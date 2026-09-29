@@ -66,7 +66,7 @@ async function score(id: number) {
 
 	const result = config.mockScorer ? await mockScore() : await runWorker(id, path.join(dir, model));
 	if (!result.ok) {
-		db.markFailed(id, friendlyError(result.error ?? ''));
+		db.markFailed(id, friendlyError(result.error ?? '', fs.readdirSync(dir)));
 		broadcast({ kind: 'failed', team: sub.team });
 		return;
 	}
@@ -134,10 +134,16 @@ function parseWorkerOutput(stdout: string): WorkerResult | null {
 	return null;
 }
 
-function friendlyError(detail: string): string {
+function friendlyError(detail: string, uploaded: string[]): string {
 	if (detail === '__timeout__') return `Your model took longer than ${config.timeoutSeconds}s to run and was stopped.`;
-	if (detail.includes('should be stored in'))
-		return 'Your ONNX file references external weight data that was not uploaded (usually <yourmodel>.onnx.data). Select both files together, or re-export as a single .onnx file.';
+	const missing = detail.match(/should be stored in (.+?), but it is not regular file/);
+	if (missing) {
+		const expected = path.basename(missing[1]);
+		const data = uploaded.filter((f) => f.toLowerCase().endsWith('.data'));
+		return data.length
+			? `Your model expects its weights in "${expected}", but you uploaded "${data.join('", "')}". Upload the .onnx.data file from the same export as the model.`
+			: `Your model keeps its weights in a separate file, "${expected}". Drop it in the weights box too, or re-export as a single .onnx file.`;
+	}
 	return "Could not score your model. Make sure it's a valid ONNX classifier with the expected input shape.";
 }
 
