@@ -21,7 +21,6 @@
 	let fileChip = $state<HTMLElement>();
 	let submitButton = $state<HTMLElement>();
 	let trackerCard = $state<HTMLElement>();
-	let fileInput = $state<HTMLInputElement>();
 	let charged = $state(false);
 
 	// --- While a file is dragged over the page, bananas stream from the cursor into the drop zone.
@@ -98,7 +97,6 @@
 			trackedId = body.id;
 			files = [];
 			charged = false;
-			if (fileInput) fileInput.value = '';
 			await tick();
 			if (submitButton && trackerCard) flowBananas(submitButton, trackerCard, { count: 10, spread: 500 });
 		} catch {
@@ -144,11 +142,12 @@
 		</fieldset>
 
 		<!-- Drop zone -->
-		<label
+		<!-- Drag-and-drop only (no file picker): the banana stream is the point. -->
+		<div
 			bind:this={zone}
-			class="rounded-box relative flex min-h-72 cursor-pointer flex-col items-center justify-center gap-4 overflow-hidden border border-dashed p-10 text-center transition-colors duration-300 {dragging
-				? 'border-primary'
-				: 'border-base-300 hover:border-base-content/30'}"
+			role="region"
+			aria-label="Drop zone for your model file"
+			class="rounded-box relative flex min-h-72 flex-col items-center justify-center gap-4 overflow-hidden border border-dashed p-10 text-center transition-colors duration-300 {dragging ? 'border-primary' : 'border-base-300'}"
 		>
 			{#if files.length}
 				<div bind:this={fileChip} in:scale={{ start: 1.4, duration: 500, easing: backOut }} class="relative flex flex-col items-center gap-3">
@@ -158,7 +157,7 @@
 					{#each files as f (f.name)}
 						<div class="num text-sm">{f.name} <span class="text-base-content/40">· {sizeLabel(f.size)}</span></div>
 					{/each}
-					<span class="text-base-content/40 text-xs">Click or drop again to replace</span>
+					<span class="text-base-content/40 text-xs">Drop another file to replace</span>
 				</div>
 			{:else}
 				<div class="relative flex flex-col items-center gap-3">
@@ -171,19 +170,11 @@
 					>
 						<path stroke-linecap="round" stroke-linejoin="round" d="M12 16V4m0 0-4 4m4-4 4 4M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
 					</svg>
-					<span class="text-lg font-medium">{dragging ? 'Let go' : 'Drop your model here'}</span>
+					<span class="text-lg font-medium">{dragging ? 'Let go' : 'Drag your model here'}</span>
 					<span class="text-base-content/40 text-sm">.onnx, plus the .onnx.data file if your export made one</span>
 				</div>
 			{/if}
-			<input
-				bind:this={fileInput}
-				class="hidden"
-				type="file"
-				accept=".onnx,.data"
-				multiple
-				onchange={(e) => setFiles([...(e.currentTarget.files ?? [])])}
-			/>
-		</label>
+		</div>
 
 		<button bind:this={submitButton} class="btn btn-primary btn-lg w-full transition-shadow" class:charged={charged && ready} disabled={!ready}>
 			{#if busy}
