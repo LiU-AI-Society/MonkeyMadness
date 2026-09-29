@@ -1,0 +1,79 @@
+@import 'tailwindcss';
+@plugin 'daisyui' {
+	themes: false;
+}
+
+/* Matches liuais.com: shadcn-style neutral greys, Geist, blue accents from its chart palette. */
+@plugin 'daisyui/theme' {
+	name: 'liuais-dark';
+	default: true;
+	prefersdark: true;
+	color-scheme: dark;
+	--color-base-100: #0a0a0a;
+	--color-base-200: #171717;
+	--color-base-300: #262626;
+	--color-base-content: #fafafa;
+	--color-primary: #3080ff;
+	--color-primary-content: #fafafa;
+	--color-secondary: #e5e5e5;
+	--color-secondary-content: #171717;
+	--color-accent: #90c5ff;
+	--color-accent-content: #0a0a0a;
+	--color-neutral: #262626;
+	--color-neutral-content: #fafafa;
+	--color-info: #90c5ff;
+	--color-info-content: #0a0a0a;
+	--color-success: #4ade80;
+	--color-success-content: #052e16;
+	--color-warning: #facc15;
+	--color-warning-content: #1a1400;
+	--color-error: #ff6568;
+	--color-error-content: #1a0000;
+	--radius-selector: 0.5rem;
+	--radius-field: 0.625rem;
+	--radius-box: 0.875rem;
+	--border: 1px;
+	--depth: 0;
+	--noise: 0;
+}
+
+@plugin 'daisyui/theme' {
+	name: 'liuais';
+	color-scheme: light;
+	--color-base-100: #ffffff;
+	--color-base-200: #f5f5f5;
+	--color-base-300: #e5e5e5;
+	--color-base-content: #0a0a0a;
+	--color-primary: #155dfc;
+	--color-primary-content: #fafafa;
+	--color-secondary: #171717;
+	--color-secondary-content: #fafafa;
+	--color-accent: #3080ff;
+	--color-accent-content: #fafafa;
+	--color-neutral: #171717;
+	--color-neutral-content: #fafafa;
+	--color-info: #3080ff;
+	--color-info-content: #fafafa;
+	--color-success: #16a34a;
+	--color-success-content: #fafafa;
+	--color-warning: #ca8a04;
+	--color-warning-content: #fafafa;
+	--color-error: #e40014;
+	--color-error-content: #fafafa;
+	--radius-selector: 0.5rem;
+	--radius-field: 0.625rem;
+	--radius-box: 0.875rem;
+	--border: 1px;
+	--depth: 0;
+	--noise: 0;
+}
+
+@theme {
+	--font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
+	--font-mono: 'Geist Mono', ui-monospace, monospace;
+}
+
+.num {
+	font-family: var(--font-mono);
+	font-variant-numeric: tabular-nums;
+}

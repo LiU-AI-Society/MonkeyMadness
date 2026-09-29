@@ -16,7 +16,7 @@ def load_class_names(labels_path):
     """Read monkey_labels.txt and return common names in n0..n9 order (matches training class indices)."""
     df = pd.read_csv(labels_path, header=None, skiprows=1)
     df.columns = ["Label", "Latin Name", "Common Name", "Train Images", "Validation Images"]
-    return [name.rstrip() for name in df["Common Name"]]
+    return [name.strip() for name in df["Common Name"]]
 
 
 def to_numpy(tensor):

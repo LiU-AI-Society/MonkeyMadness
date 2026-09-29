@@ -5,7 +5,8 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 from sklearn.metrics import (classification_report, confusion_matrix,
-                              f1_score, precision_score, recall_score)
+                              f1_score, precision_recall_fscore_support,
+                              precision_score, recall_score)
 
 
 def plot_cm(all_labels, all_preds, classes, title="Confusion Matrix"):
@@ -64,7 +65,28 @@ def evaluate(predictions_csv, gold_csv, show_confusion_matrix=True, verbose=True
     if show_confusion_matrix:
         plot_cm(merged["label"], merged["predicted_label"], cm_labels)
 
-    return {"accuracy": accuracy, "precision": precision, "recall": recall, "f1_score": f1}
+    return {
+        "accuracy": accuracy, "precision": precision, "recall": recall, "f1_score": f1,
+        "per_class": per_class_stats(merged["label"], merged["predicted_label"], classes),
+    }
+
+
+def per_class_stats(labels, preds, classes):
+    """Precision/recall/F1/support per true class, plus the class it is most often mistaken for."""
+    p, r, f, support = precision_recall_fscore_support(labels, preds, labels=classes, zero_division=0)
+    cm = confusion_matrix(labels, preds, labels=classes)
+    stats = []
+    for i, name in enumerate(classes):
+        wrong = cm[i].copy()
+        wrong[i] = 0
+        j = int(wrong.argmax())
+        stats.append({
+            "label": str(name),
+            "precision": float(p[i]), "recall": float(r[i]), "f1": float(f[i]), "support": int(support[i]),
+            "confused_with": str(classes[j]) if wrong[j] > 0 else None,
+            "confused_count": int(wrong[j]),
+        })
+    return stats
 
 
 def main():
