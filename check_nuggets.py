@@ -26,10 +26,37 @@ BASELINE_IMAGE_SIZE = (64, 64)
 BASELINE_CONV_LAYERS = 2
 
 
-def load_active_source(path):
+def get_live_colab_notebook():
+    """If running in Google Colab, return the currently open notebook's JSON --
+    including unsaved edits -- via Colab's internal messaging API. Returns None
+    outside Colab (or if the request fails for any reason).
+
+    This matters because Colab notebooks aren't backed by the .ipynb file that
+    was git-cloned onto the VM: editing cells in the browser never writes back
+    to that file, so reading it from disk (like load_active_source does) only
+    ever sees the notebook exactly as it was at clone time."""
+    try:
+        from google.colab import _message
+    except ImportError:
+        return None
+    try:
+        return _message.blocking_request("get_ipynb", request="", timeout_sec=10)["ipynb"]
+    except Exception as e:
+        print(f"Warning: could not fetch the live Colab notebook ({e}); "
+              f"falling back to the on-disk copy, which may be stale.")
+        return None
+
+
+def load_active_source(notebook_or_path):
     """Return (per-cell active source list, joined active source) with full-line and
-    trailing comments stripped, so commented-out code isn't mistaken for a purchase."""
-    notebook = json.loads(Path(path).read_text(encoding="utf-8"))
+    trailing comments stripped, so commented-out code isn't mistaken for a purchase.
+
+    Accepts either a path to a .ipynb file, or an already-parsed notebook dict
+    (e.g. from get_live_colab_notebook)."""
+    if isinstance(notebook_or_path, dict):
+        notebook = notebook_or_path
+    else:
+        notebook = json.loads(Path(notebook_or_path).read_text(encoding="utf-8"))
     cells = []
     for cell in notebook.get("cells", []):
         if cell.get("cell_type") != "code":
@@ -193,12 +220,19 @@ def check_augmentation(active_all, transform_name):
 
 
 def main():
-    notebook_path = Path(sys.argv[1]) if len(sys.argv) > 1 else NOTEBOOK_PATH
-    if not notebook_path.exists():
-        print(f"Notebook not found: {notebook_path}")
-        sys.exit(1)
+    explicit_path = Path(sys.argv[1]) if len(sys.argv) > 1 else None
+    live_notebook = None if explicit_path else get_live_colab_notebook()
 
-    _, active_all = load_active_source(notebook_path)
+    if live_notebook is not None:
+        source, source_label = live_notebook, "live Colab session (unsaved edits included)"
+    else:
+        notebook_path = explicit_path or NOTEBOOK_PATH
+        if not notebook_path.exists():
+            print(f"Notebook not found: {notebook_path}")
+            sys.exit(1)
+        source, source_label = notebook_path, str(notebook_path)
+
+    _, active_all = load_active_source(source)
 
     rows = []
 
@@ -263,7 +297,7 @@ def main():
     total = sum(r[3] for r in rows)
 
     header = f"{'Upgrade':<{name_w}}  {'Price':<{price_w}}  {'Status':<8}  {'Cost':>8}  Detail"
-    print(f"Neural Nugget Ledger - {notebook_path.name}")
+    print(f"Neural Nugget Ledger - {source_label}")
     print("=" * len(header))
     print(header)
     print("-" * len(header))
