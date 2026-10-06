@@ -7,8 +7,17 @@ import { broadcast } from '$lib/server/live';
 import { enqueue, queueLength, uploadDir } from '$lib/server/queue';
 import type { RequestHandler } from './$types';
 
-/** Keep the original name (an external-data model references its companion file by name) but strip anything path-like. */
-const safeName = (name: string) => path.basename(name).replace(/[^A-Za-z0-9._-]/g, '_').replace(/^\.+/, '') || 'file';
+/**
+ * Keep the original name exactly (spaces included): a model exported with external
+ * data references its .onnx.data file by that literal name. Only strip what could
+ * escape the upload folder or hide the file.
+ */
+const safeName = (name: string) =>
+	path
+		.basename(name)
+		.replace(/[\/\\\0]/g, '_')
+		.replace(/^\.+/, '')
+		.slice(0, 200) || 'file';
 
 const recentByIp = new Map<string, number[]>();
 
