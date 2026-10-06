@@ -1,5 +1,5 @@
-torchlens
-torchsummary
+torchinfo
 onnx
-livelossplot
 onnxscript
+# 0.6.1+ requires ipython>=8, which upgrades Colab's pinned IPython and breaks google.colab
+livelossplot==0.6.0
