@@ -11,6 +11,7 @@ implemented in an unrecognized way may be missed.
 
 import json
 import math
+import os
 import re
 import sys
 from pathlib import Path
@@ -35,15 +36,15 @@ def get_live_colab_notebook():
     was git-cloned onto the VM: editing cells in the browser never writes back
     to that file, so reading it from disk (like load_active_source does) only
     ever sees the notebook exactly as it was at clone time."""
-    try:
-        from google.colab import _message
-    except ImportError:
+    if "google.colab" not in sys.modules and "COLAB_RELEASE_TAG" not in os.environ:
         return None
     try:
+        from google.colab import _message
         return _message.blocking_request("get_ipynb", request="", timeout_sec=10)["ipynb"]
     except Exception as e:
         print(f"Warning: could not fetch the live Colab notebook ({e}); "
-              f"falling back to the on-disk copy, which may be stale.")
+              f"falling back to the on-disk copy, which may be stale. "
+              f"Run this via `%run check_nuggets.py` (not `!python`) so it runs inside the notebook kernel.")
         return None
 
 
