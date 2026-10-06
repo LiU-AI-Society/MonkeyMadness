@@ -160,7 +160,7 @@ if __name__ == "__main__":
     import torch.nn as nn
     import torch.nn.functional as F
     import torch
-    from torchsummary import summary
+    from torchinfo import summary
     from train import train, training_info
     from test_model import test
     import torch.optim

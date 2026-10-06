@@ -104,9 +104,9 @@ It’s called “supervised” because the model learns under guidance (the labe
   
   ```python
 transform = transforms.Compose([ 
-      #Put augmentations here preferably
-      transforms.ToTensor(), 
-      transforms.Resize((IMAGE_SIZE[0], IMAGE_SIZE[1]))
+      transforms.Resize((IMAGE_SIZE[0], IMAGE_SIZE[1])),
+      #Put augmentations here, after Resize (augmenting full-size photos is ~10x slower)
+      transforms.ToTensor()
       ])
   ```
 
@@ -142,6 +142,8 @@ transforms.GaussianBlur(kernel_size=(5, 9), sigma=(0.1, 5)),  # Apply Gaussian b
 ```python
 transforms.RandomErasing(p=0.5, scale=(0.02, 0.2), ratio=(0.3, 3.3)),  # Randomly erases parts of the image
 ```
+
+Note: unlike the other augmentations, `RandomErasing` works on tensors, so put it **after** `transforms.ToTensor()`.
   </details>     </details>
 
 
