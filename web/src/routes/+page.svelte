@@ -61,6 +61,17 @@
 		<li class="step-row">
 			<span class="step-num">03</span>
 			<div>
+				<h2 class="text-xl font-medium">Save a copy in Drive <span class="badge badge-primary badge-soft ml-2 align-middle">Important</span></h2>
+				<p class="text-base-content/60 mt-1">
+					In Colab: <span class="text-base-content">File → Save a copy in Drive</span>. Work in that copy, otherwise your
+					changes are lost when you close the tab.
+				</p>
+			</div>
+		</li>
+
+		<li class="step-row">
+			<span class="step-num">04</span>
+			<div>
 				<h2 class="text-xl font-medium">Turn on the GPU</h2>
 				<p class="text-base-content/60 mt-1">
 					<span class="text-base-content">Runtime → Change runtime type</span> → Hardware accelerator:
@@ -70,7 +81,7 @@
 		</li>
 
 		<li class="step-row">
-			<span class="step-num">04</span>
+			<span class="step-num">05</span>
 			<div>
 				<h2 class="text-xl font-medium">Train, export, submit</h2>
 				<p class="text-base-content/60 mt-1">
