@@ -310,8 +310,13 @@
 								<span class="text-base-content/50">−{Math.abs(d * 100).toFixed(1)} vs best</span>
 							{/if}
 						</div>
-						<button type="button" class="btn btn-ghost btn-sm mt-3" onclick={() => openStats(tracked.id)}>Class breakdown</button>
 					{/if}
+				</div>
+				<div class="mt-4 flex justify-center gap-2">
+					{#if tracked.status === 'done' && !tracked.hidden}
+						<button type="button" class="btn btn-ghost btn-sm" onclick={() => openStats(tracked.id)}>Class breakdown</button>
+					{/if}
+					<a class="btn btn-outline btn-sm" href={resolve('/leaderboard')}>View on leaderboard →</a>
 				</div>
 			{:else}
 				<p class="text-base-content/40 mt-3 text-sm">Nothing submitted yet.</p>
