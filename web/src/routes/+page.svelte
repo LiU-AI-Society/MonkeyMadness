@@ -3,7 +3,7 @@
 
 	const SLIDES_URL =
 		'https://docs.google.com/presentation/d/1VC7fK8MI8rnKlRPbKY3ylMFtQMWmfSDD/edit?usp=sharing&ouid=111602748456141665171&rtpof=true&sd=true';
-	const VIDEO_URL = 'https://www.youtube.com/watch?v=bmWaPy7jvhQ';
+	const VIDEO_URL = 'https://www.youtube.com/watch?v=93Q_AKH6Cvo';
 	const COLAB_URL = 'https://colab.research.google.com';
 	const REPO_URL = 'https://github.com/LiU-AI-Society/MonkeyMadness';
 	const README_URL = 'https://github.com/LiU-AI-Society/MonkeyMadness/blob/main/README.md';
