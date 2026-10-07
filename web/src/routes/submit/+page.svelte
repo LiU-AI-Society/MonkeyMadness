@@ -21,6 +21,8 @@
 
 	let zone = $state<HTMLElement>();
 	let dataZone = $state<HTMLElement>();
+	let modelPicker = $state<HTMLInputElement>();
+	let weightsPicker = $state<HTMLInputElement>();
 	let modelChip = $state<HTMLElement>();
 	let weightsChip = $state<HTMLElement>();
 	let submitButton = $state<HTMLElement>();
@@ -61,6 +63,19 @@
 		dragging = false;
 		addFiles([...e.dataTransfer.files]);
 	}
+
+	/** Clicking a zone opens a file picker as an alternative to dragging. */
+	function onPicked(e: Event & { currentTarget: HTMLInputElement }) {
+		const picked = [...(e.currentTarget.files ?? [])];
+		e.currentTarget.value = ''; // so picking the same file again still fires change
+		addFiles(picked);
+	}
+	const onZoneKey = (picker: HTMLInputElement | undefined) => (e: KeyboardEvent) => {
+		if (e.key === 'Enter' || e.key === ' ') {
+			e.preventDefault();
+			picker?.click();
+		}
+	};
 
 	const isModel = (f: File) => f.name.toLowerCase().endsWith('.onnx');
 	const isWeights = (f: File) => f.name.toLowerCase().endsWith('.data');
@@ -170,9 +185,12 @@
 		<!-- Drag-and-drop only (no file picker): the banana stream is the point. -->
 		<div
 			bind:this={zone}
-			role="region"
-			aria-label="Drop zone for your .onnx model"
-			class="rounded-box relative flex min-h-64 flex-col items-center justify-center gap-4 overflow-hidden border border-dashed p-10 text-center transition-colors duration-300 {dragging
+			role="button"
+			tabindex="0"
+			aria-label="Choose or drop your .onnx model"
+			onclick={() => modelPicker?.click()}
+			onkeydown={onZoneKey(modelPicker)}
+			class="rounded-box hover:border-base-content/30 relative flex min-h-64 cursor-pointer flex-col items-center justify-center gap-4 overflow-hidden border border-dashed p-10 text-center transition-colors duration-300 {dragging
 				? 'border-primary'
 				: 'border-base-300'}"
 		>
@@ -183,10 +201,10 @@
 							<path stroke-linejoin="round" d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5z" /><path d="M14 3v5h5" />
 						</svg>
 						<div class="num text-sm">{model.name} <span class="text-base-content/40">· {sizeLabel(model.size)}</span></div>
-						<span class="text-base-content/40 text-xs">Drop another .onnx to replace it</span>
+						<span class="text-base-content/40 text-xs">Drop or click to replace it</span>
 					</div>
 				{/key}
-				<button type="button" class="remove" aria-label="Remove model" onclick={() => ((model = null), (charged = false))}>×</button>
+				<button type="button" class="remove" aria-label="Remove model" onclick={(e) => (e.stopPropagation(), (model = null), (charged = false))}>×</button>
 			{:else}
 				<div class="relative flex flex-col items-center gap-3">
 					<svg
@@ -199,6 +217,7 @@
 						<path stroke-linecap="round" stroke-linejoin="round" d="M12 16V4m0 0-4 4m4-4 4 4M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
 					</svg>
 					<span class="text-lg font-medium">{dragging ? 'Let go' : 'Drag your .onnx model here'}</span>
+					<span class="text-base-content/40 text-sm">or click to choose a file</span>
 				</div>
 			{/if}
 		</div>
@@ -206,9 +225,12 @@
 		<!-- Optional external weights -->
 		<div
 			bind:this={dataZone}
-			role="region"
-			aria-label="Drop zone for the optional .onnx.data weights file"
-			class="rounded-box relative -mt-2 flex min-h-16 items-center justify-center gap-3 border border-dashed px-6 py-4 text-sm transition-colors duration-300 {dragging
+			role="button"
+			tabindex="0"
+			aria-label="Choose or drop the optional .onnx.data weights file"
+			onclick={() => weightsPicker?.click()}
+			onkeydown={onZoneKey(weightsPicker)}
+			class="rounded-box hover:border-base-content/30 relative -mt-2 flex min-h-16 cursor-pointer items-center justify-center gap-3 border border-dashed px-6 py-4 text-sm transition-colors duration-300 {dragging
 				? 'border-primary/60'
 				: 'border-base-300'}"
 		>
@@ -218,13 +240,16 @@
 						{weights.name} <span class="text-base-content/40">· {sizeLabel(weights.size)}</span>
 					</div>
 				{/key}
-				<button type="button" class="remove centered" aria-label="Remove weights file" onclick={() => (weights = null)}>×</button>
+				<button type="button" class="remove centered" aria-label="Remove weights file" onclick={(e) => (e.stopPropagation(), (weights = null))}>×</button>
 			{:else}
 				<span class="text-base-content/40">
-					Optional: <span class="num">.onnx.data</span> weights file, only if your export created one
+					Optional: <span class="num">.onnx.data</span> weights file, only if your export created one (drop or click)
 				</span>
 			{/if}
 		</div>
+
+		<input bind:this={modelPicker} class="hidden" type="file" accept=".onnx" onchange={onPicked} />
+		<input bind:this={weightsPicker} class="hidden" type="file" accept=".data" onchange={onPicked} />
 
 		<button bind:this={submitButton} class="btn btn-primary btn-lg w-full transition-shadow" class:charged={charged && ready} disabled={!ready}>
 			{#if busy}
