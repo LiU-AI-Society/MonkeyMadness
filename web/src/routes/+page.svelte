@@ -6,6 +6,7 @@
 	const VIDEO_URL = 'https://www.youtube.com/watch?v=bmWaPy7jvhQ';
 	const COLAB_URL = 'https://colab.research.google.com';
 	const REPO_URL = 'https://github.com/LiU-AI-Society/MonkeyMadness';
+	const README_URL = 'https://github.com/LiU-AI-Society/MonkeyMadness/blob/main/README.md';
 
 	let copied = $state(false);
 	async function copyRepo() {
@@ -87,6 +88,10 @@
 				<p class="text-base-content/60 mt-1">
 					Follow the notebook. It saves your best model as an <span class="num text-base-content">.onnx</span> file. Download it and drag
 					it into the submit page; it gets scored on a hidden test set within seconds.
+				</p>
+				<p class="text-base-content/60 mt-3">
+					Want to improve your score? The <a class="link text-base-content" href={README_URL} target="_blank" rel="noreferrer">README ↗</a> has
+					the details about all the upgrades you can buy.
 				</p>
 				<div class="mt-4 flex gap-3">
 					<a class="btn btn-primary btn-sm" href={resolve('/submit')}>Submit a model</a>
