@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 
-	const SLIDES_URL = 'https://docs.google.com/presentation/d/1L4-nOQ0v3o2grriAKTFoHdaBwn1F2PCW/edit?slide=id.p1#slide=id.p1';
+	const SLIDES_URL =
+		'https://docs.google.com/presentation/d/1VC7fK8MI8rnKlRPbKY3ylMFtQMWmfSDD/edit?usp=sharing&ouid=111602748456141665171&rtpof=true&sd=true';
 	const VIDEO_URL = 'https://www.youtube.com/watch?v=bmWaPy7jvhQ';
 	const COLAB_URL = 'https://colab.research.google.com';
 	const REPO_URL = 'https://github.com/LiU-AI-Society/MonkeyMadness';
@@ -45,8 +46,8 @@
 			<div class="min-w-0 flex-1">
 				<h2 class="text-xl font-medium">Open the notebook in Google Colab</h2>
 				<p class="text-base-content/60 mt-1">
-					Go to Colab, choose <span class="text-base-content">File → Open notebook</span>, pick the
-					<span class="text-base-content">GitHub</span> tab and paste:
+					Go to Colab, press <span class="text-base-content">Upload notebook</span>, pick
+					<span class="text-base-content">GitHub</span> and paste:
 				</p>
 				<div class="border-base-300 bg-base-200 mt-4 flex items-center gap-2 rounded-lg border py-1.5 pr-1.5 pl-4">
 					<code class="num min-w-0 flex-1 truncate text-sm select-all">{REPO_URL}</code>
