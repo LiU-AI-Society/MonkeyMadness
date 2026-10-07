@@ -73,7 +73,7 @@ It’s called “supervised” because the model learns under guidance (the labe
 | Ensemble enchanter                      | 60 B NN      |
 | Neural boost                      | 20 B NN  per layer. Buy 3 for the price of 2    |
 | Drop shield                             | 10 B NN      |
-| Weigth decay                                      | 10 B NN      |
+| Weight decay                                      | 10 B NN      |
 | Herr Nilsson's friend                   | Free            |
 | Wisdom extractor                        | 40 B NN            |
 | Speed boost                        | 10 B NN            |
@@ -97,53 +97,51 @@ It’s called “supervised” because the model learns under guidance (the labe
 </details>
 
 <details>
-<summary><strong> Implement Augmentations </strong> </summary>
+<summary><strong>Data augmentation</strong> — Whirl and swirl, Flip trick, Need for shift: Tokyo data drift, Foggy Lens, Cutout mask</summary>
 
 
-  In order to implement augmentations for the data one needs to change the cell called "DATASET"  
+  In order to implement augmentations for the data one needs to change the cell called "DATASET". Add them to `train_augment`, which is applied to the training images only (validation images stay un-augmented so your validation accuracy is honest):
   
   ```python
-transform = transforms.Compose([ 
-      transforms.Resize((IMAGE_SIZE[0], IMAGE_SIZE[1])),
-      #Put augmentations here, after Resize (augmenting full-size photos is ~10x slower)
-      transforms.ToTensor()
+train_augment = transforms.Compose([
+      #Put augmentations here
       ])
   ```
 
-### Whirl and Swirl
+  Re-run the DATASET cell to preview them: the top row shows original images, the bottom row the same images with your augmentations applied.
+
+### Whirl and swirl — random rotation (10 B NN)
 
 ```python
 transforms.RandomRotation(degrees=15),  # Rotate the image randomly within a 15-degree range
 ```
 
-### Flip trick
+### Flip trick — random flips (10 B NN)
 
 ```python
 transforms.RandomHorizontalFlip(p=0.2),  # Randomly flip the image horizontally with 20% probability
 transforms.RandomVerticalFlip(p=0.2),  # Randomly flip the image vertically with 20% probability
 ```
 
-### Need for shift: Tokyo data drift
+### Need for shift: Tokyo data drift — random shifts (5 B NN)
 
 ```python
 transforms.RandomAffine(degrees=0, translate=(0.1, 0.1)) # Randomly shift image by up to 10% of its size
 
 ```
 
-### Foggy Lens  
+### Foggy Lens — random blur (5 B NN)
 
 ```python
 transforms.GaussianBlur(kernel_size=(5, 9), sigma=(0.1, 5)),  # Apply Gaussian blur with a random kernel size
 
 ```
 
-### Missing Pieces (Cutout Chaos) 
+### Cutout mask — random erasing (5 B NN)
 
 ```python
 transforms.RandomErasing(p=0.5, scale=(0.02, 0.2), ratio=(0.3, 3.3)),  # Randomly erases parts of the image
 ```
-
-Note: unlike the other augmentations, `RandomErasing` works on tensors, so put it **after** `transforms.ToTensor()`.
   </details>     </details>
 
 
@@ -160,7 +158,7 @@ Note: unlike the other augmentations, `RandomErasing` works on tensors, so put i
 </details>
 
 <details>
-<summary><strong> Implement Info infusion </strong> </summary>
+<summary><strong>Info Infusion</strong> — use more of the training data (1 B NN per % added)</summary>
 
 Change the variable ```DATA_PERCENTAGE``` to 1 in the dataset code block
 
@@ -171,7 +169,7 @@ Change the variable ```DATA_PERCENTAGE``` to 1 in the dataset code block
 </details>
 
 <details>
-<summary><strong> Implement Ensemble Enchanter </strong> </summary>
+<summary><strong>Ensemble enchanter</strong> — combine the predictions of several models (60 B NN)</summary>
 
 This one is a bit more tricky....
 
@@ -265,7 +263,7 @@ Then to save it (do this it has trained in the TRAINING BLOCK):
 
 
 <details>
-<summary><strong> Implement Neural turbo boost </strong> </summary>
+<summary><strong>Neural boost</strong> — add more convolutional layers (20 B NN per layer, 3 for the price of 2)</summary>
 
 Why add more layers? Adding a layer to a Convolutional Neural Network (CNN) increases the model’s depth, allowing it to learn more complex features from the input data. New layers, like convolutional, pooling, or fully connected layers, enhance the network's ability to capture patterns such as edges, textures, or object parts. Adding layers can improve model performance but also increases computational requirements and the risk of overfitting.
 
@@ -320,7 +318,7 @@ def _get_fc_input_size(self, input_size):
 
 
 <details>
-<summary><strong> Weight decay </strong> </summary>
+<summary><strong>Weight decay</strong> — penalize large weights to reduce overfitting (10 B NN)</summary>
 What is weight decay? Weight decay is a regularization technique used to prevent overfitting in machine learning models by adding a penalty to the model's loss function based on the size of its weights. It works by slightly reducing the weights during training, encouraging simpler models with smaller weights, which often generalize better to new data. This technique is especially useful in neural networks, where complex models can easily overfit to the training data.
 
 The following lines should be added to the TRAINING code block
@@ -338,7 +336,7 @@ Here you can experiment with the weight decay parameter. It controls how much it
 </details>
 
 <details>
-<summary><strong> Implement Rate Rollercoaster </strong> </summary>
+<summary><strong>Hypothesis hustle</strong> — learning rate scheduler (20 B NN)</summary>
 
 Why have learning rate scheduler?A learning rate scheduler is used to adjust the learning rate during training to improve the performance of a machine learning model. By modifying the learning rate, the scheduler helps to balance the trade-off between convergence speed and stability. A high learning rate can lead to unstable training and overshooting the optimal solution, while a low learning rate can result in slow convergence. Learning rate schedulers can implement strategies such as gradually decreasing the learning rate over time or adjusting it based on performance metrics, allowing the model to escape local minima and achieve better overall accuracy. This dynamic approach enhances training efficiency and often leads to improved model performance.
 
@@ -351,7 +349,7 @@ Why have learning rate scheduler?A learning rate scheduler is used to adjust the
 </details>
 
 <details>
-<summary><strong> Implement Speed Boost </strong> </summary>
+<summary><strong>Speed boost</strong> — add momentum to the optimizer (10 B NN)</summary>
 
 Why momentum? Momentum is an optimization technique that helps accelerate gradients vectors in the right directions, thus leading to faster converging. It works by adding a fraction of the previous update to the current update, which helps to smooth out the updates and reduces oscillation, especially in areas with noisy gradients. This technique mimics the physical concept of momentum, where the optimizer retains a memory of past gradients to guide its current direction.
 
@@ -367,7 +365,7 @@ optimizer1 = torch.optim.SGD(model1.parameters(), lr=LR, momentum=momentum)
 </details>
 
 <details>
-<summary><strong> Herr Nilsson's friend</strong> </summary>
+<summary><strong>Herr Nilsson's friend</strong> — extra reward for the squirrel monkey class (free)</summary>
 If you want to get the title of Herr Nilssons friend you might want to give an extra reward to the model when it makes corrects predictions for the squirrel monkey class. You can do this by: (in the TRAINING block)
 
 ```python
@@ -386,7 +384,7 @@ Remeber that you still want high recall so you still want to predict some of the
 
 
 <details>
-<summary><strong> Implement Drop shield </strong> </summary>
+<summary><strong>Drop shield</strong> — dropout layers (10 B NN)</summary>
 
 
 
@@ -432,7 +430,7 @@ model = MonkeyNET(num_classes=10, dropout_rate=0.3)
 </details>
 
 <details>
-<summary><strong> Implement Wisdom Extractor  </strong> </summary>
+<summary><strong>Wisdom extractor</strong> — knowledge distillation from a pretrained teacher model (40 B NN)</summary>
 
 # How Knowledge Distillation Works
 
@@ -503,7 +501,7 @@ model, t_loss, t_acc, v_loss, v_acc = train(model, train_loader, val_loader, opt
 
 </details>
 <details>
-<summary><strong> Implement Focus Lens  </strong> </summary>
+<summary><strong>Focus Lens</strong> — spatial attention (15 B NN)</summary>
 
 # **Spatial Attention**
 
@@ -607,7 +605,7 @@ class MonkeyNET(nn.Module):
 
 </details>
 <details>
-<summary><strong> Skip Connections</strong> </summary>
+<summary><strong>Skip Connection</strong> — residual blocks (15 B NN)</summary>
 Residual connections (ResNet architecture) address the vanishing gradient problem in deep neural networks by:
 
 -Allowing direct information flow between layers

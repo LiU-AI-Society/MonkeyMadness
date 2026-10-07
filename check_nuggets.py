@@ -271,7 +271,7 @@ def main():
     rows.append(("Drop shield", "10B NN", used, cost, detail))
 
     used, cost, detail = check_weight_decay(active_all)
-    rows.append(("Weigth decay", "10B NN", used, cost, detail))
+    rows.append(("Weight decay", "10B NN", used, cost, detail))
 
     used, cost, detail = check_herr_nilsson(active_all)
     rows.append(("Herr Nilsson's friend", "Free", used, cost, detail))

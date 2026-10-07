@@ -266,6 +266,45 @@ class MonkeyImageDataset(Dataset):
 
 
 
+class AugmentedDataset(Dataset):
+    """Applies extra transforms on top of a dataset (or a random_split subset of one),
+    so augmentations can be limited to the training split and validation stays clean."""
+
+    def __init__(self, dataset, transform):
+        self.dataset = dataset
+        self.transform = transform
+
+    def __len__(self):
+        return len(self.dataset)
+
+    def __getitem__(self, idx):
+        image, target = self.dataset[idx]
+        return self.transform(image), target
+
+    def _class_names(self):
+        ds = self.dataset
+        while not hasattr(ds, "class_names"):
+            ds = ds.dataset
+        return ds.class_names
+
+    def visualize(self, nr_images=5):
+        """Top row: images as loaded. Bottom row: the same images after augmentation."""
+        indices = random.sample(range(len(self.dataset)), nr_images)
+        originals, augmented, names = [], [], []
+        for idx in indices:
+            image, target = self.dataset[idx]
+            originals.append(image)
+            augmented.append(self.transform(image))
+            names.append(self._class_names()[torch.argmax(target).item()])
+
+        grid_img = torchvision.utils.make_grid(originals + augmented, nrow=nr_images, normalize=True)
+        plt.figure(figsize=(12, 5))
+        plt.imshow(grid_img.permute(1, 2, 0))
+        plt.axis('off')
+        plt.title("Top: original | Bottom: augmented\n" + " | ".join(names))
+        plt.show()
+
+
 class UnlabeledImageDataset(Dataset):
     """
     Flat directory of images with no label information (no class subfolders).
