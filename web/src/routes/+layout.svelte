@@ -14,7 +14,8 @@
 	onMount(() => live.connect());
 
 	const links = [
-		{ href: resolve('/'), label: 'Scoreboard', hint: 'Live standings' },
+		{ href: resolve('/'), label: 'Get started', hint: 'Video, Colab and the notebook' },
+		{ href: resolve('/leaderboard'), label: 'Leaderboard', hint: 'Live standings' },
 		{ href: resolve('/submit'), label: 'Submit', hint: 'Upload your .onnx model' }
 	];
 	const leader = $derived(live.snapshot?.leaderboard[0] ?? null);
