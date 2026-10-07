@@ -99,6 +99,8 @@ It’s called “supervised” because the model learns under guidance (the labe
 <details>
 <summary><strong>Data augmentation</strong> — Whirl and swirl, Flip trick, Need for shift: Tokyo data drift, Foggy Lens, Cutout mask</summary>
 
+**Add augmentations to `train_augment`** (DATASET code block)
+
 
   In order to implement augmentations for the data one needs to change the cell called "DATASET". Add them to `train_augment`, which is applied to the training images only (validation images stay un-augmented so your validation accuracy is honest):
   
@@ -160,6 +162,8 @@ transforms.RandomErasing(p=0.5, scale=(0.02, 0.2), ratio=(0.3, 3.3)),  # Randoml
 <details>
 <summary><strong>Info Infusion</strong> — use more of the training data (1 B NN per % added)</summary>
 
+**Increase `DATA_PERCENTAGE`** (DATASET code block)
+
 Change the variable ```DATA_PERCENTAGE``` to 1 in the dataset code block
 
 
@@ -170,6 +174,8 @@ Change the variable ```DATA_PERCENTAGE``` to 1 in the dataset code block
 
 <details>
 <summary><strong>Ensemble enchanter</strong> — combine the predictions of several models (60 B NN)</summary>
+
+**Define an `Ensemble` class** (MODEL code block), **then train several models and combine them** (TRAINING code block)
 
 This one is a bit more tricky....
 
@@ -265,6 +271,8 @@ Then to save it (do this it has trained in the TRAINING BLOCK):
 <details>
 <summary><strong>Neural boost</strong> — add more convolutional layers (20 B NN per layer, 3 for the price of 2)</summary>
 
+**Add convolutional layers to `MonkeyNET`** (MODEL code block)
+
 Why add more layers? Adding a layer to a Convolutional Neural Network (CNN) increases the model’s depth, allowing it to learn more complex features from the input data. New layers, like convolutional, pooling, or fully connected layers, enhance the network's ability to capture patterns such as edges, textures, or object parts. Adding layers can improve model performance but also increases computational requirements and the risk of overfitting.
 
 For this you should change the MonkeyNET. You need to add the convolutional layer to the constructor, the forward method and the get_fc_input_size method. (This is done in the MODEL code block)
@@ -319,6 +327,9 @@ def _get_fc_input_size(self, input_size):
 
 <details>
 <summary><strong>Weight decay</strong> — penalize large weights to reduce overfitting (10 B NN)</summary>
+
+**Add `weight_decay` to the optimizer** (TRAINING code block)
+
 What is weight decay? Weight decay is a regularization technique used to prevent overfitting in machine learning models by adding a penalty to the model's loss function based on the size of its weights. It works by slightly reducing the weights during training, encouraging simpler models with smaller weights, which often generalize better to new data. This technique is especially useful in neural networks, where complex models can easily overfit to the training data.
 
 The following lines should be added to the TRAINING code block
@@ -338,6 +349,8 @@ Here you can experiment with the weight decay parameter. It controls how much it
 <details>
 <summary><strong>Hypothesis hustle</strong> — learning rate scheduler (20 B NN)</summary>
 
+**Add a learning rate scheduler** (TRAINING code block)
+
 Why have learning rate scheduler?A learning rate scheduler is used to adjust the learning rate during training to improve the performance of a machine learning model. By modifying the learning rate, the scheduler helps to balance the trade-off between convergence speed and stability. A high learning rate can lead to unstable training and overshooting the optimal solution, while a low learning rate can result in slow convergence. Learning rate schedulers can implement strategies such as gradually decreasing the learning rate over time or adjusting it based on performance metrics, allowing the model to escape local minima and achieve better overall accuracy. This dynamic approach enhances training efficiency and often leads to improved model performance.
 
 
@@ -351,13 +364,13 @@ Why have learning rate scheduler?A learning rate scheduler is used to adjust the
 <details>
 <summary><strong>Speed boost</strong> — add momentum to the optimizer (10 B NN)</summary>
 
-Why momentum? Momentum is an optimization technique that helps accelerate gradients vectors in the right directions, thus leading to faster converging. It works by adding a fraction of the previous update to the current update, which helps to smooth out the updates and reduces oscillation, especially in areas with noisy gradients. This technique mimics the physical concept of momentum, where the optimizer retains a memory of past gradients to guide its current direction.
+**Add momentum to the optimizer** (TRAINING code block)
 
-Add momemntum to the optimizer: (TRAINING code block)
+Why momentum? Momentum is an optimization technique that helps accelerate gradients vectors in the right directions, thus leading to faster converging. It works by adding a fraction of the previous update to the current update, which helps to smooth out the updates and reduces oscillation, especially in areas with noisy gradients. This technique mimics the physical concept of momentum, where the optimizer retains a memory of past gradients to guide its current direction.
 
 ```python
 momentum = 0.9
-optimizer1 = torch.optim.SGD(model1.parameters(), lr=LR, momentum=momentum)
+optimizer = torch.optim.SGD(model.parameters(), lr=LR, momentum=momentum)
 ```
 </details>
 
@@ -366,6 +379,9 @@ optimizer1 = torch.optim.SGD(model1.parameters(), lr=LR, momentum=momentum)
 
 <details>
 <summary><strong>Herr Nilsson's friend</strong> — extra reward for the squirrel monkey class (free)</summary>
+
+**Add class weights to the loss function** (TRAINING code block)
+
 If you want to get the title of Herr Nilssons friend you might want to give an extra reward to the model when it makes corrects predictions for the squirrel monkey class. You can do this by: (in the TRAINING block)
 
 ```python
@@ -385,6 +401,8 @@ Remeber that you still want high recall so you still want to predict some of the
 
 <details>
 <summary><strong>Drop shield</strong> — dropout layers (10 B NN)</summary>
+
+**Add dropout layers to `MonkeyNET`** (MODEL code block)
 
 
 
@@ -431,6 +449,8 @@ model = MonkeyNET(num_classes=10, dropout_rate=0.3)
 
 <details>
 <summary><strong>Wisdom extractor</strong> — knowledge distillation from a pretrained teacher model (40 B NN)</summary>
+
+**Load the teacher model and switch to a distillation loss** (TRAINING code block)
 
 # How Knowledge Distillation Works
 
@@ -502,6 +522,8 @@ model, t_loss, t_acc, v_loss, v_acc = train(model, train_loader, val_loader, opt
 </details>
 <details>
 <summary><strong>Focus Lens</strong> — spatial attention (15 B NN)</summary>
+
+**Add a `SpatialAttention` module to `MonkeyNET`** (MODEL code block)
 
 # **Spatial Attention**
 
@@ -606,6 +628,9 @@ class MonkeyNET(nn.Module):
 </details>
 <details>
 <summary><strong>Skip Connection</strong> — residual blocks (15 B NN)</summary>
+
+**Add residual blocks to `MonkeyNET`** (MODEL code block)
+
 Residual connections (ResNet architecture) address the vanishing gradient problem in deep neural networks by:
 
 -Allowing direct information flow between layers
